@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF8300"
+    tools:context=".SlotMachine">
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@android:drawable/toast_frame"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="155dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@android:drawable/toast_frame"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="376dp"
+        android:layout_height="360dp"
+        app:srcCompat="@android:drawable/toast_frame"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="242dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@android:drawable/toast_frame"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="281dp"
+        android:layout_height="77dp"
+        android:background="#DF362D"
+        android:backgroundTint="#DF362D"
+        android:foregroundTint="#FFFFFF"
+        android:text="Spin!"
+        app:iconTint="#DF362D"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="626dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:tint="#FFFFFF"
+        app:srcCompat="@android:drawable/toast_frame"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="66dp"
+        android:layout_height="63dp"
+        android:tint="#DF362D"
+        app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="326dp"
+        tools:layout_editor_absoluteY="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
