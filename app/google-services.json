@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156447938732",
+    "project_id": "findandplay-acad0",
+    "storage_bucket": "findandplay-acad0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156447938732:android:2b641592cc511b04302709",
+        "android_client_info": {
+          "package_name": "com.hfad.findandplayA"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156447938732-9r813gqdbhkr9e5ehugna6a34sq6rov2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOYCPVrwMsqcCypgoK0Us1b2wi85ghivU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156447938732-9r813gqdbhkr9e5ehugna6a34sq6rov2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
