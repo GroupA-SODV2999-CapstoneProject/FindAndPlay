@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindAndPlay">
         <activity
+            android:name=".AuthRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AuthLoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".SlotMachine"
             android:exported="false" />
         <activity android:name=".MainActivity">
