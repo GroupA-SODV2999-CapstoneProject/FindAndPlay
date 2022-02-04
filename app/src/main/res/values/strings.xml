@@ -1,10 +1,10 @@
 <resources>
-	<string name="app_name">FindAndPlay</string>
-	<string name="login_email">Email</string>
-	<string name="login_pass">Password</string>
-	<string name="login_submit">SIGN IN</string>
-	<string name="register_submit">SIGN UP</string>
+    <string name="app_name">FindAndPlay</string>
+    <string name="login_email">Email</string>
+    <string name="login_pass">Password</string>
+    <string name="login_submit">SIGN IN</string>
+    <string name="register_submit">SIGN UP</string>
     <string name="signup_hint">Don\'t have an account? <u>Sign Up</u></string>
-	<string name="signin_hint">Have an account? <u>Sign In</u></string>
-	<string name="signout"><u>Sign Out</u></string>
+    <string name="signin_hint">Have an account? <u>Sign In</u></string>
+    <string name="signout"><u>Sign Out</u></string>
 </resources>

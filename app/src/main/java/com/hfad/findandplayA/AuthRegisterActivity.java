@@ -34,9 +34,9 @@ public class AuthRegisterActivity extends AppCompatActivity {
         signinHint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View ref) {
-				Intent intent = new Intent(AuthRegisterActivity.this, AuthLoginActivity.class);
-				intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-				AuthRegisterActivity.this.startActivity(intent);
+                Intent intent = new Intent(AuthRegisterActivity.this, AuthLoginActivity.class);
+                intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                AuthRegisterActivity.this.startActivity(intent);
             }
         });
 
