@@ -3,49 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/slotMachine">
+    app:startDestination="@id/authLoginActivity">
 
-    <fragment android:id="@+id/signIn_Placeholder" >
-        <action
-            android:id="@+id/action_signIn_Placeholder_to_signUp_Placeholder"
-            app:destination="@id/signUp_Placeholder" />
-        <action
-            android:id="@+id/action_signIn_Placeholder_to_homeScreen_Placeholder"
-            app:destination="@id/homeScreen_Placeholder" />
-        <action
-            android:id="@+id/action_signIn_Placeholder_to_adminHomeScreen_Placeholder"
-            app:destination="@id/adminHomeScreen_Placeholder" />
-    </fragment>
-    <fragment android:id="@+id/profilePage_Placeholder" >
-        <action
-            android:id="@+id/action_profilePage_Placeholder_to_profilePictureDialog_placeholder2"
-            app:destination="@id/profilePictureDialog_placeholder" />
-    </fragment>
-    <fragment android:id="@+id/signUp_Placeholder" >
-        <action
-            android:id="@+id/action_signUp_Placeholder_to_homeScreen_Placeholder"
-            app:destination="@id/homeScreen_Placeholder" />
-    </fragment>
-    <fragment android:id="@+id/profilePictureDialog_placeholder" />
-    <fragment android:id="@+id/cameraScreen_Placeholder" >
-        <action
-            android:id="@+id/action_cameraScreen_Placeholder_to_slotMachine_Placeholder"
-            app:destination="@id/slotMachine_Placeholder" />
-    </fragment>
-    <fragment android:id="@+id/adminGroupCreation_Placeholder" >
+    <!-- These are the Placeholders -->
+    <fragment android:id="@+id/adminGroupCreation_Placeholder">
         <action
             android:id="@+id/action_adminGroupCreation_Placeholder_to_slotMachine_Placeholder"
             app:destination="@id/slotMachine_Placeholder" />
     </fragment>
-    <fragment android:id="@+id/homeScreen_Placeholder" >
+    <fragment android:id="@+id/adminUserCreationScreen_Placeholder" />
+    <fragment android:id="@+id/profilePage_Placeholder">
         <action
-            android:id="@+id/action_homeScreen_Placeholder_to_profilePage_Placeholder"
-            app:destination="@id/profilePage_Placeholder" />
-        <action
-            android:id="@+id/action_homeScreen_Placeholder_to_slotMachine_Placeholder"
-            app:destination="@id/slotMachine_Placeholder" />
+            android:id="@+id/action_profilePage_Placeholder_to_profilePictureDialog_placeholder2"
+            app:destination="@id/profilePictureDialog_placeholder" />
     </fragment>
-    <fragment android:id="@+id/adminHomeScreen_Placeholder" >
+    <fragment android:id="@+id/cameraScreen_Placeholder"/>
+    <fragment android:id="@+id/profilePictureDialog_placeholder" />
+    <fragment android:id="@+id/adminHomeScreen_Placeholder">
         <action
             android:id="@+id/action_adminHomeScreen_Placeholder_to_adminGroupCreation_Placeholder"
             app:destination="@id/adminGroupCreation_Placeholder" />
@@ -59,29 +33,43 @@
             android:id="@+id/action_adminHomeScreen_Placeholder_to_adminUserCreationScreen_Placeholder"
             app:destination="@id/adminUserCreationScreen_Placeholder" />
     </fragment>
-    <fragment android:id="@+id/ChecksifAdminOrReg" >
-        <action
-            android:id="@+id/action_ChecksifAdminOrReg_to_homeScreen_Placeholder"
-            app:destination="@id/homeScreen_Placeholder" />
-        <action
-            android:id="@+id/action_ChecksifAdminOrReg_to_adminHomeScreen_Placeholder"
-            app:destination="@id/adminHomeScreen_Placeholder" />
-    </fragment>
-    <fragment android:id="@+id/slotMachine_Placeholder" >
+    <fragment android:id="@+id/slotMachine_Placeholder">
         <action
             android:id="@+id/action_slotMachine_Placeholder_to_cameraScreen_Placeholder"
             app:destination="@id/cameraScreen_Placeholder" />
-        <action
-            android:id="@+id/action_slotMachine_Placeholder_to_ChecksifAdminOrReg"
-            app:destination="@id/ChecksifAdminOrReg" />
     </fragment>
-    <fragment android:id="@+id/adminUserCreationScreen_Placeholder" />
-    <navigation android:id="@+id/CreatedScreens"
-        app:startDestination="@id/slotMachine">
-        <activity
-            android:id="@+id/slotMachine"
-            android:name="com.hfad.findandplayA.SlotMachine"
-            android:label="activity_slot_machine"
-            tools:layout="@layout/activity_slot_machine" />
-    </navigation>
+    <fragment android:id="@+id/homeScreen_Placeholder">
+        <action
+            android:id="@+id/action_homeScreen_Placeholder_to_profilePage_Placeholder"
+            app:destination="@id/profilePage_Placeholder" />
+        <action
+            android:id="@+id/action_homeScreen_Placeholder_to_slotMachine_Placeholder"
+            app:destination="@id/slotMachine_Placeholder" />
+    </fragment>
+
+    <!-- Here is where implementation of created activities starts -->
+    <activity
+        android:id="@+id/authLoginActivity"
+        android:name="com.hfad.findandplayA.AuthLoginActivity"
+        android:label="activity_auth_login"
+        tools:layout="@layout/activity_auth_login">
+        <action
+            android:id="@+id/action_signIn_to_authRegisterActivity"
+            app:destination="@id/authRegisterActivity" />
+        <action
+            android:id="@+id/action_signIn_to_homeScreen_Placeholder"
+            app:destination="@id/homeScreen_Placeholder" />
+        <action
+            android:id="@+id/action_signIn_to_adminHomeScreen_Placeholder"
+            app:destination="@id/adminHomeScreen_Placeholder" />
+    </activity>
+    <activity
+        android:id="@+id/authRegisterActivity"
+        android:name="com.hfad.findandplayA.AuthRegisterActivity"
+        android:label="activity_auth_register"
+        tools:layout="@layout/activity_auth_register">
+        <action
+            android:id="@+id/action_authRegisterActivity_to_homeScreen_Placeholder"
+            app:destination="@id/homeScreen_Placeholder" />
+    </activity>
 </navigation>
