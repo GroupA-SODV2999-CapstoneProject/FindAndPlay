@@ -37,7 +37,10 @@ public class SlotMachine extends AppCompatActivity {
     }
 
     //TODO Method to respin for an individual item (Limited or restricted to admin override)
-
+    public void respinSlotMachine(View view) {
+        //Check for a selected item
+        
+    }
     //
 
     //TODO Method to assign those items to each child in the current group

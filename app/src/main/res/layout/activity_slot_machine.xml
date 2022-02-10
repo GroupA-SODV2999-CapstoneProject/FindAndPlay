@@ -38,6 +38,7 @@
         android:id="@+id/imageButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:background="@drawable/selected_item_border"
         app:srcCompat="@android:drawable/toast_frame"
         tools:ignore="SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="16dp"
