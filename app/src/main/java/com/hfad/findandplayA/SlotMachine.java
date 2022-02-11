@@ -44,7 +44,7 @@ public class SlotMachine extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slot_machine);
-        spinBtn = (Button) findViewById((R.id.spinBtn));
+        spinBtn = (Button) findViewById((R.id.button));
         populateCategories(); //Performance might be an issue here, calling this in the background or even during a splash screen at startup might be better
     }
 
@@ -137,7 +137,7 @@ public class SlotMachine extends AppCompatActivity {
 
     public void spinSlotMachine(View view) {
         //Change text of spin button
-        if (view.getId() == R.id.spinBtn) {
+        if (view.getId() == R.id.button) {
             spinBtn.setText("Spin for item again");
             //TODO check if size of new text fits in button
         }
