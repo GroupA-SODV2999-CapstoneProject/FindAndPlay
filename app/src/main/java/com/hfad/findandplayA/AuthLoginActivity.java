@@ -2,8 +2,6 @@ package com.hfad.findandplayA;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,9 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AuthLoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
-    private NavController navigationController;
-    private void navTo_SignUp() { navigationController.navigate(R.id.action_signIn_to_authRegisterActivity); }
-    private void navTo_HomeScreen() { navigationController.navigate(R.id.action_signIn_to_homeScreen_Placeholder); }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +28,6 @@ public class AuthLoginActivity extends AppCompatActivity {
 
         // init firebase auth
         auth = FirebaseAuth.getInstance();
-
-        //Initialize the NavController
-        this.initializeController();
 
         // sign up hint clickable
         TextView signupHint = (TextView) findViewById(R.id.signup_hint);
@@ -88,11 +80,5 @@ public class AuthLoginActivity extends AppCompatActivity {
                     });
             }
         });
-    }
-
-    //Method used to initialize the controller for the instance.
-    protected void initializeController() {
-        NavHostFragment viewHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_containerView);
-        this.navigationController = viewHost.getNavController();
     }
 }
