@@ -8,24 +8,15 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.hfad.findandplayA.viewmodels.Auth;
 
 public class MainActivity extends AppCompatActivity {
-    private FirebaseAuth auth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // init firebase auth
-        auth = FirebaseAuth.getInstance();
-
-        // get signed in user if any
-        FirebaseUser currentUser = auth.getCurrentUser();
-
-        if(currentUser == null){
+        if( ! Auth.isLoggedIn() ){
             // load login activity
             Intent intent = new Intent(MainActivity.this, AuthLoginActivity.class);
             intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -37,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
             spinner.setVisibility(spinner.GONE);
             main.setVisibility(spinner.VISIBLE);
             TextView text = (TextView) findViewById(R.id.centered_message);
-            text.setText(String.format("Signed in as %s", currentUser.getEmail()));
+            text.setText(String.format("Signed in as %s", Auth.getCurrentUser().getEmail()));
 
             // sign out clickable
             TextView signout = (TextView) findViewById(R.id.signout);
             signout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View ref) {
-                    auth.signOut();
+                    Auth.signOut();
                     finish();
                     startActivity(MainActivity.this.getIntent());
                 }
