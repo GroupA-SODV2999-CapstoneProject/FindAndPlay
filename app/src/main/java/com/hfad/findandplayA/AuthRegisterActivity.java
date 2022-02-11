@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.hfad.findandplayA.viewmodels.User;
 
 public class AuthRegisterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -60,24 +61,17 @@ public class AuthRegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(AuthRegisterActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("AUTH", "signInWithEmail:success");
-                                FirebaseUser user = auth.getCurrentUser();
-
-								Intent intent = new Intent(AuthRegisterActivity.this, MainActivity.class);
-								intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-								AuthRegisterActivity.this.startActivity(intent);
-                            } else {
-                                Log.w("AUTH", "signInWithEmail:failure", task.getException());
-                                Toast.makeText(AuthRegisterActivity.this, "Error: invalid credentials.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                User user = new User(email, password);
+                user.save(saved -> {
+                    if ( saved ) {
+                        Intent intent = new Intent(AuthRegisterActivity.this, MainActivity.class);
+                        intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        AuthRegisterActivity.this.startActivity(intent);
+                    } else {
+                        Toast.makeText(AuthRegisterActivity.this, "Error: please try again or contact us.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
