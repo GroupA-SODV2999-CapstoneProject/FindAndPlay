@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindAndPlay">
         <activity
+            android:name=".AddPlayer"
+            android:exported="false" />
+        <activity
+            android:name=".GroupCreation"
+            android:exported="false" />
+        <activity
             android:name=".AuthRegisterActivity"
             android:exported="false" />
         <activity
