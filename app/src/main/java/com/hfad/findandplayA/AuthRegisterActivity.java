@@ -61,7 +61,7 @@ public class AuthRegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                User user = new User(email, password);
+                User user = new User(email, password, null, null);
                 user.save(saved -> {
                     if ( saved ) {
                         Intent intent = new Intent(AuthRegisterActivity.this, MainActivity.class);
