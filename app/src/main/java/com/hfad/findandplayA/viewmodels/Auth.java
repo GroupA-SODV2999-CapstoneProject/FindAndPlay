@@ -39,17 +39,15 @@ public class Auth {
         FirebaseUser userObj = getFirebaseAuthInstance().getCurrentUser();
 
         if ( userObj != null && ! Strings.isEmptyOrWhitespace(userObj.getUid()) ) {
-            User user = new User(userObj.getUid());
-            user.setEmail(userObj.getEmail()); // @todo rm
-            return (currentUser = null != user.getEmail() ? user : new User(null));
+            return (currentUser = new User(userObj));
         } else { // a default user object
-            return (currentUser = new User(null));
+            return (currentUser = new User());
         }
     }
 
     public static boolean isLoggedIn()
     {
-        return getCurrentUser().getUid() != null;
+        return getCurrentUser() != null && getCurrentUser().getUid() != null;
     }
 
     public static void login( String email, String password, Consumer<Boolean> then )
