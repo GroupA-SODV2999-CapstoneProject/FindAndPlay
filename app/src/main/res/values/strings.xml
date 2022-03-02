@@ -18,6 +18,6 @@
     <string name="short_back">◀</string>
 
     <!-- SlotMachine -->
-    <string name="respinBtnTxt"><u>SPIN AGAIN FOR SELECTED</u></string>
+    <string name="respinBtnTxt">Spin again for selected</string>
 
 </resources>

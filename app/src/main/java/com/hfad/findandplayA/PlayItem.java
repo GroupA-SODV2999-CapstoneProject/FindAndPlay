@@ -5,6 +5,7 @@ public class PlayItem {
     private int ItemID = 0;
     private String ItemName = "";
     private String Description = "";
+    //TODO add photo reference when it is implemented in Firestore (need getter/setter too)
 
     // * Note: Non-parameterized constructor and ALL getter/setter methods required
     // * to convert Firebase document to class object @ SlotMachine.java - PopulateCategories() - DO NOT REMOVE

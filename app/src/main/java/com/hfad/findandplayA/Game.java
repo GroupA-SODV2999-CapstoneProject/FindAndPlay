@@ -15,16 +15,16 @@ import java.util.Random;
 
 public class Game {
     private static final String TAG = "Game";
-    public static boolean categoryEmpty = false;
-    public static ArrayList<PlayItem> inGameItems = new ArrayList<>();
-    //    private static ArrayList<PlayItem> catFive = new ArrayList<PlayItem>();
-//    private static ArrayList<PlayItem> catSix = new ArrayList<PlayItem>();
-    private final int numOfCat = 4; //TODO update based on # of categories in db
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final int numOfCat = 4; //TODO update based on # of categories in db
     private ArrayList<PlayItem> catOne = new ArrayList<>();
     private ArrayList<PlayItem> catTwo = new ArrayList<>();
     private ArrayList<PlayItem> catThree = new ArrayList<>();
     private ArrayList<PlayItem> catFour = new ArrayList<>();
+//    private ArrayList<PlayItem> catFive = new ArrayList<PlayItem>();
+//    private ArrayList<PlayItem> catSix = new ArrayList<PlayItem>();
+    public static ArrayList<PlayItem> inGameItems = new ArrayList<>();
+    public static boolean categoryEmpty = false;
 
 
     public Game() {
@@ -32,9 +32,8 @@ public class Game {
         catTwo = getAllItemsOfCategory(2);
         catThree = getAllItemsOfCategory(3);
         catFour = getAllItemsOfCategory(4);
-//        catFive = populateCategories(5);
-//        catSix = populateCategories(6);
-        categoryEmpty = !(catOne.isEmpty() && catTwo.isEmpty() && catThree.isEmpty() && catFour.isEmpty() /*&& catFive.isEmpty() && catSix.isEmpty()*/);
+//        catFive = getAllItemsOfCategory(5);
+//        catSix = getAllItemsOfCategory(6);
     }
 
     // TODO (certain # to grab instead of all?)
@@ -65,10 +64,12 @@ public class Game {
                     }
                 } else {
                     //TODO add dialog that forces restart and to check internet connection (Category is empty)
-                    Log.d("FromFirestore", "Category " + categoryNum + "returned no results...");
+                    Log.d("FromFirestore", "Category " + categoryNum + " returned no results...");
+                    categoryEmpty = true;
                 }
             } else {
                 Log.e(TAG, "Error retrieving category " + categoryNum + " documents: ", task.getException());
+                categoryEmpty = true;
             }
         });
         return returnedItems;
