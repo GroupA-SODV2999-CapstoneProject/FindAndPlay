@@ -7,6 +7,19 @@
     android:background="#FF8300"
     tools:context=".SlotMachine">
 
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="281dp"
+        android:layout_height="77dp"
+        android:background="#DF362D"
+        android:backgroundTint="#DF362D"
+        android:foregroundTint="#FFFFFF"
+        android:text="Start!"
+        app:iconTint="#DF362D"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="474dp"
+        tools:visibility="invisible" />
+
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="100dp"
@@ -27,8 +40,8 @@
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="376dp"
-        android:layout_height="360dp"
+        android:layout_width="370dp"
+        android:layout_height="104dp"
         app:srcCompat="@android:drawable/toast_frame"
         tools:ignore="SpeakableTextPresentCheck"
         tools:layout_editor_absoluteX="16dp"
@@ -45,7 +58,7 @@
         tools:layout_editor_absoluteY="118dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/spinBtn"
         android:layout_width="281dp"
         android:layout_height="77dp"
         android:background="#DF362D"
@@ -53,8 +66,8 @@
         android:foregroundTint="#FFFFFF"
         android:text="Spin!"
         app:iconTint="#DF362D"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="626dp" />
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="363dp" />
 
     <ImageButton
         android:id="@+id/imageButton5"

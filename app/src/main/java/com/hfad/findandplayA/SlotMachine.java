@@ -1,8 +1,7 @@
 //TODO Summary (Marked on relevant lines in code)
 // * ****** UI AND SLOT MACHINE ANIMATION ******
 // * Animation is either for all categories to spin or only a selected category as noted in spin
-// * We need a "Go" or "Start" button added to the layout (it will stay deactivated until the slot machine has spun at least once) (id = startBtn) (Error will show until this is done)
-// * The "SPIN!" button needs to be given id = spinBtn (Error will show until this is done)
+// * I added a "Start" button to the layout (it will stay deactivated/hidden until the slot machine has spun at least once), it will need to be placed/sized appropriately in UI
 // * After the animation is done and there are images associated with Items in Firestore, I'll need to add assigning the results of a spin (inGameItems) to the UI
 // *
 // * ****** CHILD GROUP / MEMBER ******
@@ -90,6 +89,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         //First spin
         else if (!spinned) {
+            startBtn.setVisibility(View.VISIBLE);
             spinBtn.setText(R.string.respinBtnTxt);
 
             //TODO Start animation of all categories
