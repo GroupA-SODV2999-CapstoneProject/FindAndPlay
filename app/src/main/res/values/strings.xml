@@ -16,4 +16,8 @@
     <string name="pic_4">pic_4</string>
     <string name="pic_6">pic_6</string>
     <string name="short_back">◀</string>
+
+    <!-- SlotMachine -->
+    <string name="respinBtnTxt"><u>SPIN AGAIN FOR SELECTED</u></string>
+
 </resources>
