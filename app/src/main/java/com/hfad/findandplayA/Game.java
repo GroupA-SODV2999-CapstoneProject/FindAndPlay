@@ -143,8 +143,8 @@ public class Game {
 
 
     /**
-     * Starts the animation of the slot machine spinning for all categories (first spin
-     * It then calls on pickRandomItem to populate the inGameItems.
+     * Picks a random item from all available categories, then stores them in inGameItems ArrayList
+     *
      */
     public void spinAll() {
         inGameItems.clear();
@@ -154,6 +154,11 @@ public class Game {
         }
     }
 
+    /**
+     * Changes a single item matching the given category in inGameItems to a new randomly selected one.
+     *
+     * @param category  The categoryID of the item to replace.
+     */
     public void spinOne(int category) {
         inGameItems.set(category - 1, pickRandomItem(category));
 
