@@ -105,7 +105,7 @@ public class User {
                         // since task is successful
                         link = Objects.requireNonNull(task.getResult()).getUser();
                         refreshPropertiesFromAuth();
-                        updateUserMetadata(ok -> then.accept(true));
+                        then.accept(true);
                     }
                 });
     }
@@ -125,26 +125,7 @@ public class User {
                     return;
                 }
 
-                updateUserMetadata(ok -> then.accept(true));
-            }
-        });
-    }
-
-    private void updateUserMetadata(Consumer<Boolean> then)
-    {
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        DocumentReference ref = firebaseFirestore.collection("Users").document(getUid());
-
-        Map<String, Object> data = new HashMap<>();
-        data.put("email", email);
-        data.put("displayName", displayName);
-        data.put("photoUri", photoUri);
-
-        ref.set(data).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                then.accept(task.isSuccessful());
+                then.accept(true);
             }
         });
     }
