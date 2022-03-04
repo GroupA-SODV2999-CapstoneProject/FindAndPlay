@@ -21,13 +21,21 @@
 
 package com.hfad.findandplayA;
 
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.hfad.findandplayA.viewmodels.Game;
+import com.hfad.findandplayA.viewmodels.PlayItem;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,27 +45,46 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private Game game;
     private boolean spinned = false;
     private boolean errState = false;
+    private PlayItem playItem;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_slot_machine);
-        spinBtn = (Button) findViewById((R.id.spinBtn));
-        startBtn = (Button) findViewById((R.id.startBtn));
+        setContentView(R.layout.activity_slot_machinev2);
+
+        // hide loading spinner once data loaded from firestore
+        RelativeLayout spinner = (RelativeLayout) findViewById(R.id.layout_loading_spinner);
+        RelativeLayout main = (RelativeLayout) findViewById(R.id.layout_main_content);
+        main.setVisibility(View.GONE);
+        spinner.setVisibility(View.VISIBLE);
+
+        // items loading is tied to constructor, so instantiating a game obj when activity is started
+        game = new Game(ok -> {
+            spinner.setVisibility(View.GONE);
+            main.setVisibility(View.VISIBLE);
+        });
+
+        spinBtn = (Button) findViewById(R.id.spinBtn);
+        startBtn = (Button) findViewById(R.id.startBtn);
         startBtn.setEnabled(false);
+        startBtn.setVisibility(View.GONE);
         spinBtn.setOnClickListener(this);
         startBtn.setOnClickListener(this);
-
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onResume() {
+        // Jamie, this will reload the game each time you bring the app to foreground, e.g when switching
+        // between apps and opening the app again, or when phone locks then unlocks and app openned
+        // @see https://developer.android.com/guide/components/activities/activity-lifecycle#onresume
         super.onResume();
-        game = new Game();
+        game = new Game(ok -> {});
     }
 
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
         int id = v.getId();
@@ -77,11 +104,12 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
      *
      * @param view View passed from onClickListener that calls spin.
      */
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void spin(View view) {
         //Error retrieving items
         if (Game.categoryEmpty) {
             //Attempt to pull from Firestore again
-            game = new Game();
+            game = new Game(ok -> {});
 
             Toast networkErrorToast = Toast.makeText(getApplicationContext(), "Something went wrong...\nCheck internet and try again", Toast.LENGTH_LONG);
             networkErrorToast.show();
@@ -90,13 +118,26 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         //First spin
         else if (!spinned) {
             startBtn.setVisibility(View.VISIBLE);
+            spinBtn.setVisibility(View.GONE);
             spinBtn.setText(R.string.respinBtnTxt);
+
+            ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
+            ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
+            ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
 
             //TODO Start animation of all categories
 
             game.spinAll();
 
-            for (int i = 0; i < Game.inGameItems.size(); i++) {
+
+            /*
+            Game.getImageBitmap(Game.inGameItems.get(0).getIcon(), data -> btn1.setImageBitmap(data));
+            Game.getImageBitmap(Game.inGameItems.get(1).getIcon(), data -> btn2.setImageBitmap(data));
+            Game.getImageBitmap(Game.inGameItems.get(2).getIcon(), data -> btn3.setImageBitmap(data));
+             */
+
+            for (PlayItem item : Game.inGameItems) {
+                Log.d("ITEM", item.getIcon());
                 //TODO Display selected items from inGameItems
                 //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
             }

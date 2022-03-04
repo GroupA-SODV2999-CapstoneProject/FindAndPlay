@@ -2,16 +2,28 @@
 // * Animation is for all categories to spin in spinAll() or only selected category in spinOne()
 // *
 
-package com.hfad.findandplayA;
+package com.hfad.findandplayA.viewmodels;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
+
+import java.util.function.Consumer;
 
 public class Game {
     private static final String TAG = "Game";
@@ -26,12 +38,21 @@ public class Game {
     public static ArrayList<PlayItem> inGameItems = new ArrayList<>();
     public static boolean categoryEmpty = false;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Game(final Consumer<Boolean> then) {
+        final int[] completed = {0};
+        final Consumer<Boolean> listener = ok ->
+        {
+            completed[0]++;
+            if ( completed[0] >= 4 ) {
+                then.accept(true);
+            }
+        };
 
-    public Game() {
-        catOne = getAllItemsOfCategory(1);
-        catTwo = getAllItemsOfCategory(2);
-        catThree = getAllItemsOfCategory(3);
-        catFour = getAllItemsOfCategory(4);
+        catOne = getAllItemsOfCategory(1, listener);
+        catTwo = getAllItemsOfCategory(2, listener);
+        catThree = getAllItemsOfCategory(3, listener);
+        catFour = getAllItemsOfCategory(4, listener);
 //        catFive = getAllItemsOfCategory(5);
 //        catSix = getAllItemsOfCategory(6);
     }
@@ -46,7 +67,8 @@ public class Game {
      * @param categoryNum The number to match to the "CategoryID" key in the "Items" collection.
      * @return An ArrayList of relevant PlayItems.
      */
-    public ArrayList<PlayItem> getAllItemsOfCategory(int categoryNum) {
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public ArrayList<PlayItem> getAllItemsOfCategory(int categoryNum, final Consumer<Boolean> then) {
         ArrayList<PlayItem> returnedItems = new ArrayList<>();
         //Populate category 1 from firebase
         String dbCatId = "CategoryID";
@@ -71,7 +93,10 @@ public class Game {
                 Log.e(TAG, "Error retrieving category " + categoryNum + " documents: ", task.getException());
                 categoryEmpty = true;
             }
-        });
+            then.accept(task.isSuccessful());
+        }).addOnFailureListener(runnable -> then.accept(false));
+        // this won't work Jamie as the callbacks are executed asynchronously
+        // have yet to figure out async/await in Java, so I use consumer callbacks instead
         return returnedItems;
     }
 
@@ -167,5 +192,31 @@ public class Game {
             Log.d("SelectedNewForGame", item.getItemName());
         }
 
+    }
+
+    public static void getImageBitmap(String url, Consumer<Bitmap> then) {
+        Thread thread = new Thread(new Runnable() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void run() {
+                Bitmap bm = null;
+                try {
+                    URL aURL = new URL(url);
+                    URLConnection conn = aURL.openConnection();
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    bm = BitmapFactory.decodeStream(bis);
+                    bis.close();
+                    is.close();
+                } catch (IOException e) {
+                    Log.e(TAG, "Error getting bitmap", e);
+                }
+                
+                then.accept(bm);
+            }
+        });
+
+        thread.start();
     }
 }
