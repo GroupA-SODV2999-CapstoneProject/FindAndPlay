@@ -1,10 +1,11 @@
-package com.hfad.findandplayA;
+package com.hfad.findandplayA.viewmodels;
 
 public class PlayItem {
     private int CategoryID = 0;
     private int ItemID = 0;
     private String ItemName = "";
     private String Description = "";
+    private String Icon = "";
     //TODO add photo reference when it is implemented in Firestore (need getter/setter too)
 
     // * Note: Non-parameterized constructor and ALL getter/setter methods required
@@ -43,5 +44,9 @@ public class PlayItem {
 
     public void setItemName(String itemName) {
         ItemName = itemName;
+    }
+
+    public String getIcon() {
+        return Icon;
     }
 }
