@@ -130,11 +130,9 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             game.spinAll();
 
 
-            /*
-            Game.getImageBitmap(Game.inGameItems.get(0).getIcon(), data -> btn1.setImageBitmap(data));
-            Game.getImageBitmap(Game.inGameItems.get(1).getIcon(), data -> btn2.setImageBitmap(data));
-            Game.getImageBitmap(Game.inGameItems.get(2).getIcon(), data -> btn3.setImageBitmap(data));
-             */
+            loadCategoryItem(0, btn1);
+            loadCategoryItem(1, btn2);
+            loadCategoryItem(2, btn3);
 
             for (PlayItem item : Game.inGameItems) {
                 Log.d("ITEM", item.getIcon());
@@ -194,6 +192,15 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
     }
 
+    protected void loadCategoryItem( int index, ImageView ref )
+    {
+        Game.getImageBitmap(Game.inGameItems.get(index).getIcon(), data -> runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                ref.setImageBitmap(data);
+            }
+        }));
+    }
 
     //TODO Method needed to assign playItems to each child in the current group
 }
