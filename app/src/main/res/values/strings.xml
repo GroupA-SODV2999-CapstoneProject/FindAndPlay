@@ -19,5 +19,7 @@
 
     <!-- SlotMachine -->
     <string name="respinBtnTxt">Spin again for selected</string>
+    <string name="slot_machine_start">Start!</string>
+    <string name="slot_machine_spin">Spin!</string>
 
 </resources>

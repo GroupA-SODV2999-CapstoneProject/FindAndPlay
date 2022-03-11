@@ -21,14 +21,24 @@
 
 package com.hfad.findandplayA;
 
+import android.animation.ObjectAnimator;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -36,10 +46,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.hfad.findandplayA.viewmodels.Game;
 import com.hfad.findandplayA.viewmodels.PlayItem;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.util.Arrays;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.function.BiConsumer;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
+    private static final Integer ANIMATION_DURATION_MS = 3 *1000; // milliseconds
+    private static final Integer ANIMATION_DELAY_MS = 250; // milliseconds
     private Button spinBtn;
     private Button startBtn;
     private Game game;
@@ -129,10 +148,37 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
             game.spinAll();
 
+            Bitmap[] imgData = new Bitmap[3];
+            ImageView[] btns = { btn1, btn2, btn3 };
+            final int[] completed = {0};
+            final BiConsumer<Bitmap,Integer> listener = (data, index) ->
+            {
+                imgData[index] = data;
+                completed[0]++;
 
-            loadCategoryItem(0, btn1);
-            loadCategoryItem(1, btn2);
-            loadCategoryItem(2, btn3);
+                Log.d(TAG, "--------- index: " + index);
+                Log.d(TAG, "--------- is null: " + (null == data));
+                Log.d(TAG, "--------- Has null: " + Arrays.asList(imgData).contains(null));
+
+                // check if all images bitmap data loaded from cache or remotely
+                if ( completed[0] >= 3 ) { // increase count when you add more category buttons
+                    if ( Arrays.asList(imgData).contains(null) ) {
+                        Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    for ( int i=0; i<btns.length; i++ )
+                        loadImageWithAnimation(btns[i], imgData, i);
+
+                    // btns[0].setImageBitmap(imgData[0]);
+                    // btns[1].setImageBitmap(imgData[1]);
+                    // btns[2].setImageBitmap(imgData[2]);
+                }
+            };
+
+            loadCategoryItem(0, listener);
+            loadCategoryItem(1, listener);
+            loadCategoryItem(2, listener);
 
             for (PlayItem item : Game.inGameItems) {
                 Log.d("ITEM", item.getIcon());
@@ -192,14 +238,72 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
     }
 
-    protected void loadCategoryItem( int index, ImageView ref )
+    protected void loadCategoryItem( int index, BiConsumer<Bitmap,Integer> then )
     {
-        Game.getImageBitmap(Game.inGameItems.get(index).getIcon(), data -> runOnUiThread(new Runnable() {
+        // @todo rm
+        String url = "https://placeimg.com/300/300/any?_=" + java.util.UUID.randomUUID().toString();
+        url = Game.inGameItems.get(index).getIcon();
+
+        // load image from cache or url into view
+        Picasso.get().load(url).into(new Target() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                then.accept(bitmap, index);
+            }
+
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                then.accept(null, index);
+            }
+
+            @Override
+            public void onPrepareLoad(Drawable placeHolderDrawable) {
+            }
+        });
+    }
+
+    protected void loadImageWithAnimation( ImageView ref, Bitmap[] imgData, int index )
+    {
+        int resId = getResources().getIdentifier("animate__sv" + (index+1), "id", this.getPackageName());
+        ScrollView animSv = (ScrollView) findViewById(resId);
+        RelativeLayout animRl = (RelativeLayout) animSv.getChildAt(0);
+
+        animSv.setVerticalScrollBarEnabled(false);
+        animSv.setHorizontalScrollBarEnabled(false);
+
+        int[] imgSize = {ref.getWidth(), ref.getHeight()};
+        animRl.removeView(ref);
+
+        ref.setImageBitmap(imgData[index]);
+        int[] imgIds = new int[imgData.length];
+
+        for ( int i=0; i<imgData.length; i++ ) {
+            ImageView img = new ImageView(getBaseContext());
+            img.setImageBitmap(imgData[i]);
+            img.setAdjustViewBounds(true);
+
+            imgIds[i] = View.generateViewId();
+            img.setId(imgIds[i]);
+
+            if ( i > 0 ) {
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+                params.addRule(RelativeLayout.BELOW, imgIds[i - 1]);
+                img.setLayoutParams(params);
+            }
+
+            animRl.addView(img);
+        }
+
+        animSv.post(new Runnable() {
             @Override
             public void run() {
-                ref.setImageBitmap(data);
+                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", 0, animSv.getScrollY() + index*imgSize[1]).setDuration(1000);
+                objectAnimator.start();
+
             }
-        }));
+        });
     }
 
     //TODO Method needed to assign playItems to each child in the current group
