@@ -19,5 +19,11 @@
 
     <!-- SlotMachine -->
     <string name="respinBtnTxt">Spin again for selected</string>
+    <string name="here_is_this_weeks_image">HERE IS THIS WEEKS IMAGE</string>
+    <string name="string_here_is_this_weeks_image" />
+    <string name="load_image">Load Image</string>
+    <string name="weeklyimage">weeklyIMAGE</string>
+    <string name="load_image">Load Image</string>
+    <string name="todo">TODO</string>
 
 </resources>
