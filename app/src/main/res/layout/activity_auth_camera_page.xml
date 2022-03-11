@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#FF9100"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/btn_Camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:paddingBottom="10dp"
+        android:textColorLink="#FF1000"
+        android:text="@string/camera_symbol"
+        android:textSize="48sp"
+        app:cornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/Picture_View"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="@string/todo"
+        app:layout_constraintBottom_toTopOf="@+id/btn_Camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_light_normal_background"
+        tools:ignore="ImageContrastCheck" />
+
+    <Button
+        android:id="@+id/btn_flip"
+        android:layout_width="78dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="16dp"
+        android:textColorLink="#FF1000"
+        android:text="@string/flip_symbol"
+        android:textSize="34sp"
+        app:cornerRadius="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_Camera" />
+</androidx.constraintlayout.widget.ConstraintLayout>
