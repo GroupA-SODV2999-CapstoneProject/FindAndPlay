@@ -21,7 +21,7 @@
 
 package com.hfad.findandplayA;
 
-import android.net.Uri;
+import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +35,12 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hfad.findandplayA.viewmodels.Game;
+import com.hfad.findandplayA.viewmodels.MathProblem;
 import com.hfad.findandplayA.viewmodels.PlayItem;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,8 +49,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private Button startBtn;
     private Game game;
     private boolean spinned = false;
-    private boolean errState = false;
-    private PlayItem playItem;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -117,8 +120,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         //First spin
         else if (!spinned) {
-            startBtn.setVisibility(View.VISIBLE);
-            spinBtn.setVisibility(View.GONE);
+            //startBtn.setVisibility(View.VISIBLE);
+            //spinBtn.setVisibility(View.GONE);
             spinBtn.setText(R.string.respinBtnTxt);
 
             ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
@@ -150,43 +153,62 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         }
         //Subsequent spin(s)
         else {
-            if (adminPermission()) {
-                //TODO Get category number from selected
-                int category = 1; //TODO Update
+            MathProblem mathProblem = new MathProblem();
+            ArrayList<String> selections = new ArrayList<>();
+            int[] selected = { -1 };
 
-                //TODO start animation on single category
+            //Get a math problem and solution
+            MathProblem.Question question = mathProblem.getMathProblem();
+            //Create a new dialog
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            //Set the dialogs features
+            dialogBuilder.setTitle(question.prompt);
+//            dialogBuilder.setMessage("\nAnswer the following question to approve this action.\n" + question.prompt);
+            dialogBuilder.setCancelable(false);
 
-                game.spinOne(category);
+            //Create 3 wrong answers to go with the solution
+            Random random = new Random();
+            Log.d("ParseIntAnswer", question.answer);
+            int answer = Integer.parseInt(question.answer);
+            selections.add(Integer.toString(answer + random.nextInt(50) + 1));
+            selections.add(Integer.toString(answer - random.nextInt(50) + 1));
+            selections.add(Integer.toString(answer + random.nextInt(50) + 1));
+            selections.add(question.answer);
 
-                //TODO update UI to be new item (Note: new item will be "game.inGameItems.get(category - 1)")
-            }
+            Collections.shuffle(selections);
 
-            //TODO REMOVE *****DEBUGGER******
-            for (PlayItem item : Game.inGameItems) {
-                Log.d("SelectedNewForGame", item.getItemName());
-            }
+            CharSequence[] selectionsArray = selections.toArray(new CharSequence[0]);
+
+            //Set the onClick for the MC options in the dialog
+            dialogBuilder.setSingleChoiceItems(selectionsArray, selected[0], (dialog, s) -> {
+                selected[0] = s;
+                String currentItem = selectionsArray[s].toString();
+
+                //Check if the answer matches the solution
+                if (currentItem.equals(question.answer)) {
+                    //TODO Get category number from selected
+                    int category = 1; //TODO Update
+
+                    //TODO start animation on single category
+
+                    game.spinOne(category);
+
+                    //TODO update UI to be new item (Note: new item will be "game.inGameItems.get(category - 1)")
+
+                    //TODO REMOVE *****DEBUGGER******
+                    for (PlayItem item : Game.inGameItems) {
+                        Log.d("SelectedNewForGame", item.getItemName());
+                    }
+                }
+                dialog.dismiss();
+            }).setNegativeButton("Cancel", (dialog, s) -> dialog.dismiss());
+
+            AlertDialog adminDialog = dialogBuilder.create();
+            adminDialog.show();
+
         }
     }
 
-
-    /**
-     * Prompt user through an AlertDialog to answer a random math question (easy, but hard enough that under 5 can't answer).
-     *
-     * @return True if answered correctly, else false.
-     */
-    private boolean adminPermission() {
-        //TODO add prompt for random math question to act as admin approval of an action
-        //Check submitted answer
-        if(true) {
-            //TODO maybe an animation of a green checkmark to indicate it was correct?
-            return true;
-        }
-        else {
-            //TODO maybe an animation of a red x to show it was incorrect?
-            return false;
-
-        }
-    }
 
     public void startGame(View view) {
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
