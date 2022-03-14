@@ -24,12 +24,14 @@ package com.hfad.findandplayA;
 import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
@@ -65,7 +67,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private boolean spinned = false;
     private boolean errState = false;
     private PlayItem playItem;
-
+    private boolean audioOn = true;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -91,6 +93,17 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         startBtn.setVisibility(View.GONE);
         spinBtn.setOnClickListener(this);
         startBtn.setOnClickListener(this);
+
+        ImageView audioBtn = (ImageView) findViewById(R.id.audioBtn);
+        audioBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View ref) {
+                audioOn = ! audioOn;
+                audioBtn.setImageResource( audioOn
+                        ? android.R.drawable.ic_lock_silent_mode_off
+                        : android.R.drawable.ic_lock_silent_mode );
+            }
+        });
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -240,9 +253,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     protected void loadCategoryItem( int index, BiConsumer<Bitmap,Integer> then )
     {
-        // @todo rm
-        String url = "https://placeimg.com/300/300/any?_=" + java.util.UUID.randomUUID().toString();
-        url = Game.inGameItems.get(index).getIcon();
+        String url = Game.inGameItems.get(index).getIcon();
+        // url = "https://picsum.photos/300/300?random=2&_=" + java.util.UUID.randomUUID().toString();
 
         // load image from cache or url into view
         Picasso.get().load(url).into(new Target() {
@@ -272,16 +284,31 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         animSv.setVerticalScrollBarEnabled(false);
         animSv.setHorizontalScrollBarEnabled(false);
+        animSv.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) { return true; }
+        });
 
         int[] imgSize = {ref.getWidth(), ref.getHeight()};
         animRl.removeView(ref);
 
-        ref.setImageBitmap(imgData[index]);
-        int[] imgIds = new int[imgData.length];
+        Bitmap[] dataAlt = new Bitmap[30*(1+index)];
+        int[] imgIds = new int[dataAlt.length];
 
-        for ( int i=0; i<imgData.length; i++ ) {
+        for ( int i=0; i<dataAlt.length; i++ ) {
+            Bitmap data = imgData[ i % (imgData.length-1) ];
+
+            // set target image as first and last
+            if ( 0 == i || i == dataAlt.length -1 ) {
+                data = imgData[index];
+            }
+
+            dataAlt[i] = data;
+        }
+
+        for ( int i=0; i<dataAlt.length; i++ ) {
             ImageView img = new ImageView(getBaseContext());
-            img.setImageBitmap(imgData[i]);
+            img.setImageBitmap(dataAlt[i]);
             img.setAdjustViewBounds(true);
 
             imgIds[i] = View.generateViewId();
@@ -299,10 +326,33 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         animSv.post(new Runnable() {
             @Override
             public void run() {
-                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", 0, animSv.getScrollY() + index*imgSize[1]).setDuration(1000);
-                objectAnimator.start();
+                int animationDuration = 750*(1+index);
 
+                if ( audioOn ) {
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            if ( audioOn ) playSound(R.raw.magicwand);
+                        }
+                    }, animationDuration);
+                }
+
+                int scrollTo = animSv.getScrollY() + (dataAlt.length -1)*imgSize[1];
+                animSv.scrollTo(0, scrollTo);
+
+                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", scrollTo, 0)
+                        .setDuration(animationDuration);
+                objectAnimator.start();
             }
+        });
+    }
+
+    protected void playSound( int id )
+    {
+        runOnUiThread(() ->
+        {
+            MediaPlayer mediaPlayer = MediaPlayer.create(SlotMachine.this, id);
+            mediaPlayer.start();
         });
     }
 

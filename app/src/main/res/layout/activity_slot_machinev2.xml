@@ -73,7 +73,7 @@
                         android:gravity="center" />
 
                     <ImageButton
-                        android:id="@+id/imageButton6"
+                        android:id="@+id/audioBtn"
                         android:layout_width="66dp"
                         android:layout_height="63dp"
                         app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
