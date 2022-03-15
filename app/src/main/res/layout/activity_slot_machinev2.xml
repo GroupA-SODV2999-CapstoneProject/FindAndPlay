@@ -43,27 +43,29 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            >
+            tools:ignore="DuplicateIds">
+
             <RelativeLayout
                 android:id="@+id/layout_main_content"
-                android:visibility="visible"
-                android:layout_weight="1"
                 android:layout_width="390dp"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:layout_weight="1"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/llayout_col0"
-                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
                     <ImageButton
                         android:id="@+id/imageButton5"
                         android:layout_width="66dp"
                         android:layout_height="66dp"
-                        android:tint="#FFFFFF"
                         app:srcCompat="@android:drawable/toast_frame"
+                        app:tint="#FFFFFF"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <TextView
@@ -76,19 +78,19 @@
                         android:id="@+id/imageButton6"
                         android:layout_width="66dp"
                         android:layout_height="63dp"
-                        android:tint="#DF362D"
                         app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
+                        app:tint="#DF362D"
                         tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/llayout_col1"
-                    android:layout_below="@+id/llayout_col0"
-                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/llayout_col0"
+                    android:layout_marginVertical="25dp"
                     android:gravity="center"
-                    android:layout_marginVertical="25dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imageButton"
@@ -126,12 +128,12 @@
 
                 <LinearLayout
                     android:id="@+id/llayout_col2"
-                    android:layout_below="@+id/llayout_col1"
-                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/llayout_col1"
+                    android:layout_marginVertical="25dp"
                     android:gravity="center"
-                    android:layout_marginVertical="25dp">
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imageButton4"
@@ -144,12 +146,12 @@
 
                 <LinearLayout
                     android:id="@+id/llayout_col3"
-                    android:layout_below="@+id/llayout_col2"
-                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/llayout_col2"
+                    android:layout_marginVertical="25dp"
                     android:gravity="center"
-                    android:layout_marginVertical="25dp">
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/spinBtn"
@@ -172,7 +174,18 @@
                         app:iconTint="#DF362D"
                         tools:visibility="gone" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/timerText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="00:00:00"
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
+
             </RelativeLayout>
+
         </RelativeLayout>
     </LinearLayout>
 

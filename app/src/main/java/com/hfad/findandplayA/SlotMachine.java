@@ -24,11 +24,13 @@ package com.hfad.findandplayA;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -37,9 +39,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hfad.findandplayA.viewmodels.Game;
 import com.hfad.findandplayA.viewmodels.PlayItem;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
+    private int counter = 0;
+    private TextView timerText;
     private Button spinBtn;
     private Button startBtn;
     private Game game;
@@ -65,7 +72,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             spinner.setVisibility(View.GONE);
             main.setVisibility(View.VISIBLE);
         });
-
+        timerText = findViewById(R.id.timerText);
         spinBtn = (Button) findViewById(R.id.spinBtn);
         startBtn = (Button) findViewById(R.id.startBtn);
         startBtn.setEnabled(false);
@@ -90,6 +97,24 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         int id = v.getId();
         if (id == R.id.spinBtn) {
             spin(v);
+            new CountDownTimer(30000, 1000) {
+                @Override
+                public void onTick(long l) {
+                    NumberFormat format = new DecimalFormat("00");
+                    long hour = (l/3600000)%24;
+                    long minute = (l/60000)%60;
+                    long second = (l/1000)%60;
+                    timerText.setText(format.format(hour) + ":" + format.format(minute) + ":" + format.format(second));
+                    startBtn.setEnabled(false);
+                }
+
+                @Override
+                public void onFinish() {
+                    timerText.setText("00:00:00");
+                    Toast.makeText(SlotMachine.this,"Time Over!", Toast.LENGTH_SHORT).show();
+                    startBtn.setEnabled(true);
+                }
+            }.start();
         } else if (id == R.id.startBtn) {
             startGame(v);
         } else {
