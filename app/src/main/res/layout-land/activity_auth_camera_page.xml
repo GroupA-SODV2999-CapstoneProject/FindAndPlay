@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
-        android:id="@+id/Picture_View"
+        android:id="@+id/cameraImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
@@ -34,7 +34,7 @@
         tools:ignore="ImageContrastCheck" />
 
     <Button
-        android:id="@+id/btn_flip"
+        android:id="@+id/clearImageBtn"
         android:layout_width="78dp"
         android:layout_height="76dp"
         android:layout_marginEnd="32dp"
