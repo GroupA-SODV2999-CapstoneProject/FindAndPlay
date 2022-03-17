@@ -19,5 +19,9 @@
 
     <!-- SlotMachine -->
     <string name="respinBtnTxt">Spin again for selected</string>
+    <string name="picture_view">TODO</string>
+    <string name="camera_symbol">📷</string>
+    <string name="flip_symbol">🔄</string>
+    <string name="todo">TODO</string>
 
 </resources>
