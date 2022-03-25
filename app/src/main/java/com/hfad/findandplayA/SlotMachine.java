@@ -25,22 +25,15 @@ import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
@@ -52,20 +45,15 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.function.BiConsumer;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
-    private static final Integer ANIMATION_DURATION_MS = 3 *1000; // milliseconds
-    private static final Integer ANIMATION_DELAY_MS = 250; // milliseconds
     private Button spinBtn;
     private Button startBtn;
     private Game game;
     private boolean spinned = false;
-    private boolean errState = false;
     private PlayItem playItem;
     private boolean audioOn = true;
 
@@ -95,14 +83,11 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         startBtn.setOnClickListener(this);
 
         ImageView audioBtn = (ImageView) findViewById(R.id.audioBtn);
-        audioBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View ref) {
-                audioOn = ! audioOn;
-                audioBtn.setImageResource( audioOn
-                        ? android.R.drawable.ic_lock_silent_mode_off
-                        : android.R.drawable.ic_lock_silent_mode );
-            }
+        audioBtn.setOnClickListener(ref -> {
+            audioOn = ! audioOn;
+            audioBtn.setImageResource( audioOn
+                    ? android.R.drawable.ic_lock_silent_mode_off
+                    : android.R.drawable.ic_lock_silent_mode );
         });
     }
 
@@ -284,10 +269,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         animSv.setVerticalScrollBarEnabled(false);
         animSv.setHorizontalScrollBarEnabled(false);
-        animSv.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) { return true; }
-        });
+        animSv.setOnTouchListener((v, event) -> true);
 
         int[] imgSize = {ref.getWidth(), ref.getHeight()};
         animRl.removeView(ref);
