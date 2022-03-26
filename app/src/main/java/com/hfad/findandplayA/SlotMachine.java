@@ -22,6 +22,7 @@
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -249,6 +250,9 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     public void startGame(View view) {
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
+
+        Intent startGameIntent = new Intent(SlotMachine.this, PlayerSelect.class);
+        startActivity(startGameIntent);
     }
 
     protected void loadCategoryItem( int index, BiConsumer<Bitmap,Integer> then )
