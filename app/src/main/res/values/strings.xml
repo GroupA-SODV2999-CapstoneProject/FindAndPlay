@@ -26,4 +26,7 @@
     <string name="flip_symbol">🔄</string>
     <string name="todo">TODO</string>
 
+    <!-- PlayerSelect -->
+    <string name="player_color_change_text">The button for each child will change from <font color='#FFFF4444'>RED </font>to <font color='#337A42'>GREEN </font>once all required pictures have been taken.</string>
+
 </resources>
