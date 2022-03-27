@@ -7,4 +7,26 @@
     <string name="signup_hint">Don\'t have an account? <u>Sign Up</u></string>
     <string name="signin_hint">Have an account? <u>Sign In</u></string>
     <string name="signout"><u>Sign Out</u></string>
+    <string name="back">Back</string>
+    <string name="change_profile_change">Change Profile Change</string>
+    <string name="pic_1">pic_1</string>
+    <string name="pic_2">pic_2</string>
+    <string name="pic_3">pic_3</string>
+    <string name="pic_5">pic_5</string>
+    <string name="pic_4">pic_4</string>
+    <string name="pic_6">pic_6</string>
+    <string name="short_back">◀</string>
+
+    <!-- SlotMachine -->
+    <string name="respinBtnTxt">Spin again for selected</string>
+    <string name="slot_machine_start">Start!</string>
+    <string name="slot_machine_spin">Spin!</string>
+    <string name="picture_view">TODO</string>
+    <string name="camera_symbol">📷</string>
+    <string name="flip_symbol">🔄</string>
+    <string name="todo">TODO</string>
+
+    <!-- PlayerSelect -->
+    <string name="player_color_change_text">The button for each child will change from <font color='#FFFF4444'>RED </font>to <font color='#337A42'>GREEN </font>once all required pictures have been taken.</string>
+
 </resources>
