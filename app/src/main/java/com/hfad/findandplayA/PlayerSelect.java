@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 
 public class PlayerSelect extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -18,6 +19,7 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
     private Button cameraBtn; //TODO remove this button code once data is implemented
     private Spinner spinner;
     LinearLayout playerButtonLayout;
+    ScrollView playerButtonScrollView;
 
     private static final String[] tempGroups = {"Group 1", "Group 2", "Group 3", "Group 4"}; // TODO remove and replace this temp array with actual group data from FireBase
 
@@ -28,7 +30,13 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
 
         spinner = (Spinner)findViewById(R.id.groupSelectSpinner); // Dropdown menu for groups
         playerButtonLayout = findViewById(R.id.playerButtonLinearLayoutID); // Linear Layout where buttons will be added
+        playerButtonScrollView = findViewById(R.id.playerButtonScrollViewLayout); // ScrollView Layout where buttons will be added
+
+        // TODO activate the below code once testing buttons are removed and proper items are added to the drop down
+//        playerButtonScrollView.setVisibility(View.GONE); // Hides the player button scrollview
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(PlayerSelect.this, android.R.layout.simple_spinner_item,tempGroups); // TODO change this from tempGroups to actual groups from FireBase
+
         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item)); // Setting dropdown
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
@@ -50,6 +58,7 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
 
         // TODO add the rest of the code to get children from selected group and
 
+        playerButtonScrollView.setVisibility(View.VISIBLE); // Shows the player button scrollview
         createPlayerButtons(selection);
     }
 
