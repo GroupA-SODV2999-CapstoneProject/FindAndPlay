@@ -141,8 +141,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         //First spin
         else if (!spinned) {
-            startBtn.setVisibility(View.VISIBLE);
-            spinBtn.setVisibility(View.GONE);
+            //startBtn.setVisibility(View.VISIBLE);
+            //spinBtn.setVisibility(View.GONE);
             spinBtn.setText(R.string.respinBtnTxt);
 
             ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
@@ -211,12 +211,10 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             //Set the dialogs features
             dialogBuilder.setTitle(question.prompt);
-//            dialogBuilder.setMessage("\nAnswer the following question to approve this action.\n" + question.prompt);
             dialogBuilder.setCancelable(false);
 
             //Create 3 wrong answers to go with the solution
             Random random = new Random();
-            Log.d("ParseIntAnswer", question.answer);
             int answer = Integer.parseInt(question.answer);
             selections.add(Integer.toString(answer + random.nextInt(50) + 1));
             selections.add(Integer.toString(answer - random.nextInt(50) + 1));
