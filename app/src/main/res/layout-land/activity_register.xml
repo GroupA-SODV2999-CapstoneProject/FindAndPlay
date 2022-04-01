@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/BackgroundImage"
-        android:layout_width="1279dp"
-        android:layout_height="801dp"
+        android:layout_width="686dp"
+        android:layout_height="388dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,38 +21,38 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/whitebackground"
-        android:layout_width="880dp"
-        android:layout_height="531dp"
+        android:layout_width="582dp"
+        android:layout_height="290dp"
         android:layout_margin="120dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/landscapesignup"
         app:layout_constraintBottom_toBottomOf="@+id/BackgroundImage"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
         app:layout_constraintTop_toTopOf="@+id/BackgroundImage"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.489"
         app:shapeAppearanceOverlay="@style/roundimageview"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
         android:autofillHints=""
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:text="SIGN IN"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
         app:layout_constraintTop_toTopOf="@+id/BackgroundImage"
-        app:layout_constraintVertical_bias="0.771"
+        app:layout_constraintVertical_bias="0.871"
         tools:ignore="RtlCompat" />
 
     <Button
@@ -64,19 +64,19 @@
         app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/BackgroundImage"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
         app:layout_constraintTop_toTopOf="@+id/BackgroundImage"
-        app:layout_constraintVertical_bias="0.695" />
+        app:layout_constraintVertical_bias="0.749" />
 
     <EditText
         android:id="@+id/editTextTextPersonName2"
-        android:layout_width="678dp"
-        android:layout_height="57dp"
+        android:layout_width="542dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Student/Admin"
-        android:textSize="26sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/BackgroundImage"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
@@ -85,13 +85,13 @@
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="678dp"
-        android:layout_height="57dp"
+        android:layout_width="542dp"
+        android:layout_height="40dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="26sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/BackgroundImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -102,8 +102,8 @@
 
     <EditText
         android:id="@+id/textEmailAddress"
-        android:layout_width="678dp"
-        android:layout_height="57dp"
+        android:layout_width="542dp"
+        android:layout_height="40dp"
         android:autoText="false"
         android:autofillHints=""
         android:ems="10"
@@ -111,7 +111,7 @@
         android:selectAllOnFocus="true"
         android:singleLine="false"
         android:text="Email"
-        android:textSize="26sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
@@ -121,26 +121,27 @@
 
     <TextView
         android:id="@+id/login_text"
-        android:layout_width="157dp"
-        android:layout_height="55dp"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
         android:text="Sign Up"
         android:textAlignment="center"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
         app:layout_constraintTop_toTopOf="@+id/BackgroundImage"
-        app:layout_constraintVertical_bias="0.218" />
+        app:layout_constraintVertical_bias="0.184" />
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="678dp"
-        android:layout_height="57dp"
+        android:layout_width="542dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        android:textSize="26sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/BackgroundImage"
         app:layout_constraintHorizontal_bias="0.502"

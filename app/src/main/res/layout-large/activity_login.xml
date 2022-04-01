@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/Background"
-        android:layout_width="423dp"
-        android:layout_height="659dp"
+        android:layout_width="805dp"
+        android:layout_height="1217dp"
         android:contentDescription="todo"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,8 +20,8 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/whitebackground"
-        android:layout_width="324dp"
-        android:layout_height="434dp"
+        android:layout_width="597dp"
+        android:layout_height="850dp"
         android:layout_margin="30dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
@@ -52,8 +52,8 @@
 
     <EditText
         android:id="@+id/TextEmailAddress"
-        android:layout_width="293dp"
-        android:layout_height="55dp"
+        android:layout_width="509dp"
+        android:layout_height="79dp"
         android:autoText="false"
         android:autofillHints=""
         android:ems="10"
@@ -63,16 +63,17 @@
         android:text="Email"
         android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Background"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="@+id/Background"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.323"
+        app:layout_constraintVertical_bias="0.29"
         tools:ignore="LabelFor" />
 
     <EditText
         android:id="@+id/editTextTextPassword"
-        android:layout_width="293dp"
-        android:layout_height="55dp"
+        android:layout_width="509dp"
+        android:layout_height="79dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="password"
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="@+id/Background"
         app:layout_constraintStart_toStartOf="@+id/Background"
         app:layout_constraintTop_toTopOf="@+id/Background"
-        app:layout_constraintVertical_bias="0.454"
+        app:layout_constraintVertical_bias="0.381"
         tools:text="Password" />
 
     <Button
@@ -126,30 +127,30 @@
         app:layout_constraintEnd_toEndOf="@+id/Background"
         app:layout_constraintStart_toStartOf="@+id/Background"
         app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="0.389"
+        app:layout_constraintVertical_bias="0.804"
         tools:text="FORGOT PASSWORD?" />
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="45dp"
-        android:layout_height="35dp"
+        android:layout_width="51dp"
+        android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/Background"
         app:layout_constraintEnd_toEndOf="@+id/whitebackground"
         app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="@+id/Background"
         app:layout_constraintTop_toTopOf="@+id/Background"
-        app:layout_constraintVertical_bias="0.323"
+        app:layout_constraintVertical_bias="0.3"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
     <ImageButton
         android:id="@+id/imageButton2"
-        android:layout_width="45dp"
-        android:layout_height="35dp"
+        android:layout_width="51dp"
+        android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="@+id/Background"
         app:layout_constraintEnd_toEndOf="@+id/whitebackground"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="@+id/Background"
         app:layout_constraintTop_toTopOf="@+id/Background"
-        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintVertical_bias="0.382"
         app:srcCompat="@android:drawable/ic_lock_idle_lock" />
 </androidx.constraintlayout.widget.ConstraintLayout>
