@@ -31,7 +31,7 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="@+id/BackgroundImage"
         app:layout_constraintTop_toTopOf="@+id/BackgroundImage"
-        app:layout_constraintVertical_bias="0.28"
+        app:layout_constraintVertical_bias="0.369"
         app:shapeAppearanceOverlay="@style/roundimageview"
         tools:ignore="MissingConstraints" />
 
