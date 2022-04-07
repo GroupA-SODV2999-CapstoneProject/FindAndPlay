@@ -20,18 +20,18 @@
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/whitebackground"
-        android:layout_width="932dp"
-        android:layout_height="459dp"
+        android:layout_width="924dp"
+        android:layout_height="436dp"
         android:layout_margin="30dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/white_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.251"
+        app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/Background"
-        app:layout_constraintVertical_bias="0.771"
+        app:layout_constraintVertical_bias="0.721"
         app:shapeAppearanceOverlay="@style/roundimageview"
         tools:ignore="MissingConstraints" />
 
