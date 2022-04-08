@@ -241,54 +241,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    /**
-     * Prompt user through an AlertDialog to answer a random math question (easy, but hard enough that under 5 can't answer).
-     *
-     * @return True if answered correctly, else false.
-     */
-    private boolean adminPermission() {
-        final boolean[] approved = {false};
-        MathProblem mathProblem = new MathProblem();
-        ArrayList<String> selections = new ArrayList<>();
-        int[] selected = {-1};
-
-        //Get a math problem and solution
-        MathProblem.Question question = mathProblem.getMathProblem();
-        //Create a new dialog
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        //Set the dialogs features
-        dialogBuilder.setTitle(question.prompt);
-        dialogBuilder.setCancelable(false);
-
-        //Create 3 wrong answers to go with the solution
-        Random random = new Random();
-        int answer = Integer.parseInt(question.answer);
-        selections.add(Integer.toString(answer + random.nextInt(50) + 1));
-        selections.add(Integer.toString(answer - random.nextInt(50) + 1));
-        selections.add(Integer.toString(answer + random.nextInt(50) + 1));
-        selections.add(question.answer);
-
-        Collections.shuffle(selections);
-
-        CharSequence[] selectionsArray = selections.toArray(new CharSequence[0]);
-
-        //Set the onClick for the MC options in the dialog
-        dialogBuilder.setSingleChoiceItems(selectionsArray, selected[0], (dialog, s) -> {
-            selected[0] = s;
-            String currentItem = selectionsArray[s].toString();
-
-            //Check if the answer matches the solution
-            if (currentItem.equals(question.answer)) {
-                approved[0] = true;
-            }
-            dialog.dismiss();
-        }).setNegativeButton("Cancel", (dialog, s) -> dialog.dismiss());
-
-        AlertDialog adminDialog = dialogBuilder.create();
-        adminDialog.show();
-        return approved[0];
-    }
-
     public void startGame(View view) {
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
 
