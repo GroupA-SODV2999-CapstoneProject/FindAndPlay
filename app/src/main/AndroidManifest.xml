@@ -34,7 +34,7 @@
             android:exported="false" />
         <activity
             android:name=".SlotMachine"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".CameraFunctionality"
             android:exported="false" />

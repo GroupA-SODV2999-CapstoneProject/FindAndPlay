@@ -95,9 +95,7 @@ public class Game {
                 categoryEmpty = true;
             }
             then.accept(task.isSuccessful());
-        }).addOnFailureListener(runnable -> then.accept(false));
-        // this won't work Jamie as the callbacks are executed asynchronously
-        // have yet to figure out async/await in Java, so I use consumer callbacks instead
+        });
         return returnedItems;
     }
 
