@@ -52,6 +52,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiConsumer;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
@@ -133,19 +134,28 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             networkErrorToast.show();
         }
 
-        //First spin
-        else if (!spinned) {
-            //startBtn.setVisibility(View.VISIBLE);
-            //spinBtn.setVisibility(View.GONE);
-            spinBtn.setText(R.string.respinBtnTxt);
+        //Subsequent spin(s)
+//        if (spinned && !adminPermission().get()) {
+//                return;
+//        }
 
-            ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
-            ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
-            ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
+        // first or subsequent spin
+        startBtn.setVisibility(View.VISIBLE);
+        spinBtn.setVisibility(View.GONE);
+        spinBtn.setText(R.string.respinBtnTxt);
+
+        ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
+        ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
+        ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
 
             //TODO Start animation of all categories
 
+        if ( -1 != selectedCatIndex ) {
+            // game.spinOne(selectedCatIndex +1);
             game.spinAll();
+        } else {
+            game.spinAll();
+        }
 
             Bitmap[] imgData = _imgData;
             ImageView[] btns = {btn1, btn2, btn3};
@@ -197,9 +207,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             }
         }
 
-
-        //Subsequent spin(s)
-        else {
+    private AtomicBoolean adminPermission() {
+        AtomicBoolean approved = new AtomicBoolean(false);
             MathProblem mathProblem = new MathProblem();
             ArrayList<String> selections = new ArrayList<>();
             int[] selected = { -1 };
@@ -231,28 +240,15 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
                 //Check if the answer matches the solution
                 if (currentItem.equals(question.answer)) {
-                    //TODO Get category number from selected
-                    int category = 1; //TODO Update
-
-                    //TODO start animation on single category
-
-                    game.spinOne(category);
-
-                    //TODO update UI to be new item (Note: new item will be "game.inGameItems.get(category - 1)")
-
-                    //TODO REMOVE *****DEBUGGER******
-                    for (PlayItem item : Game.inGameItems) {
-                        Log.d("SelectedNewForGame", item.getItemName());
-                    }
+                    approved.set(true);
                 }
                 dialog.dismiss();
             }).setNegativeButton("Cancel", (dialog, s) -> dialog.dismiss());
 
             AlertDialog adminDialog = dialogBuilder.create();
             adminDialog.show();
-
+            return approved;
         }
-    }
 
     public void startGame(View view) {
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
