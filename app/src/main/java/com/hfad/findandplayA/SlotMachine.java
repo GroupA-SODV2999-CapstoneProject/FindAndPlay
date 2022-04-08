@@ -22,11 +22,11 @@
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -49,12 +49,10 @@ import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.function.BiConsumer;
-
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.function.BiConsumer;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,7 +62,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private Game game;
     private boolean spinned = false;
 
-    private PlayItem playItem;
     private boolean audioOn = true;
     private HashMap<Integer,Boolean> loadedCatBtns = new HashMap<>();
     private int selectedCatIndex = -1;
@@ -104,15 +101,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected void onResume() {
-        // Jamie, this will reload the game each time you bring the app to foreground, e.g when switching
-        // between apps and opening the app again, or when phone locks then unlocks and app openned
-        // @see https://developer.android.com/guide/components/activities/activity-lifecycle#onresume
-        super.onResume();
-        game = new Game(ok -> {});
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -151,62 +139,65 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             //spinBtn.setVisibility(View.GONE);
             spinBtn.setText(R.string.respinBtnTxt);
 
-        ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
-        ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
-        ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
+            ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
+            ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
+            ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
 
-        //TODO Start animation of all categories
+            //TODO Start animation of all categories
 
             game.spinAll();
 
-        Bitmap[] imgData = _imgData;
-        ImageView[] btns = { btn1, btn2, btn3 };
-        final int[] completed = {0};
-        final BiConsumer<Bitmap,Integer> listener = (data, index) ->
-        {
-            imgData[index] = data;
-            _imgData[index] = data == null ? _imgData[index] : data; // cache
-            completed[0]++;
+            Bitmap[] imgData = _imgData;
+            ImageView[] btns = {btn1, btn2, btn3};
+            final int[] completed = {0};
+            final BiConsumer<Bitmap, Integer> listener = (data, index) ->
+            {
+                imgData[index] = data;
+                _imgData[index] = data == null ? _imgData[index] : data; // cache
+                completed[0]++;
 
-            // check if all images bitmap data loaded from cache or remotely
-            if ( completed[0] >= 3 ) { // increase count when you add more category buttons
-                boolean hasMissing = Arrays.asList(imgData).contains(null);
+                // check if all images bitmap data loaded from cache or remotely
+                if (completed[0] >= 3) { // increase count when you add more category buttons
+                    boolean hasMissing = Arrays.asList(imgData).contains(null);
 
-                if ( -1 != selectedCatIndex )
-                    hasMissing = imgData[selectedCatIndex] == null;
+                    if (-1 != selectedCatIndex)
+                        hasMissing = imgData[selectedCatIndex] == null;
 
-                if ( hasMissing ) {
-                    Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
-                    return;
+                    if (hasMissing) {
+                        Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    for (int i = 0; i < btns.length; i++) {
+                        if (-1 != selectedCatIndex && i != selectedCatIndex)
+                            continue;
+
+                        loadedCatBtns.put(i, false);
+                        loadImageWithAnimation(btns[i], imgData, i);
+                    }
                 }
+            };
 
-                for ( int i=0; i<btns.length; i++ ) {
-                    if ( -1 != selectedCatIndex && i != selectedCatIndex )
-                        continue;
-
-                    loadedCatBtns.put(i, false);
-                    loadImageWithAnimation(btns[i], imgData, i);
-                }
+            for (int i = 0; i < btns.length; i++) {
+                loadCategoryItem(i, listener);
             }
-        };
 
-        for ( int i=0; i<btns.length; i++ ) {
-            loadCategoryItem(i, listener);
+            for (PlayItem item : Game.inGameItems) {
+                Log.d("ITEM", item.getIcon());
+                //TODO Display selected items from inGameItems
+                //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
+            }
+
+            startBtn.setEnabled(true);
+            spinned = true;
+
+            //TODO REMOVE *****DEBUGGER******
+            for (PlayItem item : Game.inGameItems) {
+                Log.d("SelectedForGame", item.getItemName());
+            }
         }
 
-        for (PlayItem item : Game.inGameItems) {
-            Log.d("ITEM", item.getIcon());
-            //TODO Display selected items from inGameItems
-            //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
-        }
 
-        startBtn.setEnabled(true);
-        spinned = true;
-
-        //TODO REMOVE *****DEBUGGER******
-        for (PlayItem item : Game.inGameItems) {
-            Log.d("SelectedForGame", item.getItemName());
-        }
         //Subsequent spin(s)
         else {
             MathProblem mathProblem = new MathProblem();

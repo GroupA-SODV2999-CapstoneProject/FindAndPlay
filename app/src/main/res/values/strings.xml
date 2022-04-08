@@ -18,7 +18,6 @@
     <string name="short_back">◀</string>
 
     <!-- SlotMachine -->
-    <string name="respinBtnTxt">Spin again</string>
     <string name="respinBtnTxt">SPIN SELECTED AGAIN</string>
     <string name="slot_machine_start">Start!</string>
     <string name="slot_machine_spin">SPIN!</string>
