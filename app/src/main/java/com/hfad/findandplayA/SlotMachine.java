@@ -18,10 +18,10 @@
 // * After animation is finished I'll need to add item highlighting and selection functionality for spinning again (it's just set to spin again on category 1 for testing)
 
 
-
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -41,27 +41,29 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hfad.findandplayA.viewmodels.Game;
+import com.hfad.findandplayA.viewmodels.MathProblem;
 import com.hfad.findandplayA.viewmodels.PlayItem;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
+    private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
+    private final Bitmap[] _imgData = new Bitmap[3];
     private Button spinBtn;
     private Button startBtn;
     private Game game;
     private boolean spinned = false;
-    private PlayItem playItem;
     private boolean audioOn = true;
-    private HashMap<Integer,Boolean> loadedCatBtns = new HashMap<>();
     private int selectedCatIndex = -1;
-    private Bitmap[] _imgData = new Bitmap[3];
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -90,22 +92,13 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         ImageView audioBtn = (ImageView) findViewById(R.id.audioBtn);
         audioBtn.setOnClickListener(ref -> {
-            audioOn = ! audioOn;
-            audioBtn.setImageResource( audioOn
+            audioOn = !audioOn;
+            audioBtn.setImageResource(audioOn
                     ? android.R.drawable.ic_lock_silent_mode_off
-                    : android.R.drawable.ic_lock_silent_mode );
+                    : android.R.drawable.ic_lock_silent_mode);
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
-    protected void onResume() {
-        // Jamie, this will reload the game each time you bring the app to foreground, e.g when switching
-        // between apps and opening the app again, or when phone locks then unlocks and app openned
-        // @see https://developer.android.com/guide/components/activities/activity-lifecycle#onresume
-        super.onResume();
-        game = new Game(ok -> {});
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -120,6 +113,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+
     /**
      * Starts the animation of the slot machine spinning (either one or all categories depending on
      * game state). It then calls on pickRandomItem to populate the inGameItems and displays them on
@@ -132,17 +126,12 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         //Error retrieving items
         if (Game.categoryEmpty) {
             //Attempt to pull from Firestore again
-            game = new Game(ok -> {});
+            game = new Game(ok -> {
+            });
 
             Toast networkErrorToast = Toast.makeText(getApplicationContext(), "Something went wrong...\nCheck internet and try again", Toast.LENGTH_LONG);
             networkErrorToast.show();
             return;
-        }
-
-        //Subsequent spin(s)
-        if ( spinned && false /* @Jamie I disabled this for now, enable later */ ) {
-            if ( ! adminPermission() )
-                return;
         }
 
         // first or subsequent spin
@@ -150,42 +139,94 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         spinBtn.setVisibility(View.GONE);
         spinBtn.setText(R.string.respinBtnTxt);
 
+        //Subsequent Spins
+        if (spinned) {
+            MathProblem mathProblem = new MathProblem();
+            ArrayList<String> selections = new ArrayList<>();
+            int[] selected = {-1};
+
+            //Get a math problem and solution
+            MathProblem.Question question = mathProblem.getMathProblem();
+            //Create a new dialog
+            AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+            //Set the dialogs features
+            dialogBuilder.setTitle(question.prompt);
+            dialogBuilder.setCancelable(false);
+
+            //Create 3 wrong answers to go with the solution
+            Random random = new Random();
+            int answer = Integer.parseInt(question.answer);
+            selections.add(Integer.toString(answer + random.nextInt(50) + 1));
+            selections.add(Integer.toString(answer - random.nextInt(50) + 1));
+            selections.add(Integer.toString(answer + random.nextInt(50) + 1));
+            selections.add(question.answer);
+
+            Collections.shuffle(selections);
+
+            CharSequence[] selectionsArray = selections.toArray(new CharSequence[0]);
+
+            //Set the onClick for the MC options in the dialog
+            dialogBuilder.setSingleChoiceItems(selectionsArray, selected[0], (dialog, s) -> {
+                selected[0] = s;
+                String currentItem = selectionsArray[s].toString();
+
+                //Check if the answer matches the solution
+                if (currentItem.equals(question.answer)) {
+                    game.spinOne(selectedCatIndex + 1);
+                    loadImgData();
+                    //TODO REMOVE *****DEBUGGER******
+                    for (PlayItem item : Game.inGameItems) {
+                        Log.d("SelectedForGame", item.getItemName());
+                    }
+                }
+                dialog.dismiss();
+            }).setNegativeButton("Cancel", (dialog, s) -> dialog.dismiss());
+
+            AlertDialog adminDialog = dialogBuilder.create();
+            adminDialog.show();
+
+        }
+        //First Spin
+        else {
+            game.spinAll();
+            loadImgData();
+            spinned = true;
+            //TODO REMOVE *****DEBUGGER******
+            for (PlayItem item : Game.inGameItems) {
+                Log.d("SelectedForGame", item.getItemName());
+            }
+        }
+        startBtn.setEnabled(true);
+    }
+
+    private void loadImgData() {
         ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
         ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
         ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
 
-        //TODO Start animation of all categories
-
-        if ( -1 != selectedCatIndex ) {
-            // game.spinOne(selectedCatIndex +1);
-            game.spinAll();
-        } else {
-            game.spinAll();
-        }
-
         Bitmap[] imgData = _imgData;
-        ImageView[] btns = { btn1, btn2, btn3 };
+        ImageView[] btns = {btn1, btn2, btn3};
         final int[] completed = {0};
-        final BiConsumer<Bitmap,Integer> listener = (data, index) ->
+        final BiConsumer<Bitmap, Integer> listener = (data, index) ->
         {
             imgData[index] = data;
             _imgData[index] = data == null ? _imgData[index] : data; // cache
             completed[0]++;
 
             // check if all images bitmap data loaded from cache or remotely
-            if ( completed[0] >= 3 ) { // increase count when you add more category buttons
+            if (completed[0] >= 3) { // increase count when you add more category buttons
                 boolean hasMissing = Arrays.asList(imgData).contains(null);
 
-                if ( -1 != selectedCatIndex )
+                if (-1 != selectedCatIndex)
                     hasMissing = imgData[selectedCatIndex] == null;
 
-                if ( hasMissing ) {
+                if (hasMissing) {
                     Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                for ( int i=0; i<btns.length; i++ ) {
-                    if ( -1 != selectedCatIndex && i != selectedCatIndex )
+                for (int i = 0; i < btns.length; i++) {
+                    if (-1 != selectedCatIndex && i != selectedCatIndex)
                         continue;
 
                     loadedCatBtns.put(i, false);
@@ -194,42 +235,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             }
         };
 
-        for ( int i=0; i<btns.length; i++ ) {
+        for (int i = 0; i < btns.length; i++) {
             loadCategoryItem(i, listener);
-        }
-
-        for (PlayItem item : Game.inGameItems) {
-            Log.d("ITEM", item.getIcon());
-            //TODO Display selected items from inGameItems
-            //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
-        }
-
-        startBtn.setEnabled(true);
-        spinned = true;
-
-        //TODO REMOVE *****DEBUGGER******
-        for (PlayItem item : Game.inGameItems) {
-            Log.d("SelectedForGame", item.getItemName());
-        }
-    }
-
-
-    /**
-     * Prompt user through an AlertDialog to answer a random math question (easy, but hard enough that under 5 can't answer).
-     *
-     * @return True if answered correctly, else false.
-     */
-    private boolean adminPermission() {
-        //TODO add prompt for random math question to act as admin approval of an action
-        //Check submitted answer
-        if(true) {
-            //TODO maybe an animation of a green checkmark to indicate it was correct?
-            return true;
-        }
-        else {
-            //TODO maybe an animation of a red x to show it was incorrect?
-            return false;
-
         }
     }
 
@@ -240,8 +247,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         startActivity(startGameIntent);
     }
 
-    protected void loadCategoryItem( int index, BiConsumer<Bitmap,Integer> then )
-    {
+    protected void loadCategoryItem(int index, BiConsumer<Bitmap, Integer> then) {
         String url = Game.inGameItems.get(index).getIcon();
         // url = "https://picsum.photos/300/300?random=2&_=" + java.util.UUID.randomUUID().toString();
 
@@ -265,15 +271,14 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    protected void loadImageWithAnimation( ImageView ref, Bitmap[] imgData, final int index )
-    {
-        int resId = getResources().getIdentifier("animate__sv" + (index+1), "id", this.getPackageName());
+    protected void loadImageWithAnimation(ImageView ref, Bitmap[] imgData, final int index) {
+        int resId = getResources().getIdentifier("animate__sv" + (index + 1), "id", this.getPackageName());
         ScrollView animSv = (ScrollView) findViewById(resId);
         RelativeLayout animRl = (RelativeLayout) animSv.getChildAt(0);
 
-        if ( ref == null || -1 != selectedCatIndex ) { // handle subsequent spins
-            for ( int i=0; i<animRl.getChildCount(); i++ ) { // cleanup existing items except first
-                if ( i > 0 ) animRl.removeView(animRl.getChildAt(i));
+        if (ref == null || -1 != selectedCatIndex) { // handle subsequent spins
+            for (int i = 0; i < animRl.getChildCount(); i++) { // cleanup existing items except first
+                if (i > 0) animRl.removeView(animRl.getChildAt(i));
             }
 
             ref = (ImageView) animRl.getChildAt(0);
@@ -283,58 +288,57 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         animSv.setHorizontalScrollBarEnabled(false);
 
         Handler tapHandler = new Handler();
-        Runnable tapRunner = new Runnable() {
-            public void run() {
-                if ( ! loadedCatBtns.get(index) ) // img not loaded
-                    return;
+        Runnable tapRunner = () -> {
+            if (!loadedCatBtns.get(index)) // img not loaded
+                return;
 
-                selectedCatIndex = selectedCatIndex == index ? -1 : index;
-                
-                for ( int i=0; i<imgData.length; i++ ) {
-                    ScrollView _animSv = (ScrollView) findViewById(getResources().getIdentifier("animate__sv" + (i+1),
-                            "id", SlotMachine.this.getPackageName()));
-                    
-                    if ( null != _animSv ) {
-                        _animSv.setForeground( i == selectedCatIndex
-                          ? getResources().getDrawable(R.drawable.sm_category_overlay) : null );
-                    }
-                }
+            selectedCatIndex = selectedCatIndex == index ? -1 : index;
 
-                if ( selectedCatIndex != -1 ) {
-                    startBtn.setVisibility(View.GONE);
-                    spinBtn.setVisibility(View.VISIBLE);
-                } else {
-                    startBtn.setVisibility(View.VISIBLE);
-                    spinBtn.setVisibility(View.GONE);                    
+            for (int i = 0; i < imgData.length; i++) {
+                ScrollView _animSv = (ScrollView) findViewById(getResources().getIdentifier("animate__sv" + (i + 1),
+                        "id", SlotMachine.this.getPackageName()));
+
+                if (null != _animSv) {
+                    _animSv.setForeground(i == selectedCatIndex
+                            ? getResources().getDrawable(R.drawable.sm_category_overlay) : null);
                 }
+            }
+
+            if (selectedCatIndex != -1) {
+                startBtn.setVisibility(View.GONE);
+                spinBtn.setVisibility(View.VISIBLE);
+            } else {
+                startBtn.setVisibility(View.VISIBLE);
+                spinBtn.setVisibility(View.GONE);
             }
         };
 
         animSv.setOnTouchListener((v, event) ->
-            {
-                tapHandler.removeCallbacks(tapRunner);
-                tapHandler.postDelayed(tapRunner, 250);
-                return true;
-            });
+        {
+            tapHandler.removeCallbacks(tapRunner);
+            tapHandler.postDelayed(tapRunner, 250);
+
+            return true;
+        });
 
         int[] imgSize = {ref.getWidth(), ref.getHeight()};
         animRl.removeView(ref);
 
-        Bitmap[] dataAlt = new Bitmap[30*(1+index)];
+        Bitmap[] dataAlt = new Bitmap[30 * (1 + index)];
         int[] imgIds = new int[dataAlt.length];
 
-        for ( int i=0; i<dataAlt.length; i++ ) {
-            Bitmap data = imgData[ i % (imgData.length-1) ];
+        for (int i = 0; i < dataAlt.length; i++) {
+            Bitmap data = imgData[i % (imgData.length - 1)];
 
             // set target image as first and last
-            if ( 0 == i || i == dataAlt.length -1 ) {
+            if (0 == i || i == dataAlt.length - 1) {
                 data = imgData[index];
             }
 
             dataAlt[i] = data;
         }
 
-        for ( int i=0; i<dataAlt.length; i++ ) {
+        for (int i = 0; i < dataAlt.length; i++) {
             ImageView img = new ImageView(getBaseContext());
             img.setImageBitmap(dataAlt[i]);
             img.setAdjustViewBounds(true);
@@ -342,7 +346,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             imgIds[i] = View.generateViewId();
             img.setId(imgIds[i]);
 
-            if ( i > 0 ) {
+            if (i > 0) {
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
                 params.addRule(RelativeLayout.BELOW, imgIds[i - 1]);
                 img.setLayoutParams(params);
@@ -351,41 +355,35 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             animRl.addView(img);
         }
 
-        animSv.post(new Runnable() {
-            @Override
-            public void run() {
-                int animationDuration = 750*(1+index);
+        animSv.post(() -> {
+            int animationDuration = 750 * (1 + index);
 
-                if ( index == selectedCatIndex ) { // reset selection and call associated UI events
-                    int tmp = selectedCatIndex;
-                    tapRunner.run();
-                    selectedCatIndex = tmp;
-                }
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        if ( audioOn ) playSound(R.raw.magicwand);
-
-                        if ( index == selectedCatIndex )
-                            selectedCatIndex = -1;
-                    }
-                }, animationDuration);
-
-                int scrollTo = animSv.getScrollY() + (dataAlt.length -1)*imgSize[1];
-                animSv.scrollTo(0, scrollTo);
-
-                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", scrollTo, 0)
-                        .setDuration(animationDuration);
-                objectAnimator.start();
+            if (index == selectedCatIndex) { // reset selection and call associated UI events
+                int tmp = selectedCatIndex;
+                tapRunner.run();
+                selectedCatIndex = tmp;
             }
+
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                if (audioOn) playSound(R.raw.magicwand);
+
+                if (index == selectedCatIndex)
+                    selectedCatIndex = -1;
+            }, animationDuration);
+
+            int scrollTo = animSv.getScrollY() + (dataAlt.length - 1) * imgSize[1];
+            animSv.scrollTo(0, scrollTo);
+
+            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", scrollTo, 0)
+                    .setDuration(animationDuration);
+            objectAnimator.start();
         });
 
         loadedCatBtns.put(index, true);
     }
 
-    protected void playSound( int id )
-    {
+    protected void playSound(int id) {
         runOnUiThread(() ->
         {
             MediaPlayer mediaPlayer = MediaPlayer.create(SlotMachine.this, id);

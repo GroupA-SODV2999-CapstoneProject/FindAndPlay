@@ -18,9 +18,9 @@
     <string name="short_back">◀</string>
 
     <!-- SlotMachine -->
-    <string name="respinBtnTxt">Spin again</string>
+    <string name="respinBtnTxt">SPIN SELECTED AGAIN</string>
     <string name="slot_machine_start">Start!</string>
-    <string name="slot_machine_spin">Spin!</string>
+    <string name="slot_machine_spin">SPIN!</string>
     <string name="picture_view">TODO</string>
     <string name="camera_symbol">📷</string>
     <string name="flip_symbol">🔄</string>
