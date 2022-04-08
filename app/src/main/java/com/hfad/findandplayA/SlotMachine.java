@@ -22,6 +22,7 @@
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -46,7 +47,9 @@ import com.hfad.findandplayA.viewmodels.PlayItem;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.BiConsumer;
 
 import java.util.ArrayList;
@@ -63,6 +66,9 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     private PlayItem playItem;
     private boolean audioOn = true;
+    private HashMap<Integer,Boolean> loadedCatBtns = new HashMap<>();
+    private int selectedCatIndex = -1;
+    private Bitmap[] _imgData = new Bitmap[3];
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -145,59 +151,61 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             //spinBtn.setVisibility(View.GONE);
             spinBtn.setText(R.string.respinBtnTxt);
 
-            ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
-            ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
-            ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
+        ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
+        ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
+        ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
 
-            //TODO Start animation of all categories
+        //TODO Start animation of all categories
 
             game.spinAll();
 
-            Bitmap[] imgData = new Bitmap[3];
-            ImageView[] btns = { btn1, btn2, btn3 };
-            final int[] completed = {0};
-            final BiConsumer<Bitmap,Integer> listener = (data, index) ->
-            {
-                imgData[index] = data;
-                completed[0]++;
+        Bitmap[] imgData = _imgData;
+        ImageView[] btns = { btn1, btn2, btn3 };
+        final int[] completed = {0};
+        final BiConsumer<Bitmap,Integer> listener = (data, index) ->
+        {
+            imgData[index] = data;
+            _imgData[index] = data == null ? _imgData[index] : data; // cache
+            completed[0]++;
 
-                Log.d(TAG, "--------- index: " + index);
-                Log.d(TAG, "--------- is null: " + (null == data));
-                Log.d(TAG, "--------- Has null: " + Arrays.asList(imgData).contains(null));
+            // check if all images bitmap data loaded from cache or remotely
+            if ( completed[0] >= 3 ) { // increase count when you add more category buttons
+                boolean hasMissing = Arrays.asList(imgData).contains(null);
 
-                // check if all images bitmap data loaded from cache or remotely
-                if ( completed[0] >= 3 ) { // increase count when you add more category buttons
-                    if ( Arrays.asList(imgData).contains(null) ) {
-                        Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+                if ( -1 != selectedCatIndex )
+                    hasMissing = imgData[selectedCatIndex] == null;
 
-                    for ( int i=0; i<btns.length; i++ )
-                        loadImageWithAnimation(btns[i], imgData, i);
-
-                    // btns[0].setImageBitmap(imgData[0]);
-                    // btns[1].setImageBitmap(imgData[1]);
-                    // btns[2].setImageBitmap(imgData[2]);
+                if ( hasMissing ) {
+                    Toast.makeText(SlotMachine.this, "Error: not all images are loaded.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-            };
 
-            loadCategoryItem(0, listener);
-            loadCategoryItem(1, listener);
-            loadCategoryItem(2, listener);
+                for ( int i=0; i<btns.length; i++ ) {
+                    if ( -1 != selectedCatIndex && i != selectedCatIndex )
+                        continue;
 
-            for (PlayItem item : Game.inGameItems) {
-                Log.d("ITEM", item.getIcon());
-                //TODO Display selected items from inGameItems
-                //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
+                    loadedCatBtns.put(i, false);
+                    loadImageWithAnimation(btns[i], imgData, i);
+                }
             }
+        };
 
-            startBtn.setEnabled(true);
-            spinned = true;
+        for ( int i=0; i<btns.length; i++ ) {
+            loadCategoryItem(i, listener);
+        }
 
-            //TODO REMOVE *****DEBUGGER******
-            for (PlayItem item : Game.inGameItems) {
-                Log.d("SelectedForGame", item.getItemName());
-            }
+        for (PlayItem item : Game.inGameItems) {
+            Log.d("ITEM", item.getIcon());
+            //TODO Display selected items from inGameItems
+            //Add each item to UI (Note: items are stored sorted in ascending order by category # (ie. 0 == category 1)
+        }
+
+        startBtn.setEnabled(true);
+        spinned = true;
+
+        //TODO REMOVE *****DEBUGGER******
+        for (PlayItem item : Game.inGameItems) {
+            Log.d("SelectedForGame", item.getItemName());
         }
         //Subsequent spin(s)
         else {
@@ -257,6 +265,9 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     public void startGame(View view) {
         //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
+
+        Intent startGameIntent = new Intent(SlotMachine.this, PlayerSelect.class);
+        startActivity(startGameIntent);
     }
 
     protected void loadCategoryItem( int index, BiConsumer<Bitmap,Integer> then )
@@ -284,15 +295,57 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
     }
 
-    protected void loadImageWithAnimation( ImageView ref, Bitmap[] imgData, int index )
+    protected void loadImageWithAnimation( ImageView ref, Bitmap[] imgData, final int index )
     {
         int resId = getResources().getIdentifier("animate__sv" + (index+1), "id", this.getPackageName());
         ScrollView animSv = (ScrollView) findViewById(resId);
         RelativeLayout animRl = (RelativeLayout) animSv.getChildAt(0);
 
+        if ( ref == null || -1 != selectedCatIndex ) { // handle subsequent spins
+            for ( int i=0; i<animRl.getChildCount(); i++ ) { // cleanup existing items except first
+                if ( i > 0 ) animRl.removeView(animRl.getChildAt(i));
+            }
+
+            ref = (ImageView) animRl.getChildAt(0);
+        }
+
         animSv.setVerticalScrollBarEnabled(false);
         animSv.setHorizontalScrollBarEnabled(false);
-        animSv.setOnTouchListener((v, event) -> true);
+
+        Handler tapHandler = new Handler();
+        Runnable tapRunner = new Runnable() {
+            public void run() {
+                if ( ! loadedCatBtns.get(index) ) // img not loaded
+                    return;
+
+                selectedCatIndex = selectedCatIndex == index ? -1 : index;
+
+                for ( int i=0; i<imgData.length; i++ ) {
+                    ScrollView _animSv = (ScrollView) findViewById(getResources().getIdentifier("animate__sv" + (i+1),
+                            "id", SlotMachine.this.getPackageName()));
+
+                    if ( null != _animSv ) {
+                        _animSv.setForeground( i == selectedCatIndex
+                          ? getResources().getDrawable(R.drawable.sm_category_overlay) : null );
+                    }
+                }
+
+                if ( selectedCatIndex != -1 ) {
+                    startBtn.setVisibility(View.GONE);
+                    spinBtn.setVisibility(View.VISIBLE);
+                } else {
+                    startBtn.setVisibility(View.VISIBLE);
+                    spinBtn.setVisibility(View.GONE);
+                }
+            }
+        };
+
+        animSv.setOnTouchListener((v, event) ->
+            {
+                tapHandler.removeCallbacks(tapRunner);
+                tapHandler.postDelayed(tapRunner, 250);
+                return true;
+            });
 
         int[] imgSize = {ref.getWidth(), ref.getHeight()};
         animRl.removeView(ref);
@@ -333,14 +386,21 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             public void run() {
                 int animationDuration = 750*(1+index);
 
-                if ( audioOn ) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            if ( audioOn ) playSound(R.raw.magicwand);
-                        }
-                    }, animationDuration);
+                if ( index == selectedCatIndex ) { // reset selection and call associated UI events
+                    int tmp = selectedCatIndex;
+                    tapRunner.run();
+                    selectedCatIndex = tmp;
                 }
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        if ( audioOn ) playSound(R.raw.magicwand);
+
+                        if ( index == selectedCatIndex )
+                            selectedCatIndex = -1;
+                    }
+                }, animationDuration);
 
                 int scrollTo = animSv.getScrollY() + (dataAlt.length -1)*imgSize[1];
                 animSv.scrollTo(0, scrollTo);
@@ -350,6 +410,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
                 objectAnimator.start();
             }
         });
+
+        loadedCatBtns.put(index, true);
     }
 
     protected void playSound( int id )
