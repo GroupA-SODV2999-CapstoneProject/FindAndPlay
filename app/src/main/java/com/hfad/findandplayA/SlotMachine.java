@@ -138,6 +138,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         startBtn.setVisibility(View.VISIBLE);
         spinBtn.setVisibility(View.GONE);
         spinBtn.setText(R.string.respinBtnTxt);
+        spinBtn.setTextSize(20); // that re-spin text is a bit too large
 
         //Subsequent Spins
         if (spinned) {
@@ -324,7 +325,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         int[] imgSize = {ref.getWidth(), ref.getHeight()};
         animRl.removeView(ref);
 
-        Bitmap[] dataAlt = new Bitmap[30 * (1 + index)];
+        Bitmap[] dataAlt = new Bitmap[30 * (-1 != selectedCatIndex ? 1 : 1 + index)];
         int[] imgIds = new int[dataAlt.length];
 
         for (int i = 0; i < dataAlt.length; i++) {
@@ -356,7 +357,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         }
 
         animSv.post(() -> {
-            int animationDuration = 750 * (1 + index);
+            int animationDuration = 750 * (-1 != selectedCatIndex ? 2 : 1 + index);
 
             if (index == selectedCatIndex) { // reset selection and call associated UI events
                 int tmp = selectedCatIndex;
