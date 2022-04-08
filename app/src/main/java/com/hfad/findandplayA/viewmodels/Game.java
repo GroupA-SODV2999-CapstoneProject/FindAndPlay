@@ -70,9 +70,10 @@ public class Game {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public ArrayList<PlayItem> getAllItemsOfCategory(int categoryNum, final Consumer<Boolean> then) {
         ArrayList<PlayItem> returnedItems = new ArrayList<>();
-        //Populate category 1 from firebase
+        //Populate category n from firebase
         String dbCatId = "CategoryID";
         String dbCollName = "Items";
+
         db.collection(dbCollName).whereEqualTo(dbCatId, categoryNum)
                 .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -94,9 +95,7 @@ public class Game {
                 categoryEmpty = true;
             }
             then.accept(task.isSuccessful());
-        }).addOnFailureListener(runnable -> then.accept(false));
-        // this won't work Jamie as the callbacks are executed asynchronously
-        // have yet to figure out async/await in Java, so I use consumer callbacks instead
+        });
         return returnedItems;
     }
 
@@ -186,12 +185,6 @@ public class Game {
      */
     public void spinOne(int category) {
         inGameItems.set(category - 1, pickRandomItem(category));
-
-        //TODO REMOVE *****DEBUGGER******
-        for (PlayItem item : inGameItems) {
-            Log.d("SelectedNewForGame", item.getItemName());
-        }
-
     }
 
     public static void getImageBitmap(String url, Consumer<Bitmap> then) {
