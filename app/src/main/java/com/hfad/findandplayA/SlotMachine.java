@@ -56,15 +56,14 @@ import java.util.function.BiConsumer;
 public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
+    private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
+    private final Bitmap[] _imgData = new Bitmap[3];
     private Button spinBtn;
     private Button startBtn;
     private Game game;
     private boolean spinned = false;
-
     private boolean audioOn = true;
-    private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
     private int selectedCatIndex = -1;
-    private final Bitmap[] _imgData = new Bitmap[3];
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -289,30 +288,28 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         animSv.setHorizontalScrollBarEnabled(false);
 
         Handler tapHandler = new Handler();
-        Runnable tapRunner = new Runnable() {
-            public void run() {
-                if (!loadedCatBtns.get(index)) // img not loaded
-                    return;
+        Runnable tapRunner = () -> {
+            if (!loadedCatBtns.get(index)) // img not loaded
+                return;
 
-                selectedCatIndex = selectedCatIndex == index ? -1 : index;
+            selectedCatIndex = selectedCatIndex == index ? -1 : index;
 
-                for (int i = 0; i < imgData.length; i++) {
-                    ScrollView _animSv = (ScrollView) findViewById(getResources().getIdentifier("animate__sv" + (i + 1),
-                            "id", SlotMachine.this.getPackageName()));
+            for (int i = 0; i < imgData.length; i++) {
+                ScrollView _animSv = (ScrollView) findViewById(getResources().getIdentifier("animate__sv" + (i + 1),
+                        "id", SlotMachine.this.getPackageName()));
 
-                    if (null != _animSv) {
-                        _animSv.setForeground(i == selectedCatIndex
-                                ? getResources().getDrawable(R.drawable.sm_category_overlay) : null);
-                    }
+                if (null != _animSv) {
+                    _animSv.setForeground(i == selectedCatIndex
+                            ? getResources().getDrawable(R.drawable.sm_category_overlay) : null);
                 }
+            }
 
-                if (selectedCatIndex != -1) {
-                    startBtn.setVisibility(View.GONE);
-                    spinBtn.setVisibility(View.VISIBLE);
-                } else {
-                    startBtn.setVisibility(View.VISIBLE);
-                    spinBtn.setVisibility(View.GONE);
-                }
+            if (selectedCatIndex != -1) {
+                startBtn.setVisibility(View.GONE);
+                spinBtn.setVisibility(View.VISIBLE);
+            } else {
+                startBtn.setVisibility(View.VISIBLE);
+                spinBtn.setVisibility(View.GONE);
             }
         };
 
@@ -320,6 +317,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         {
             tapHandler.removeCallbacks(tapRunner);
             tapHandler.postDelayed(tapRunner, 250);
+
             return true;
         });
 
@@ -357,34 +355,29 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             animRl.addView(img);
         }
 
-        animSv.post(new Runnable() {
-            @Override
-            public void run() {
-                int animationDuration = 750 * (1 + index);
+        animSv.post(() -> {
+            int animationDuration = 750 * (1 + index);
 
-                if (index == selectedCatIndex) { // reset selection and call associated UI events
-                    int tmp = selectedCatIndex;
-                    tapRunner.run();
-                    selectedCatIndex = tmp;
-                }
-
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        if (audioOn) playSound(R.raw.magicwand);
-
-                        if (index == selectedCatIndex)
-                            selectedCatIndex = -1;
-                    }
-                }, animationDuration);
-
-                int scrollTo = animSv.getScrollY() + (dataAlt.length - 1) * imgSize[1];
-                animSv.scrollTo(0, scrollTo);
-
-                ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", scrollTo, 0)
-                        .setDuration(animationDuration);
-                objectAnimator.start();
+            if (index == selectedCatIndex) { // reset selection and call associated UI events
+                int tmp = selectedCatIndex;
+                tapRunner.run();
+                selectedCatIndex = tmp;
             }
+
+            Handler handler = new Handler();
+            handler.postDelayed(() -> {
+                if (audioOn) playSound(R.raw.magicwand);
+
+                if (index == selectedCatIndex)
+                    selectedCatIndex = -1;
+            }, animationDuration);
+
+            int scrollTo = animSv.getScrollY() + (dataAlt.length - 1) * imgSize[1];
+            animSv.scrollTo(0, scrollTo);
+
+            ObjectAnimator objectAnimator = ObjectAnimator.ofInt(animSv, "scrollY", scrollTo, 0)
+                    .setDuration(animationDuration);
+            objectAnimator.start();
         });
 
         loadedCatBtns.put(index, true);
