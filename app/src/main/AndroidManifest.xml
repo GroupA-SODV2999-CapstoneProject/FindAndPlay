@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FindAndPlay">
         <activity
+            android:name=".ResetPassword"
+            android:exported="false" />
+        <activity
             android:name=".AddPlayers"
             android:exported="false" />
         <activity
