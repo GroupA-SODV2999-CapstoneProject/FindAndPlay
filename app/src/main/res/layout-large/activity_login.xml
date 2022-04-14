@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/Background"
+        android:layout_width="805dp"
+        android:layout_height="1217dp"
+        android:contentDescription="todo"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/find_and_playbackground" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/whitebackground"
+        android:layout_width="597dp"
+        android:layout_height="850dp"
+        android:layout_margin="30dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/white_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.504"
+        app:shapeAppearanceOverlay="@style/roundimageview"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="135dp"
+        android:layout_height="54dp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Background"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.208" />
+
+    <EditText
+        android:id="@+id/TextEmailAddress"
+        android:layout_width="509dp"
+        android:layout_height="79dp"
+        android:autoText="false"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:text="Email"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Background"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.29"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword"
+        android:layout_width="509dp"
+        android:layout_height="79dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/Background"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.381"
+        tools:text="Password" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="124dp"
+        android:layout_height="64dp"
+        android:backgroundTint="#489556"
+        android:text="login"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/whitebackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine"
+        android:layout_width="98dp"
+        android:layout_height="43dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="sign up"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/Background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.68"
+        tools:ignore="RtlCompat" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FORGOT PASSWORD?"
+        app:layout_constraintBottom_toBottomOf="@+id/whitebackground"
+        app:layout_constraintEnd_toEndOf="@+id/Background"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.804"
+        tools:text="FORGOT PASSWORD?" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="51dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Background"
+        app:layout_constraintEnd_toEndOf="@+id/whitebackground"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.3"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="51dp"
+        android:layout_height="42dp"
+        app:layout_constraintBottom_toBottomOf="@+id/Background"
+        app:layout_constraintEnd_toEndOf="@+id/whitebackground"
+        app:layout_constraintHorizontal_bias="0.879"
+        app:layout_constraintStart_toStartOf="@+id/Background"
+        app:layout_constraintTop_toTopOf="@+id/Background"
+        app:layout_constraintVertical_bias="0.382"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+</androidx.constraintlayout.widget.ConstraintLayout>

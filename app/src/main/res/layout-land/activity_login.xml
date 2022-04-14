@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageViewLand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/find_and_playbackground"
+        android:contentDescription="todo" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/whitebackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="110dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/white_background_land"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:shapeAppearanceOverlay="@style/roundimageview"
+        tools:ignore="MissingConstraints" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:contentDescription="todo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.461"
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="forgot_password"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/whitebackground"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/whitebackground"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.8"
+        tools:text="FORGOT PASSWORD?" />
+
+    <EditText
+        android:id="@+id/editTextTextMultiLine2"
+        android:layout_width="100dp"
+        android:layout_height="34dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:text="sign up"
+        android:textAlignment="center"
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.738"
+        tools:ignore="LabelFor,RtlCompat" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="132dp"
+        android:layout_height="55dp"
+        android:backgroundTint="#489556"
+        android:text="login"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.62" />
+
+    <EditText
+        android:id="@+id/editTextTextPassword2"
+        android:layout_width="426dp"
+        android:layout_height="43dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.472"
+        tools:text="Password" />
+
+    <EditText
+        android:id="@+id/textEmailAddress"
+        android:layout_width="426dp"
+        android:layout_height="43dp"
+        android:autoText="false"
+        android:autofillHints=""
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="true"
+        android:singleLine="false"
+        android:text="email"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="Deprecated,LabelFor" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:contentDescription="todo"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintHorizontal_bias="0.779"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.318"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+    <TextView
+        android:id="@+id/login_text2"
+        android:layout_width="109dp"
+        android:layout_height="39dp"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewLand"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewLand"
+        app:layout_constraintStart_toStartOf="@+id/imageViewLand"
+        app:layout_constraintTop_toTopOf="@+id/imageViewLand"
+        app:layout_constraintVertical_bias="0.183" />
+</androidx.constraintlayout.widget.ConstraintLayout>
