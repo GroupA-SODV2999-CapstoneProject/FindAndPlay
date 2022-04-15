@@ -42,6 +42,8 @@
         <activity
             android:name=".CameraFunctionality"
             android:exported="false" />
+        <activity android:name=".HamburgerMenu"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
