@@ -9,8 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="732dp"
-        android:layout_height="409dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/main_background_content"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,156 +20,194 @@
         app:srcCompat="@drawable/find_and_playbackground" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/whitebackground"
-        android:layout_width="571dp"
-        android:layout_height="240dp"
+        android:id="@+id/menuButton"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="24dp"
+        android:background="#367944"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:shapeAppearanceOverlay="@style/roundimageview"
+        app:srcCompat="@android:drawable/ic_menu_sort_by_size"
+        tools:ignore="MissingConstraints,ImageContrastCheck" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/menuBase"
+        android:layout_width="361dp"
+        android:layout_height="338dp"
         android:layout_margin="30dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
         android:src="@drawable/white_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintHorizontal_bias="0.423"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/Background"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.497"
         app:shapeAppearanceOverlay="@style/roundimageview"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageButton2"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
+        android:id="@+id/cameraIcon"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:background="#367944"
-        app:layout_constraintBottom_toTopOf="@+id/whitebackground"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.099"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.818"
-        app:shapeAppearanceOverlay="@style/roundimageview"
-        app:srcCompat="@android:drawable/ic_menu_sort_by_size"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="304dp"
-        android:layout_height="46dp"
-        android:text="Camera"
-        android:textAlignment="textStart"
-        android:textColor="#303030"
-        android:textSize="30sp"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toEndOf="@+id/imageButton3"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.75"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="411dp"
-        android:layout_height="46dp"
-        android:text="Slot Machine"
-        android:textAlignment="textStart"
-        android:textColor="#303030"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.09"
-        app:layout_constraintStart_toEndOf="@+id/imageButton6"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.904"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="416dp"
-        android:layout_height="46dp"
-        android:text="Profile Settings"
-        android:textAlignment="textStart"
-        android:textColor="#303030"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.093"
-        app:layout_constraintStart_toEndOf="@+id/imageButton5"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.944"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="411dp"
-        android:layout_height="46dp"
-        android:text="Admin Settings"
-        android:textAlignment="textStart"
-        android:textColor="#303030"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="@+id/whitebackground"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toEndOf="@+id/imageButton4"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.886"
-        tools:ignore="MissingConstraints" />
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageButton3"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="#367944"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton6"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.714"
+        app:layout_constraintBottom_toBottomOf="@+id/menuBase"
+        app:layout_constraintEnd_toEndOf="@+id/menuBase"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/menuBase"
+        app:layout_constraintTop_toTopOf="@+id/menuBase"
+        app:layout_constraintVertical_bias="0.10"
         app:shapeAppearanceOverlay="@style/roundimageview"
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageButton4"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="#367944"
-        app:layout_constraintBottom_toBottomOf="@+id/whitebackground"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.934"
-        app:shapeAppearanceOverlay="@style/roundimageview"
-        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+    <TextView
+        android:id="@+id/cameraLabel"
+        android:layout_width="232dp"
+        android:layout_height="53dp"
+        android:text="@string/camera_text"
+        android:textAlignment="textStart"
+        android:textColor="#303030"
+        android:textSize="36sp"
+        app:cornerRadius="15dp"
+        app:layout_constraintStart_toEndOf="@+id/cameraIcon"
+        app:layout_constraintTop_toTopOf="@+id/cameraIcon"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/cameraButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cameraIcon"
+        app:layout_constraintEnd_toEndOf="@+id/cameraLabel"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/cameraIcon"
+        app:layout_constraintTop_toTopOf="@+id/cameraIcon"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageButton5"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:id="@+id/slotsIcon"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:background="#367944"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton4"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.937"
+        app:layout_constraintBottom_toBottomOf="@+id/menuBase"
+        app:layout_constraintEnd_toEndOf="@+id/menuBase"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/menuBase"
+        app:layout_constraintTop_toTopOf="@+id/menuBase"
+        app:layout_constraintVertical_bias="0.37"
+        app:shapeAppearanceOverlay="@style/roundimageview"
+        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+
+    <TextView
+        android:id="@+id/slotsLabel"
+        android:layout_width="232dp"
+        android:layout_height="53dp"
+        android:text="@string/slot_machine"
+        android:textAlignment="textStart"
+        android:textColor="#303030"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/slotsIcon"
+        app:layout_constraintTop_toTopOf="@+id/slotsIcon"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/slotsButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/slotsIcon"
+        app:layout_constraintEnd_toEndOf="@+id/slotsLabel"
+        app:layout_constraintStart_toStartOf="@+id/slotsIcon"
+        app:layout_constraintTop_toTopOf="@+id/slotsIcon"
+        app:layout_constraintVertical_bias="0.40"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:background="#367944"
+        app:layout_constraintBottom_toBottomOf="@+id/menuBase"
+        app:layout_constraintEnd_toEndOf="@+id/menuBase"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/menuBase"
+        app:layout_constraintTop_toTopOf="@+id/menuBase"
+        app:layout_constraintVertical_bias="0.63"
         app:shapeAppearanceOverlay="@style/roundimageview"
         app:srcCompat="@android:drawable/ic_menu_preferences" />
 
+    <TextView
+        android:id="@+id/profileLabel"
+        android:layout_width="252dp"
+        android:layout_height="53dp"
+        android:text="@string/profile_settings"
+        android:textAlignment="textStart"
+        android:textColor="#303030"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/profileIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileIcon"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/profileButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileIcon"
+        app:layout_constraintEnd_toEndOf="@+id/profileLabel"
+        app:layout_constraintStart_toStartOf="@+id/profileIcon"
+        app:layout_constraintTop_toTopOf="@+id/profileIcon"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
+
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageButton6"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:id="@+id/adminIcon"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
         android:background="#367944"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/whitebackground"
-        app:layout_constraintVertical_bias="0.891"
+        app:layout_constraintBottom_toBottomOf="@+id/menuBase"
+        app:layout_constraintEnd_toEndOf="@+id/menuBase"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="@+id/menuBase"
+        app:layout_constraintTop_toTopOf="@+id/menuBase"
+        app:layout_constraintVertical_bias="0.90"
         app:shapeAppearanceOverlay="@style/roundimageview"
-        app:srcCompat="@android:drawable/ic_dialog_dialer" />
+        app:srcCompat="@android:drawable/ic_lock_idle_lock" />
+
+    <TextView
+        android:id="@+id/adminLabel"
+        android:layout_width="252dp"
+        android:layout_height="53dp"
+        android:text="@string/admin_settings"
+        android:textAlignment="textStart"
+        android:textColor="#303030"
+        android:textSize="36sp"
+        app:layout_constraintStart_toEndOf="@+id/adminIcon"
+        app:layout_constraintTop_toTopOf="@+id/adminIcon"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/adminButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/adminIcon"
+        app:layout_constraintEnd_toEndOf="@+id/adminLabel"
+        app:layout_constraintStart_toStartOf="@+id/adminIcon"
+        app:layout_constraintTop_toTopOf="@+id/adminIcon"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
