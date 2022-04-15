@@ -27,7 +27,7 @@ import java.util.Date;
 
 public class CameraFunctionality extends Activity {
 
-    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView;
+    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView, itemFiveImageView;
     private Button clearImageBtn, openCameraButton;
     Uri pictureUri; // picture
     private static final int requestCode = 100;
@@ -44,6 +44,8 @@ public class CameraFunctionality extends Activity {
         itemOneImageView = findViewById(R.id.itemOneIV);
         itemTwoImageView = findViewById(R.id.itemTwoIV);
         itemThreeImageView = findViewById(R.id.itemThreeIV);
+        itemFourImageView = findViewById(R.id.itemFourIV);
+        itemFiveImageView = findViewById(R.id.itemFiveIV);
 
 
         clearImageBtn.setVisibility(View.GONE); // hides the clear image button
@@ -100,6 +102,30 @@ public class CameraFunctionality extends Activity {
             @Override
             public void onClick(View view) {
                 itemThreeImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
+                openCameraButton.setVisibility(View.VISIBLE);
+
+                // TODO add code to pass item data?
+            }
+        });
+
+        // onClick for the fourth items image view will change border to purple, shows the camera button and needs to pass item data
+        itemFourImageView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View view) {
+                itemFourImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
+                openCameraButton.setVisibility(View.VISIBLE);
+
+                // TODO add code to pass item data?
+            }
+        });
+
+        // onClick for the fifth items image view will change border to purple, shows the camera button and needs to pass item data
+        itemFiveImageView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
+            @Override
+            public void onClick(View view) {
+                itemFiveImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
                 openCameraButton.setVisibility(View.VISIBLE);
 
                 // TODO add code to pass item data?

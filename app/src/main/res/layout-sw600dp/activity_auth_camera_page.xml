@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/itemOneIV"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/red_camera_item_border"
         android:tag="0"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,10 +21,10 @@
 
     <ImageView
         android:id="@+id/itemTwoIV"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/red_camera_item_border"
         android:tag="0"
         app:layout_constraintStart_toEndOf="@+id/itemOneIV"
@@ -33,10 +33,10 @@
 
     <ImageView
         android:id="@+id/itemThreeIV"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/red_camera_item_border"
         android:tag="0"
         app:layout_constraintStart_toEndOf="@+id/itemTwoIV"
@@ -45,10 +45,10 @@
 
     <ImageView
         android:id="@+id/itemFourIV"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="100dp"
         android:background="@drawable/red_camera_item_border"
         android:tag="0"
         app:layout_constraintStart_toEndOf="@+id/itemThreeIV"
@@ -57,10 +57,10 @@
 
     <ImageView
         android:id="@+id/itemFiveIV"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/red_camera_item_border"
         android:tag="0"
@@ -71,20 +71,21 @@
 
     <ImageView
         android:id="@+id/cameraImageView"
-        android:layout_width="300dp"
-        android:layout_height="350dp"
+        android:layout_width="700dp"
+        android:layout_height="800dp"
+        android:layout_marginBottom="80dp"
         android:contentDescription="@string/todo"
         app:layout_constraintBottom_toTopOf="@+id/btn_Camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemTwoIV"
+        app:layout_constraintTop_toBottomOf="@+id/itemThreeIV"
         tools:ignore="ImageContrastCheck" />
 
     <Button
         android:id="@+id/btn_Camera"
         android:layout_width="wrap_content"
         android:layout_height="105dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="80dp"
         android:backgroundTint="@color/darkGreen"
         android:paddingBottom="25dp"
         android:text="@string/camera_symbol"
