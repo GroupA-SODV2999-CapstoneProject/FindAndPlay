@@ -24,6 +24,8 @@
         <activity
             android:name=".SlotMachine"
             android:exported="false" />
+        <activity android:name=".HamburgerMenu"
+            android:exported="false"/>
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
