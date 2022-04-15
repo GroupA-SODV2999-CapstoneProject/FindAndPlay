@@ -19,7 +19,6 @@
             android:exported="false" />
         <activity
             android:name=".Group_Create"
-            android:name=".PlayerSelect"
             android:exported="false" />
         <activity
             android:name=".ProfileEdit"
@@ -38,6 +37,9 @@
             android:exported="false" />
         <activity
             android:name=".CameraFunctionality"
+            android:exported="false" />
+        <activity
+            android:name=".PlayerSelect"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

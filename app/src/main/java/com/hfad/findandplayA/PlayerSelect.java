@@ -16,7 +16,7 @@ import android.widget.Spinner;
 
 public class PlayerSelect extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button cameraBtn; //TODO remove this button code once data is implemented
+    private Button cameraBtn, constructivePlayBtn; //TODO remove this button code once data is implemented
     private Spinner spinner;
     LinearLayout playerButtonLayout;
     ScrollView playerButtonScrollView;
@@ -31,6 +31,7 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
         spinner = (Spinner)findViewById(R.id.groupSelectSpinner); // Dropdown menu for groups
         playerButtonLayout = findViewById(R.id.playerButtonLinearLayoutID); // Linear Layout where buttons will be added
         playerButtonScrollView = findViewById(R.id.playerButtonScrollViewLayout); // ScrollView Layout where buttons will be added
+        constructivePlayBtn = (Button) findViewById(R.id.constructivePlayRulesBtn);
 
         // TODO activate the below code once testing buttons are removed and proper items are added to the drop down
 //        playerButtonScrollView.setVisibility(View.GONE); // Hides the player button scrollview
@@ -40,6 +41,15 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item)); // Setting dropdown
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
+
+        constructivePlayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO finish intent to constructive play rules activity
+//                Intent constructivePlayIntent = new Intent(PlayerSelect.this, .class);
+//                startActivity(constructivePlayIntent);
+            }
+        });
 
 
         cameraBtn = (Button) findViewById(R.id.playerOneBtn); //TODO remove this button code once data is implemented
@@ -76,7 +86,6 @@ public class PlayerSelect extends AppCompatActivity implements AdapterView.OnIte
 
             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(390,50);
             buttonParams.setMargins(10,2,2,10);
-//            playerButton.setLayoutParams(new LinearLayout.LayoutParams(390,50));
 
             playerButton.setId(i); // TODO Need to change when have access to children data
             playerButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.playerBtnRed))); // Sets the button to red
