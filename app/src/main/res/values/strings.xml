@@ -36,4 +36,16 @@
     <string name="camera_text">Camera</string>
     <string name="main_background_content">Main Background</string>
 
+    <!-- USerInfo -->
+    <string name="name">Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="age">Age</string>
+    <string name="group">Group</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_nickname">Your Nickname</string>
+    <string name="your_age">Your Age</string>
+    <string name="your_group">Your Group</string>
+    <string name="create_account">Create Account</string>
+    <string name="update_user_data">Update User</string>
+
 </resources>
