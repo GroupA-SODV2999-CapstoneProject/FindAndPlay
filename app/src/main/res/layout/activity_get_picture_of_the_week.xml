@@ -43,7 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="4"
-                    app:srcCompat="@drawable/blank" />
+                    app:srcCompat="@drawable/blank"
+                    android:contentDescription="@string/generalPicWeekDescr" />
 
                 <Button
                     android:id="@+id/refresh_btn"
