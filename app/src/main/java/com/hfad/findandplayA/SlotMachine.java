@@ -57,7 +57,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     private static final String TAG = "Slot_Activity";
     private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
-    private final Bitmap[] _imgData = new Bitmap[3];
+    private final Bitmap[] _imgData = new Bitmap[4];
     private Button spinBtn;
     private Button startBtn;
     private Game game;
@@ -204,9 +204,11 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
         ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
         ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
+        ImageView btn4 = (ImageView) findViewById(R.id.imageButton6);
+
 
         Bitmap[] imgData = _imgData;
-        ImageView[] btns = {btn1, btn2, btn3};
+        ImageView[] btns = {btn1, btn2, btn3, btn4};
         final int[] completed = {0};
         final BiConsumer<Bitmap, Integer> listener = (data, index) ->
         {
@@ -215,7 +217,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             completed[0]++;
 
             // check if all images bitmap data loaded from cache or remotely
-            if (completed[0] >= 3) { // increase count when you add more category buttons
+            if (completed[0] >= 4) { // increase count when you add more category buttons
                 boolean hasMissing = Arrays.asList(imgData).contains(null);
 
                 if (-1 != selectedCatIndex)
