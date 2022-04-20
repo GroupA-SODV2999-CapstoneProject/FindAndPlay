@@ -35,5 +35,8 @@
     <string name="slot_machine">Slot Machine</string>
     <string name="camera_text">Camera</string>
     <string name="main_background_content">Main Background</string>
+    <string name="refreshBtn">Refresh</string>
+    <string name="congratsTxt">Congratulations</string>
+    <string name="picOfWeekTxt">Picture of The Week</string>
 
 </resources>
