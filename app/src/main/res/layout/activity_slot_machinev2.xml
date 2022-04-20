@@ -97,7 +97,7 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv1"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="100dp"
                             android:layout_margin="0dp"
                             >
@@ -108,7 +108,7 @@
 
                                 <ImageButton
                                     android:id="@+id/imageButton"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="100dp"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
@@ -124,7 +124,7 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv2"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="100dp"
                             android:layout_margin="0dp"
                             >
@@ -132,13 +132,14 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:gravity="bottom">
+
                                 <ImageButton
                                     android:id="@+id/imageButton2"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="100dp"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
-                                    tools:ignore="SpeakableTextPresentCheck"/>
+                                    tools:ignore="SpeakableTextPresentCheck" />
                             </RelativeLayout>
                         </ScrollView>
 
@@ -150,7 +151,7 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv3"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="100dp"
                             android:layout_margin="0dp"
                             >
@@ -158,19 +159,25 @@
                                 android:layout_width="fill_parent"
                                 android:layout_height="fill_parent"
                                 android:gravity="bottom">
+
                                 <ImageButton
                                     android:id="@+id/imageButton3"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="100dp"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
                                     tools:ignore="SpeakableTextPresentCheck" />
                             </RelativeLayout>
                         </ScrollView>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="66dp"
+                            android:layout_weight="1"
+                            android:gravity="center" />
 
                         <ScrollView
                             android:id="@+id/animate__sv4"
-                            android:layout_width="100dp"
+                            android:layout_width="80dp"
                             android:layout_height="100dp"
                             android:layout_margin="0dp"
                             >
@@ -181,7 +188,7 @@
 
                                 <ImageButton
                                     android:id="@+id/imageButton6"
-                                    android:layout_width="100dp"
+                                    android:layout_width="80dp"
                                     android:layout_height="100dp"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
