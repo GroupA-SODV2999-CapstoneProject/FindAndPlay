@@ -26,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
+
             <ProgressBar
                 android:id="@+id/progress_loader"
                 style="?android:attr/progressBarStyle"
@@ -39,11 +39,10 @@
 
         <RelativeLayout
             android:id="@+id/layout_main_content"
-            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            >
+            android:visibility="visible">
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -110,6 +109,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/animate__sv1"
                             app:layout_constraintTop_toTopOf="parent">
+
                             <RelativeLayout
                                 android:layout_width="150dp"
                                 android:layout_height="150dp">
@@ -135,6 +135,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/animate__sv2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
+
                             <RelativeLayout
                                 android:layout_width="150dp"
                                 android:layout_height="150dp">
@@ -170,6 +171,7 @@
                             app:layout_constraintEnd_toStartOf="@+id/animate__sv4"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent">
+
                             <RelativeLayout
                                 android:layout_width="150dp"
                                 android:layout_height="150dp">
@@ -195,6 +197,7 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/animate__sv3"
                             app:layout_constraintTop_toTopOf="parent">
+
                             <RelativeLayout
                                 android:layout_width="150dp"
                                 android:layout_height="150dp">
