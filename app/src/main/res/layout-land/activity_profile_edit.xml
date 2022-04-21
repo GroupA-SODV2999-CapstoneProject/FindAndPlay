@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="277dp"
-        android:layout_height="143dp"
+        android:layout_width="196dp"
+        android:layout_height="114dp"
         android:layout_marginEnd="544dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
@@ -21,8 +21,8 @@
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="578dp"
-            android:layout_height="100dp"
+            android:layout_width="188dp"
+            android:layout_height="70dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_weight="1"
@@ -36,19 +36,21 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="800dp"
-        android:layout_height="557dp"
+        android:layout_width="435dp"
+        android:layout_height="294dp"
         android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.134">
 
         <ImageView
             android:id="@+id/profile_pic"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:background="#FFC022"
             app:srcCompat="@drawable/ic_launcher_foreground" />
 
@@ -75,9 +77,8 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="517dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="-100dp"
+        android:layout_width="300dp"
+        android:layout_height="72dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -86,8 +87,8 @@
 
         <Button
             android:id="@+id/save_btn"
-            android:layout_width="240dp"
-            android:layout_height="100dp"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
             android:layout_weight="1"
             android:backgroundTint="#4CAF50"
             android:text="Save"
