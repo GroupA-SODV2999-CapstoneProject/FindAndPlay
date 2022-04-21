@@ -39,9 +39,15 @@
     <string name="return_to_main_menu">Return To\nMain Menu</string>
     <string name="hamburger_menu_return_button_text">Return</string>
     <string name="Burger_Menu_Help_button_Text">Help</string>
+
+    <string name="choose">Choose</string>
+    <string name="upload">Upload</string>
+    <string name="helpview1">test1</string>
+    <string name="helpview0">test0</string>
+    <string name="helpview2">test2</string>
+    <string name="end">End</string>
     <string name="refreshBtn">Refresh</string>
     <string name="congratsTxt">Congratulations</string>
     <string name="picOfWeekTxt">Picture of The Week</string>
     <string name="generalPicWeekDescr">This week\'s picture of the week</string>
-
 </resources>

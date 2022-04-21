@@ -91,7 +91,7 @@ public class PictureIO {
      *
      * @param localPathToPic - A string reference to the location of the picture in local storage
      */
-    public static void addPicOfWeekToDb(String localPathToPic) {
+    public static void addPicOfWeekToDb(Uri localPathToPic) {
         final String TAG = "addPicOfWeekToDb";
         //Send to picture to remote storage
         String refUrl = addPicOfWeekToStorage(localPathToPic);
@@ -126,11 +126,11 @@ public class PictureIO {
 
 
 
-    private static String addPicOfWeekToStorage(String localPathToPicture) {
+    private static String addPicOfWeekToStorage(Uri file) {
         final String TAG = "addPicOfWeekToStorage";
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        Uri file = Uri.fromFile(new File(localPathToPicture));
+        //Uri file = Uri.fromFile(new File(localPathToPicture));
         StorageReference ref = storageRef.child("pictureOfTheWeek/" + file.getLastPathSegment());
         UploadTask uploadTask = ref.putFile(file);
         final String[] storageUrl = {""};

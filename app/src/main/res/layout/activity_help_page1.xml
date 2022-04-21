@@ -8,10 +8,10 @@
     tools:context=".HelpPage1">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView1"
         android:layout_width="257dp"
         android:layout_height="122dp"
-        android:text="@string/helpview2"
+        android:text="@string/helpview1"
         android:textColor="#84FFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
