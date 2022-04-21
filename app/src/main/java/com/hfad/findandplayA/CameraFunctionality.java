@@ -54,8 +54,6 @@ public class CameraFunctionality extends Activity {
         clearImageBtn.setVisibility(View.GONE); // hides the clear image button
         openCameraButton.setVisibility(View.GONE); // hides the camera button
 
-
-        setItemImageBorder(); // calls function to set item image border colors
         setItemImages(); // calls function to set item image, images
 
         // onClick for the camera button
@@ -198,40 +196,6 @@ public class CameraFunctionality extends Activity {
     public void setItemImages(){
 
         //TODO implement code to set the three item imageview images
-
-    }
-
-    @SuppressLint("UseCompatLoadingForDrawables")
-    public void setItemImageBorder(){
-
-        //TODO set the color of the items image border using the images tag red=0 and green=1 check to see if that image was actually taken?
-
-        // Checks first items tag to see if it's border should be reg or green and sets that color
-        if (itemOneImageView.getTag()=="1"){
-            itemOneImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
-        }
-        else
-        {
-            itemOneImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
-
-        // Checks second items tag to see if it's border should be reg or green and sets that color
-        if (itemTwoImageView.getTag()=="1"){
-            itemTwoImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
-        }
-        else
-        {
-            itemTwoImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
-
-        // Checks third items tag to see if it's border should be reg or green and sets that color
-        if (itemThreeImageView.getTag()=="1"){
-            itemThreeImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
-        }
-        else
-        {
-            itemThreeImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
 
     }
 
