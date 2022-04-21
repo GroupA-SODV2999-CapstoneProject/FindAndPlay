@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF8707">
+    android:background="@drawable/tabletback3">
 
     <Button
         android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#4CAF50"
         android:text="Back"
         app:cornerRadius="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,9 +20,10 @@
 
     <Button
         android:id="@+id/save_btn"
-        android:layout_width="173dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="240dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="296dp"
+        android:backgroundTint="#4CAF50"
         android:text="Save"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,26 +34,25 @@
         android:id="@+id/score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="340dp"
         android:text="Score:"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/save_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.249"
+        app:layout_constraintHorizontal_bias="0.35"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/profile_pic"
-        android:layout_width="195dp"
-        android:layout_height="150dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:background="#FFC022"
         app:layout_constraintBottom_toTopOf="@+id/edit_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632"
+        app:layout_constraintVertical_bias="0.73"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <EditText
@@ -66,10 +67,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/save_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.803"
+        app:layout_constraintHorizontal_bias="0.395"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.624" />
+        app:layout_constraintVertical_bias="0.67" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
