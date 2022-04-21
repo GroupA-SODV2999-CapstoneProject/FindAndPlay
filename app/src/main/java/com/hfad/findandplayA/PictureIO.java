@@ -4,12 +4,23 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class PictureIO {
     static String defaultConfigDir = "/Pictures";
@@ -71,5 +82,69 @@ public class PictureIO {
         return list;
     }
 
+    /**
+     * Adds a remote storage reference to the user chosen "Picture of the Week" to Firestore
+     *
+     * @param localPathToPic - A string reference to the location of the picture in local storage
+     */
+    public static void addPicOfWeekToDb(String localPathToPic) {
+        final String TAG = "addPicOfWeekToDb";
+        //Send to picture to remote storage
+        String refUrl = addPicOfWeekToStorage(localPathToPic);
+        //Handle error
+        if(refUrl.isEmpty()) {
+            Log.e(TAG, "Error: refUrl to picOfWeek empty. Abandoning save...");
+            return;
+        }
+        //Create Firestore data map
+        Map<String, Object> picData = new HashMap<>();
+        picData.put("refUrl", refUrl);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //Get the current user
+        String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+        //Attempt to add document to Firestore
+        db.collection("PictureOfTheWeek")
+                .document(userId)
+                .set(picData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
 
+
+
+    private static String addPicOfWeekToStorage(String localPathToPicture) {
+        final String TAG = "addPicOfWeekToStorage";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        Uri file = Uri.fromFile(new File(localPathToPicture));
+        StorageReference ref = storageRef.child("pictureOfTheWeek/" + file.getLastPathSegment());
+        UploadTask uploadTask = ref.putFile(file);
+        final String[] storageUrl = {""};
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure (@NonNull Exception exception){
+                                                        Log.e(TAG, "Error sending image to storage: " + exception);
+                                                    }
+                                                }).
+
+                addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess (UploadTask.TaskSnapshot taskSnapshot){
+                        // Continue with the task to get the download URL
+                        storageUrl[0] = String.valueOf(ref.getDownloadUrl());
+                        Log.d(TAG, "Success: img added at " + storageUrl[0]);
+                    }
+                });
+        return storageUrl[0];
+    }
 }
