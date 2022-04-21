@@ -21,28 +21,28 @@
                     android:textColor="#232121"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:layout_weight="2"/>
+                    android:layout_weight="1"/>
 
 
-                <TextView
-                    android:id="@+id/name_child"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center"
-                    android:text="@string/congratsTxt"
-                    android:textColor="#232121"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:id="@+id/name_child"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="0dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:fontFamily="sans-serif-black"-->
+<!--                    android:gravity="center"-->
+<!--                    android:text="@string/congratsTxt"-->
+<!--                    android:textColor="#232121"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:textStyle="bold" />-->
 
 
                 <ImageView
                     android:id="@+id/pic_of_week"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="4"
+                    android:layout_weight="2"
                     app:srcCompat="@drawable/blank"
                     android:contentDescription="@string/generalPicWeekDescr" />
 
@@ -55,7 +55,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="50dp"
                     android:layout_marginBottom="20dp"
-                    android:layout_weight="1"
+                    android:layout_weight="0.5"
                     android:backgroundTint="#4CAF50"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/refreshBtn"
