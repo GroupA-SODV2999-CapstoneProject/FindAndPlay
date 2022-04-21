@@ -1,6 +1,7 @@
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -250,6 +251,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     protected void loadImageWithAnimation(ImageView ref, Bitmap[] imgData, final int index) {
         int resId = getResources().getIdentifier("animate__sv" + (index + 1), "id", this.getPackageName());
         ScrollView animSv = (ScrollView) findViewById(resId);
@@ -267,9 +269,11 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         animSv.setHorizontalScrollBarEnabled(false);
 
         Handler tapHandler = new Handler();
-        Runnable tapRunner = () -> {
-            if (!loadedCatBtns.get(index)) // img not loaded
+        @SuppressLint("UseCompatLoadingForDrawables") Runnable tapRunner = () -> {
+            if (loadedCatBtns.get(index) == null) { // img not loaded
+                Log.e(TAG, "Error: image not loaded");
                 return;
+            }
             selectedCatIndex = selectedCatIndex == index ? -1 : index;
 
             for (int i = 0; i < imgData.length; i++) {
