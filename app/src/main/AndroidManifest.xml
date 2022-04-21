@@ -36,13 +36,17 @@
             android:name=".AuthLoginActivity"
             android:exported="false" />
         <activity
+            android:name=".ImaginativePlayActivity"
+            android:exported="false" />
+        <activity
             android:name=".SlotMachine"
             android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".CameraFunctionality"
             android:exported="false" />
-        <activity android:name=".HamburgerMenu"
+        <activity
+            android:name=".HamburgerMenu"
             android:exported="false" />
         <activity
             android:name=".PlayerSelect"

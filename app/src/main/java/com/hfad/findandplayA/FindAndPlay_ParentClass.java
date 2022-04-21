@@ -1,6 +1,8 @@
 package com.hfad.findandplayA;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Map;
 
@@ -20,6 +22,15 @@ public class FindAndPlay_ParentClass extends AppCompatActivity {
         this.startActivity(new Intent(this, destination));
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(findViewById(R.id.openBurgerMenuButton) != null) {
+            init_BurgerMenuButton();
+        }
+    }
+
     /** As UpdateView(..), but accepts a single flag for the intent.
      *
      * @param destination: The class of an activity meant to be loaded.
@@ -35,8 +46,6 @@ public class FindAndPlay_ParentClass extends AppCompatActivity {
         //Start the Activity
         this.startActivity(primeIntent);
     }
-
-    //As UpdateView but takes an array of ints with the flags wanting to be included.
 
     /** As UpdateView(..), but accepts an array of flags for the intent.
      * @See UpdateView()
@@ -100,6 +109,13 @@ public class FindAndPlay_ParentClass extends AppCompatActivity {
     protected void LoadTransfers() {
         this.loadedTransfers = getIntent().getExtras();
         //Once this function has completed you can use loadedTransfers.get
+    }
+
+    protected void init_BurgerMenuButton() {
+        View BurgerButton = findViewById(R.id.openBurgerMenuButton);
+        BurgerButton.setOnClickListener(View -> {
+            UpdateView(HamburgerMenu.class);
+        });
     }
 
     //Pre-Made Navigation
