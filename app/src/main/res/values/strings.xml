@@ -35,5 +35,9 @@
     <string name="slot_machine">Slot Machine</string>
     <string name="camera_text">Camera</string>
     <string name="main_background_content">Main Background</string>
+    <string name="ImaginativePlayTextContents"> Now to ask you some questions about what you collected!\n\nWhere did you find it? How did it get there?\n\nCan you think of any way to use these?\n\nWhat is your favorite game? Could you use these items in it?\n</string>
+    <string name="return_to_main_menu">Return To\nMain Menu</string>
+    <string name="hamburger_menu_return_button_text">Return</string>
+    <string name="Burger_Menu_Help_button_Text">Help</string>
 
 </resources>
