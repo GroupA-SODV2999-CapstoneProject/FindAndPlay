@@ -111,6 +111,16 @@ public class Groups {
          ;
      return false;
      }
+     public static void AddGroup(String GroupName){
+         FirebaseFirestore db = FirebaseFirestore.getInstance();
+         db.collection("groups").add(GroupName);
+     }
+
+     public static void AddChild(String GroupName,String ChildName, HashMap<String,String> ChildInfo){
+         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("groups").document(GroupName).collection("Children").document(ChildName).set(ChildInfo);
+
+     }
 
 
 
