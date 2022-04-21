@@ -3,30 +3,29 @@ package com.hfad.findandplayA;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.hfad.findandplayA.viewmodels.Auth;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class PostPicture extends AppCompatActivity {
@@ -130,64 +129,100 @@ public class PostPicture extends AppCompatActivity {
     // UploadImage method
     private void uploadImage()
     {
-        testAuth.signInWithEmailAndPassword("test@gmail.com", "123123123");
+        //testAuth.signInWithEmailAndPassword("test@gmail.com", "123123123");
         String UniqueUID = UUID.randomUUID().toString();
         if (filePath != null) {
-
-            // Code for showing progressDialog while uploading
-            ProgressDialog progressDialog
-                    = new ProgressDialog(this);
-            progressDialog.setTitle("Uploading...");
-            progressDialog.show();
-
-            // Defining the child of storageReference
-            String StoragePath = "potw/";
-            StorageReference ref = storageReference.child(StoragePath + UniqueUID);
-
-            //PictureIO.addPicOfWeekToDb(filePath);
-            // adding listeners on upload
-            // or failure of image
-            // Progress Listener for loading
-            // percentage on the dialog box
-
-            ref.putFile(filePath)
-                    .addOnSuccessListener(
-                            taskSnapshot -> {
-
-                                // Image uploaded successfully
-                                // Dismiss dialog
-                                progressDialog.dismiss();
-                                Toast
-                                        .makeText(getApplicationContext(),
-                                                "Image Uploaded!!",
-                                                Toast.LENGTH_SHORT)
-                                        .show();
-                            })
-
-                    .addOnFailureListener(e -> {
-
-                        // Error, Image not uploaded
-                        progressDialog.dismiss();
-                        Toast
-                                .makeText(getApplicationContext(),
-                                        "Failed " + e.getMessage(),
-                                        Toast.LENGTH_SHORT)
-                                .show();
-                    })
-                    .addOnProgressListener(
-                            taskSnapshot -> {
-                                double progress
-                                        = (100.0
-                                        * taskSnapshot.getBytesTransferred()
-                                        / taskSnapshot.getTotalByteCount());
-                                progressDialog.setMessage(
-                                        "Uploaded "
-                                                + (int)progress + "%");
-                            });
-
+            addPicOfWeekToDb(filePath);
         }
-        createFirestoreFile(UniqueUID);
+    }
 
+
+    /**
+     * Adds a remote storage reference to the user chosen "Picture of the Week" to Firestore
+     *
+     * @param localPathToPic - A string reference to the location of the picture in local storage
+     */
+    private void addPicOfWeekToDb(Uri localPathToPic) {
+        final String TAG = "addPicOfWeekToDb";
+        //Send to picture to remote storage
+        String refUrl = addPicOfWeekToStorage(localPathToPic);
+        //Handle error
+        if(refUrl.isEmpty()) {
+            Log.e(TAG, "Error: refUrl to picOfWeek empty. Abandoning save...");
+            return;
+        }
+        //Create Firestore data map
+        Map<String, Object> picData = new HashMap<>();
+        picData.put("refUrl", refUrl);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        //Get the current user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String userId = user.getUid();
+        //Attempt to add document to Firestore
+        db.collection("PictureOfTheWeek")
+                .document(userId)
+                .set(picData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                })
+
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
+
+
+    private String addPicOfWeekToStorage(Uri file) {
+        // Code for showing progressDialog while uploading
+        ProgressDialog progressDialog
+                = new ProgressDialog(this);
+        progressDialog.setTitle("Uploading...");
+
+        progressDialog.show();
+        final String TAG = "addPicOfWeekToStorage";
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageRef = storage.getReference();
+        //Uri file = Uri.fromFile(new File(localPathToPicture));
+        StorageReference ref = storageRef.child("pictureOfTheWeek/" + file.getLastPathSegment());
+        UploadTask uploadTask = ref.putFile(file);
+        final String[] storageUrl = {""};
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure (@NonNull Exception exception){
+                // Error, Image not uploaded
+                progressDialog.dismiss();
+                Toast
+                        .makeText(getApplicationContext(),
+                                "Failed " + exception.getMessage(),
+                                Toast.LENGTH_SHORT)
+                        .show();
+                Log.e(TAG, "Error sending image to storage: " + exception);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess (UploadTask.TaskSnapshot taskSnapshot){
+                        // Continue with the task to get the download URL
+                        storageUrl[0] = String.valueOf(ref.getDownloadUrl());
+                        Log.d(TAG, "Success: img added at " + storageUrl[0]);
+                    }
+                }).addOnProgressListener(
+                taskSnapshot -> {
+                    double progress
+                            = (100.0
+                            * taskSnapshot.getBytesTransferred()
+                            / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage(
+                            "Uploaded "
+                                    + (int)progress + "%");
+                });
+        return storageUrl[0];
     }
 
     private void createFirestoreFile(String uuid)
