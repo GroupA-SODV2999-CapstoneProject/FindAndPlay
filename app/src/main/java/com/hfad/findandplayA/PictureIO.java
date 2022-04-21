@@ -1,16 +1,20 @@
 package com.hfad.findandplayA;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -146,5 +150,43 @@ public class PictureIO {
                     }
                 });
         return storageUrl[0];
+    }
+
+    public static void getPicOfWeekFromDb(ImageView imageView, Context context) {
+        final String TAG = "addPicOfWeekToStorage";
+        String refUrl = getPicOfWeekRefFromFirestore();
+
+        //Handle error retrieving url
+        if (refUrl.isEmpty()) {
+            Log.e(TAG, "Error: refUrl to picOfWeek empty. Abandoning retrieval...");
+            return;
+        }
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+        Glide.with(context)
+                .load(storageReference)
+                .into(imageView);
+    }
+
+    private static String getPicOfWeekRefFromFirestore() {
+        final String TAG = "getPicOfWeekFromFire";
+        final String[] url = {""};
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        assert user != null;
+        String userId = user.getUid();
+
+        db.collection("PictureOfTheWeek")
+                .document(userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        url[0] = String.valueOf(task.getResult());
+                        Log.d(TAG, "Success: " + url[0]);
+                    } else {
+                        Log.e(TAG, "Error retrieving saved ciphers. Exception: ", task.getException());
+                    }
+                });
+        return url[0];
     }
 }
