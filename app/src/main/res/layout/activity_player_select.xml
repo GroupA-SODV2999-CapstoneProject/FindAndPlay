@@ -28,6 +28,9 @@
         android:layout_marginLeft="75dp"
         android:layout_marginRight="75dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/darkGreen"
+        android:prompt="@string/spinner_prompt"
+        android:spinnerMode="dropdown"
         android:textAlignment="center" />
 
     <Button
@@ -66,55 +69,13 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/colorDescriptionTextView"
+            <Button
+                android:id="@+id/button3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="60sp"
-                android:layout_marginRight="60sp"
-                android:layout_marginBottom="10sp"
-                android:gravity="center_horizontal"
-                android:text="@string/player_color_change_text"
-                android:textColor="#413636"
-                android:textSize="10sp"
-                android:textStyle="bold" />
+                android:text="Button" />
 
 
-            <Button
-                android:id="@+id/playerOneBtn"
-                android:layout_width="390dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
-                android:backgroundTint="@color/playerBtnRed"
-                android:text="Brian"
-                app:cornerRadius="50dp" />
-
-            <Button
-                android:id="@+id/playerTwoBtn"
-                android:layout_width="390dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
-                android:backgroundTint="@color/darkGreen"
-                android:text="Ashlee"
-                app:cornerRadius="50dp" />
-
-            <Button
-                android:id="@+id/playerThreeBtn"
-                android:layout_width="390dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="2dp"
-                android:backgroundTint="@color/playerBtnRed"
-                android:text="Arron"
-                app:cornerRadius="50dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

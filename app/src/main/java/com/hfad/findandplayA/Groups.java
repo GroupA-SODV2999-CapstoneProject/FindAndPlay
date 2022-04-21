@@ -19,10 +19,34 @@ import java.util.List;
 import java.util.Map;
 
 public class Groups {
-    static ArrayList<DocumentSnapshot> Children;
+    static ArrayList<String> children;
+    public ArrayList<String> childGroups = new ArrayList<>();
+
+// function to return child groups
+    public ArrayList<String> getGroups(){
+        FirebaseFirestore db= FirebaseFirestore.getInstance();
+        db.collection("Groups")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                Log.d("All Groups", document.getId());
+
+                                childGroups.add(document.getId());
+                            }
+                        }else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        return childGroups;
+    }
 
 
-    public ArrayList<DocumentSnapshot> getChildren(){
+//function to return all children from a group
+    public ArrayList<String> getChildren(){
     FirebaseFirestore db= FirebaseFirestore.getInstance();
     ArrayList<String> groups = new ArrayList<>();
     db.collection("Groups")
@@ -50,7 +74,7 @@ public class Groups {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("something" , document.getId() + " => " + document.getData());
-                                Children.add(document);
+                                children.add(document.getId());
 
                             }
                         } else {
@@ -59,7 +83,7 @@ public class Groups {
                     }
                 });
     }
-    return Children;
+    return children;
 }
 
 
