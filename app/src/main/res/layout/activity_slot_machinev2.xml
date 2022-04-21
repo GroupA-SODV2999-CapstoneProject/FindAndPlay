@@ -42,34 +42,38 @@
             android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             >
+
             <ScrollView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fillViewport="true"
-                android:layout_centerInParent="true">
+                android:layout_centerInParent="true"
+                android:fillViewport="true">
+
                 <RelativeLayout
                     android:id="@+id/layout_main_content2"
-                    android:visibility="visible"
-                    android:layout_weight="1"
-                    android:layout_width="390dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="visible">
 
                     <LinearLayout
                         android:id="@+id/llayout_col0"
-                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
                         <ImageButton
                             android:id="@+id/imageButton5"
                             android:layout_width="66dp"
                             android:layout_height="66dp"
+                            android:contentDescription="@string/burgerMenuDescr"
                             app:srcCompat="@android:drawable/toast_frame"
-                            tools:ignore="SpeakableTextPresentCheck"
-                            app:tint="#fff" />
+                            app:tint="#fff"
+                            tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -81,148 +85,141 @@
                             android:id="@+id/audioBtn"
                             android:layout_width="66dp"
                             android:layout_height="63dp"
+                            android:contentDescription="@string/audioBtnDescrip"
                             app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
-                            tools:ignore="SpeakableTextPresentCheck"
-                            app:tint="#DF362D" />
+                            app:tint="#DF362D"
+                            tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
                     </LinearLayout>
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/llayout_col1"
-                        android:layout_below="@+id/llayout_col0"
-                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/llayout_col0"
+                        android:layout_marginVertical="25dp"
                         android:gravity="center"
-                        android:layout_marginVertical="25dp">
-
-                        <ScrollView
-                            android:id="@+id/animate__sv1"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_margin="0dp"
-                            >
-                            <RelativeLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:gravity="bottom">
-
-                                <ImageButton
-                                    android:id="@+id/imageButton"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
-                                    android:padding="0dp"
-                                    app:srcCompat="@drawable/blank"
-                                    tools:ignore="SpeakableTextPresentCheck" />
-                            </RelativeLayout>
-                        </ScrollView>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="66dp"
-                            android:layout_weight="1"
-                            android:gravity="center" />
+                        android:orientation="horizontal">
 
                         <ScrollView
                             android:id="@+id/animate__sv2"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:layout_margin="0dp"
-                            >
+                            android:layout_marginStart="47dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/animate__sv1"
+                            app:layout_constraintTop_toTopOf="parent">
                             <RelativeLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:gravity="bottom">
+                                android:layout_width="150dp"
+                                android:layout_height="150dp">
+
+                                <ImageButton
+                                    android:id="@+id/imageButton"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:contentDescription="@string/cat1Descrip"
+                                    android:padding="0dp"
+                                    app:srcCompat="@drawable/blank"
+                                    tools:ignore="SpeakableTextPresentCheck" />
+                            </RelativeLayout>
+                        </ScrollView>
+
+
+                        <ScrollView
+                            android:id="@+id/animate__sv1"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_margin="0dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/animate__sv2"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+                            <RelativeLayout
+                                android:layout_width="150dp"
+                                android:layout_height="150dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton2"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:contentDescription="@string/cat2Descrip"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
                                     tools:ignore="SpeakableTextPresentCheck" />
                             </RelativeLayout>
                         </ScrollView>
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="66dp"
-                            android:layout_weight="1"
-                            android:gravity="center" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/llayout_col4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/llayout_col1"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
                         <ScrollView
                             android:id="@+id/animate__sv3"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:layout_margin="0dp"
-                            >
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/animate__sv4"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
                             <RelativeLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:gravity="bottom">
+                                android:layout_width="150dp"
+                                android:layout_height="150dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton3"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:contentDescription="@string/cat3Descr"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
                                     tools:ignore="SpeakableTextPresentCheck" />
                             </RelativeLayout>
                         </ScrollView>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="66dp"
-                            android:layout_weight="1"
-                            android:gravity="center" />
 
                         <ScrollView
                             android:id="@+id/animate__sv4"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:layout_margin="0dp"
-                            >
+                            android:layout_marginStart="47dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/animate__sv3"
+                            app:layout_constraintTop_toTopOf="parent">
                             <RelativeLayout
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent"
-                                android:gravity="bottom">
+                                android:layout_width="150dp"
+                                android:layout_height="150dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton6"
-                                    android:layout_width="80dp"
-                                    android:layout_height="80dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="150dp"
+                                    android:contentDescription="@string/cat4Descr"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
                                     tools:ignore="SpeakableTextPresentCheck" />
                             </RelativeLayout>
                         </ScrollView>
-                    </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <LinearLayout
-                        android:id="@+id/llayout_col2"
-                        android:layout_below="@+id/llayout_col1"
-                        android:orientation="horizontal"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_marginVertical="25dp">
-
-                        <ImageButton
-                            android:id="@+id/imageButton4"
-                            android:layout_width="0dp"
-                            android:layout_height="200dp"
-                            android:layout_weight="1"
-                            app:srcCompat="@android:drawable/toast_frame"
-                            tools:ignore="SpeakableTextPresentCheck" />
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/llayout_col3"
-                        android:layout_below="@+id/llayout_col2"
-                        android:orientation="horizontal"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/llayout_col4"
+                        android:layout_marginVertical="25dp"
                         android:gravity="center"
-                        android:layout_marginVertical="25dp">
+                        android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/spinBtn"
@@ -240,7 +237,8 @@
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textSize="30sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="TextContrastCheck" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/startBtn"
