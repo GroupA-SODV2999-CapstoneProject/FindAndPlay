@@ -39,5 +39,12 @@
     <string name="return_to_main_menu">Return To\nMain Menu</string>
     <string name="hamburger_menu_return_button_text">Return</string>
     <string name="Burger_Menu_Help_button_Text">Help</string>
+    <string name="burgerMenuDescr">Additional popup menu items.</string>
+    <string name="audioBtnDescrip">Audio ON/OFF</string>
+    <string name="cat1Descrip">Category 1 Item</string>
+    <string name="cat2Descrip">Category 2 Item</string>
+    <string name="cat4Descr">Category 4 Item</string>
+    <string name="slotDescrip">Slot Machine</string>
+    <string name="cat3Descr">Category 3 Item</string>
 
 </resources>

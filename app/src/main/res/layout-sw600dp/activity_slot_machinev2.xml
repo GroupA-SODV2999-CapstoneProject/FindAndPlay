@@ -62,13 +62,14 @@
                         android:id="@+id/llayout_col0"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="100dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageButton
                             android:id="@+id/imageButton5"
-                            android:layout_width="66dp"
-                            android:layout_height="66dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:contentDescription="@string/burgerMenuDescr"
                             app:srcCompat="@android:drawable/toast_frame"
                             app:tint="#fff"
@@ -82,8 +83,8 @@
 
                         <ImageButton
                             android:id="@+id/audioBtn"
-                            android:layout_width="66dp"
-                            android:layout_height="63dp"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
                             android:contentDescription="@string/audioBtnDescrip"
                             app:srcCompat="@android:drawable/ic_lock_silent_mode_off"
                             app:tint="#DF362D"
@@ -101,8 +102,8 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv2"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
                             android:layout_margin="0dp"
                             android:layout_marginStart="47dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -111,13 +112,13 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
-                                android:layout_width="150dp"
-                                android:layout_height="150dp">
+                                android:layout_width="300dp"
+                                android:layout_height="300dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton"
-                                    android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:contentDescription="@string/cat1Descrip"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
@@ -128,8 +129,8 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv1"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
                             android:layout_margin="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/animate__sv2"
@@ -137,13 +138,13 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
-                                android:layout_width="150dp"
-                                android:layout_height="150dp">
+                                android:layout_width="300dp"
+                                android:layout_height="300dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton2"
-                                    android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:contentDescription="@string/cat2Descrip"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
@@ -164,8 +165,8 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv3"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
                             android:layout_margin="0dp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/animate__sv4"
@@ -173,13 +174,13 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
-                                android:layout_width="150dp"
-                                android:layout_height="150dp">
+                                android:layout_width="300dp"
+                                android:layout_height="300dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton3"
-                                    android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:contentDescription="@string/cat3Descr"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
@@ -189,8 +190,8 @@
 
                         <ScrollView
                             android:id="@+id/animate__sv4"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
+                            android:layout_width="300dp"
+                            android:layout_height="300dp"
                             android:layout_margin="0dp"
                             android:layout_marginStart="47dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -199,13 +200,13 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <RelativeLayout
-                                android:layout_width="150dp"
-                                android:layout_height="150dp">
+                                android:layout_width="300dp"
+                                android:layout_height="300dp">
 
                                 <ImageButton
                                     android:id="@+id/imageButton6"
-                                    android:layout_width="150dp"
-                                    android:layout_height="150dp"
+                                    android:layout_width="300dp"
+                                    android:layout_height="300dp"
                                     android:contentDescription="@string/cat4Descr"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
@@ -220,14 +221,16 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/llayout_col4"
-                        android:layout_marginVertical="25dp"
+                        android:layout_marginStart="200dp"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginEnd="200dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/spinBtn"
-                            android:layout_width="281dp"
-                            android:layout_height="70dp"
+                            android:layout_width="400dp"
+                            android:layout_height="100dp"
                             android:background="@drawable/button_green"
                             android:fontFamily="@font/rubik"
                             android:gravity="center"
