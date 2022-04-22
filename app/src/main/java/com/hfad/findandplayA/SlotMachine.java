@@ -43,6 +43,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private final Bitmap[] _imgData = new Bitmap[4];
     private Button spinBtn;
     private Button startBtn;
+    private Button rulesBtn;
     private Game game;
     private boolean spinned = false;
     private boolean audioOn = true;
@@ -92,7 +93,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
 
 
-        Button rulesBtn = findViewById(R.id.btnRules);
+        rulesBtn = findViewById(R.id.btnRules);
 
         rulesBtn.setOnClickListener(view -> showDialog());
     }
@@ -132,6 +133,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
      */
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void spin(View view) {
+        rulesBtn.setVisibility(View.GONE);
         //Error retrieving items
         if (Game.categoryEmpty) {
             //Attempt to pull from Firestore again
