@@ -76,6 +76,9 @@ public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClick
         spinBtn.setOnClickListener(this);
         startBtn.setOnClickListener(this);
 
+        final Intent intent = getIntent();
+        String kid = intent.getStringExtra("kid");
+
         ImageView audioBtn = (ImageView) findViewById(R.id.audioBtn);
         audioBtn.setOnClickListener(ref -> {
             audioOn = !audioOn;
@@ -88,6 +91,7 @@ public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClick
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(SlotMachine.this, ProfileView.class);
+                intent.putExtra("kid", kid);
                 startActivity(intent);
             }
         });
@@ -98,6 +102,7 @@ public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClick
         rulesBtn.setOnClickListener(view -> showDialog());
 
         init_BurgerMenuButton();
+        profilePic(kid);
     }
 
     private void showDialog() {
@@ -404,4 +409,25 @@ public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClick
     }
 
     //TODO Method needed to assign playItems to each child in the current group
+
+    // Update Profile Pic
+    private void profilePic(String kid) {
+        try{
+            if (kid.equals("kid1")){
+                profileOpen.setBackgroundResource(R.drawable.kid1);
+            }else if (kid.equals("kid2")){
+                profileOpen.setBackgroundResource(R.drawable.kid2);
+            }else if (kid.equals("kid3")){
+                profileOpen.setBackgroundResource(R.drawable.kid3);
+            }else if (kid.equals("kid4")){
+                profileOpen.setBackgroundResource(R.drawable.kid4);
+            }else if (kid.equals("kid5")){
+                profileOpen.setBackgroundResource(R.drawable.kid5);
+            }else if (kid.equals("kid6")){
+                profileOpen.setBackgroundResource(R.drawable.kid6);
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Oops");
+        }
+    }
 }

@@ -102,16 +102,16 @@
 
                         <ImageView
                             android:id="@+id/profileOpen"
-                            android:layout_width="wrap_content"
-                            android:layout_height="160dp"
+                            android:layout_width="40dp"
+                            android:layout_height="206dp"
                             android:layout_weight="1"
+                            android:background="@drawable/ic_baseline_account_circle_24"
                             android:clickable="true"
+                            android:contentDescription="@string/profile_picture"
+                            android:focusable="true"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@drawable/kid1"
-                            tools:ignore="SpeakableTextPresentCheck"
-                            android:focusable="true"
-                            android:contentDescription="@string/profile_picture" />
+                            tools:ignore="SpeakableTextPresentCheck" />
 
                         <TextView
                             android:id="@+id/textView7"
