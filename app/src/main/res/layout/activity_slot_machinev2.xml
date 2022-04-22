@@ -274,7 +274,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="10dp"
-                android:text="RULES"
+                android:text="@string/rulesBtn"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </RelativeLayout>

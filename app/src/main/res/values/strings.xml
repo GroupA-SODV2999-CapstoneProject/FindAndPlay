@@ -57,4 +57,5 @@
     <string name="congratsTxt">Congratulations</string>
     <string name="picOfWeekTxt">Picture of The Week</string>
     <string name="generalPicWeekDescr">This week\'s picture of the week</string>
+    <string name="rulesBtn">RULES</string>
 </resources>
