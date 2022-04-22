@@ -38,10 +38,10 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/playBtn"
-        android:layout_width="281dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="60sp"
-        android:layout_marginTop="70sp"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="180sp"
+        android:layout_marginTop="0sp"
         android:layout_marginEnd="60sp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/rubik"
@@ -54,16 +54,16 @@
         android:text="@string/PlayBtn"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pictureOTWBtn"
-        android:layout_width="281dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="60sp"
-        android:layout_marginTop="40sp"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="180sp"
+        android:layout_marginTop="100sp"
         android:layout_marginEnd="60sp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/rubik"
@@ -76,16 +76,16 @@
         android:text="@string/pickOfTheWeekBtn"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pickPictureOTWBTN"
-        android:layout_width="281dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="60sp"
-        android:layout_marginTop="40sp"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="180sp"
+        android:layout_marginTop="100sp"
         android:layout_marginEnd="60sp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/rubik"
@@ -98,16 +98,16 @@
         android:text="@string/selectPictureOfTheWeekBtn"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/createGroupBtn"
-        android:layout_width="281dp"
-        android:layout_height="70dp"
-        android:layout_marginStart="60sp"
-        android:layout_marginTop="40sp"
+        android:layout_width="400dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="180sp"
+        android:layout_marginTop="100sp"
         android:layout_marginEnd="60sp"
         android:background="@drawable/button_green"
         android:fontFamily="@font/rubik"
@@ -120,7 +120,7 @@
         android:text="@string/createGroupBtn"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="40sp"
         android:textStyle="bold"
         tools:ignore="TextContrastCheck" />
 

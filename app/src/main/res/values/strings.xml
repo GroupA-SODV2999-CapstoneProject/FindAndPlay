@@ -76,6 +76,8 @@
     <string name="rulesBtn">RULES</string>
     <string name="createGroupBtn">Create Group</string>
     <string name="PlayBtn">Play!</string>
+    <string name="pickOfTheWeekBtn">Picture Of The Week</string>
+    <string name="selectPictureOfTheWeekBtn">Select Picture Of The Week</string>
     <string name="sign_inLink">sign in</string>
     <string name="sign_upLbl">sign up</string>
     <string name="sudent_admin">sudent/admin</string>

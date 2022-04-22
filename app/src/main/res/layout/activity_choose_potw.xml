@@ -8,6 +8,7 @@ tools:context=".MainActivity">
 
 <!--Linear Layout with horizontal orientation
     and other properties-->
+
 <LinearLayout
     android:id="@+id/layout_button"
     android:orientation="horizontal"
