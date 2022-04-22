@@ -11,53 +11,41 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class PostPicture extends AppCompatActivity {
-    private Button btnSelect, btnUpload;
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseUser user;
-
-    // view for image view
-    private ImageView imageView;
-
-    // Uri indicates, where the image will be picked from
-    private Uri filePath;
-
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
     // request code
     private final int PICK_IMAGE_REQUEST = 22;
-
+    FirebaseUser user;
     // instance for firebase storage and StorageReference
     FirebaseStorage storage;
     StorageReference storageReference;
-    FirebaseAuth testAuth = FirebaseAuth.getInstance();
+    // view for image view
+    private ImageView imageView;
+    // Uri indicates, where the image will be picked from
+    private Uri filePath;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_potw);
         user = mAuth.getCurrentUser();
 
 
         // initialise views
-        btnSelect = findViewById(R.id.btnChoose);
-        btnUpload = findViewById(R.id.btnUpload);
+        Button btnSelect = findViewById(R.id.btnChoose);
+        Button btnUpload = findViewById(R.id.btnUpload);
         imageView = findViewById(R.id.imgView);
 
         // get the Firebase  storage reference
@@ -73,8 +61,7 @@ public class PostPicture extends AppCompatActivity {
     }
 
     // Select Image method
-    private void SelectImage()
-    {
+    private void SelectImage() {
         // Defining Implicit Intent to mobile gallery
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -90,8 +77,7 @@ public class PostPicture extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode,
                                     int resultCode,
-                                    Intent data)
-    {
+                                    Intent data) {
 
         super.onActivityResult(requestCode,
                 resultCode,
@@ -118,9 +104,7 @@ public class PostPicture extends AppCompatActivity {
                                 getContentResolver(),
                                 filePath);
                 imageView.setImageBitmap(bitmap);
-            }
-
-            catch (IOException e) {
+            } catch (IOException e) {
                 // Log the exception
                 e.printStackTrace();
             }
@@ -128,9 +112,7 @@ public class PostPicture extends AppCompatActivity {
     }
 
     // UploadImage method
-    private void uploadImage()
-    {
-        String UniqueUID = UUID.randomUUID().toString();
+    private void uploadImage() {
         if (filePath != null) {
             addPicOfWeekToDb(filePath);
         }
@@ -153,56 +135,38 @@ public class PostPicture extends AppCompatActivity {
         final String TAG = "addPicOfWeekToStorage";
         FirebaseStorage storage = FirebaseStorage.getInstance("gs://findandplay-acad0.appspot.com");
         StorageReference storageRef = storage.getReference();
-        //Uri file = Uri.fromFile(new File(localPathToPicture));
-        //StorageReference ref = storageRef.child("pictureOfTheWeek/" + file.getLastPathSegment());
         final String[] storageUrl = {""};
         StorageReference ref = storageRef.child("PictureOfTheWeek/" + file.getLastPathSegment());
         ref.putFile(filePath)
-                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess (UploadTask.TaskSnapshot taskSnapshot){
-                        // Continue with the task to get the download URL
-                        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>()
-                        {
-                            @Override
-                            public void onSuccess(Uri downloadUrl)
-                            {
-                                String url = String.valueOf(downloadUrl);
-                                if(url.isEmpty()) {
-                                    Log.e(TAG, "Error: url is empty. Abandoning Firestore save...");
-                                }
-                                else {
-                                    //Create Firestore data map
-                                    Map<String, Object> picData = new HashMap<>();
-                                    picData.put("refUrl", url);
-                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    //Get the current user
-                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                    String userId = user.getUid();
-                                    //Attempt to add document to Firestore
-                                    db.collection("PictureOfTheWeek")
-                                            .document(userId)
-                                            .set(picData)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
-                                                    progressDialog.dismiss();
-                                                    Toast.makeText(PostPicture.this, "Success!", Toast.LENGTH_SHORT).show();
-                                                    Log.d(TAG, "Picture of the week successfully saved to Firestore!");
-                                                }
-                                            })
+                .addOnSuccessListener(taskSnapshot -> {
+                    // Continue with the task to get the download URL
+                    ref.getDownloadUrl().addOnSuccessListener(downloadUrl -> {
+                        String url = String.valueOf(downloadUrl);
+                        if (url.isEmpty()) {
+                            Log.e(TAG, "Error: url is empty. Abandoning Firestore save...");
+                        } else {
+                            //Create Firestore data map
+                            Map<String, Object> picData = new HashMap<>();
+                            picData.put("refUrl", url);
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            //Get the current user
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            assert user != null;
+                            String userId = user.getUid();
+                            //Attempt to add document to Firestore
+                            db.collection("PictureOfTheWeek")
+                                    .document(userId)
+                                    .set(picData)
+                                    .addOnSuccessListener(aVoid -> {
+                                        progressDialog.dismiss();
+                                        Toast.makeText(PostPicture.this, "Success!", Toast.LENGTH_SHORT).show();
+                                        Log.d(TAG, "Picture of the week successfully saved to Firestore!");
+                                    })
 
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Log.w(TAG, "Error adding document to Firestore", e);
-                                                }
-                                            });
-                                }
-                            }
-                        });
-                        Log.d(TAG, "Success: img added at " + storageUrl[0]);
-                    }
+                                    .addOnFailureListener(e -> Log.w(TAG, "Error adding document to Firestore", e));
+                        }
+                    });
+                    Log.d(TAG, "Success: img added at " + storageUrl[0]);
                 }).addOnProgressListener(
                 taskSnapshot -> {
                     double progress
@@ -211,25 +175,17 @@ public class PostPicture extends AppCompatActivity {
                             / taskSnapshot.getTotalByteCount());
                     progressDialog.setMessage(
                             "Uploaded "
-                                    + (int)progress + "%");
+                                    + (int) progress + "%");
                 })
-                .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure (@NonNull Exception exception){
-                // Error, Image not uploaded
-                progressDialog.dismiss();
-                Toast
-                        .makeText(getApplicationContext(),
-                                "Failed " + exception.getMessage(),
-                                Toast.LENGTH_SHORT)
-                        .show();
-                Log.e(TAG, "Error sending image to storage: " + exception);
-            }
-        });
-    }
-
-    private void createFirestoreFile(String uuid)
-    {
-
+                .addOnFailureListener(exception -> {
+                    // Error, Image not uploaded
+                    progressDialog.dismiss();
+                    Toast
+                            .makeText(getApplicationContext(),
+                                    "Failed " + exception.getMessage(),
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                    Log.e(TAG, "Error sending image to storage: " + exception);
+                });
     }
 }

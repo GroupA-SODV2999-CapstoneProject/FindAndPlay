@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GetPictureOfTheWeek extends AppCompatActivity {
-    private final String TAG = "GetPictureOfTheWeek";
     ImageView imgView;
     Button refreshBtn;
     Context context;
@@ -21,8 +20,8 @@ public class GetPictureOfTheWeek extends AppCompatActivity {
         context = this;
         imgView = findViewById(R.id.pic_of_week);
         imgView.setVisibility(View.INVISIBLE);
-        PictureIO.getPicOfWeekFromDb(imgView, context);
+        PictureIO.getPicOfWeekFromDb(imgView);
         refreshBtn  = findViewById(R.id.refresh_btn);
-        refreshBtn.setOnClickListener(v -> PictureIO.getPicOfWeekFromDb(imgView, context));
+        refreshBtn.setOnClickListener(v -> PictureIO.getPicOfWeekFromDb(imgView));
     }
 }
