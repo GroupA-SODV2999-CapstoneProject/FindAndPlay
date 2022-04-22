@@ -52,6 +52,12 @@
             android:name=".PlayerSelect"
             android:exported="false" />
         <activity
+            android:name=".PostPicture"
+            android:exported="false" />
+        <activity
+            android:name=".GetPictureOfTheWeek"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

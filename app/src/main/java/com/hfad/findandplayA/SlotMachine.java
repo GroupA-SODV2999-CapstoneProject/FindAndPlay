@@ -15,7 +15,6 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -44,13 +43,10 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private final Bitmap[] _imgData = new Bitmap[4];
     private Button spinBtn;
     private Button startBtn;
-    private Button rulesBtn;
     private Game game;
     private boolean spinned = false;
     private boolean audioOn = true;
     private int selectedCatIndex = -1;
-
-    ImageButton imageButton;
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -87,28 +83,18 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
 
 
-        rulesBtn = findViewById(R.id.btnRules);
+        Button rulesBtn = findViewById(R.id.btnRules);
 
-        rulesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog();
-            }
-        });
+        rulesBtn.setOnClickListener(view -> showDialog());
     }
 
-    private void showDialog(){
+    private void showDialog() {
         Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.rules);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
 
         ImageView btnclose = dialog.findViewById(R.id.btnClose);
-        btnclose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
+        btnclose.setOnClickListener(view -> dialog.dismiss());
         dialog.show();
 
     }
