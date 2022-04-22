@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LandingPage extends AppCompatActivity {
+public class LandingPage extends FindAndPlay_ParentClass {
 
     private Button playButton, createGroupButton;
 
@@ -37,5 +37,7 @@ public class LandingPage extends AppCompatActivity {
                 startActivity(createGroupIntent);
             }
         });
+
+        init_BurgerMenuButton();
     }
 }
