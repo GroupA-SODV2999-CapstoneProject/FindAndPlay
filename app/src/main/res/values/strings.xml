@@ -58,4 +58,6 @@
     <string name="picOfWeekTxt">Picture of The Week</string>
     <string name="generalPicWeekDescr">This week\'s picture of the week</string>
     <string name="rulesBtn">RULES</string>
+    <string name="createGroupBtn">Create Group</string>
+    <string name="PlayBtn">Play!</string>
 </resources>
