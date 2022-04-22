@@ -14,11 +14,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
-import java.util.Objects;
-
 public class GetPictureOfTheWeek extends AppCompatActivity {
     ImageView imgView;
-    private String TAG = "GetPicOfWeek";
+    private final String TAG = "GetPicOfWeek";
     Button refreshBtn;
     Context context;
 
@@ -38,7 +36,10 @@ public class GetPictureOfTheWeek extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String s_url = String.valueOf(Objects.requireNonNull(Objects.requireNonNull(task.getResult()).getData()).get("refUrl"));
+                        if(task.getResult().getData() == null) {
+                            return;
+                        }
+                        String s_url = String.valueOf(task.getResult().getData().get("refUrl"));
                         //Handle error retrieving url
                         if (s_url.isEmpty()) {
                             Log.e(TAG, "Error: refUrl to picOfWeek empty. Abandoning retrieval...");
