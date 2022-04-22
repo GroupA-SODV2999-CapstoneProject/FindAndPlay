@@ -60,9 +60,8 @@
 
                     <LinearLayout
                         android:id="@+id/llayout_col0"
-                        android:layout_width="914dp"
+                        android:layout_width="match_parent"
                         android:layout_height="255dp"
-                        android:layout_marginBottom="100dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
@@ -83,6 +82,8 @@
 
                             <com.google.android.material.imageview.ShapeableImageView
                                 android:id="@+id/openBurgerMenuButton_design"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
                                 android:background="#367944"
                                 app:layout_constraintBottom_toBottomOf="@id/openBurgerMenuButton"
                                 app:layout_constraintEnd_toEndOf="@id/openBurgerMenuButton"
@@ -90,9 +91,7 @@
                                 app:layout_constraintTop_toTopOf="@id/openBurgerMenuButton"
                                 app:shapeAppearanceOverlay="@style/roundimageview"
                                 app:srcCompat="@android:drawable/ic_menu_sort_by_size"
-                                tools:ignore="ImageContrastCheck"
-                                android:layout_height="0dp"
-                                android:layout_width="0dp" />
+                                tools:ignore="ImageContrastCheck" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <TextView
@@ -110,7 +109,9 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:srcCompat="@drawable/kid1"
-                            tools:ignore="SpeakableTextPresentCheck" />
+                            tools:ignore="SpeakableTextPresentCheck"
+                            android:focusable="true"
+                            android:contentDescription="@string/profile_picture" />
 
                         <TextView
                             android:id="@+id/textView7"
@@ -160,7 +161,7 @@
                                     android:contentDescription="@string/cat1Descrip"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
-                                    tools:ignore="SpeakableTextPresentCheck" />
+                                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
                             </RelativeLayout>
                         </ScrollView>
 
@@ -248,7 +249,7 @@
                                     android:contentDescription="@string/cat4Descr"
                                     android:padding="0dp"
                                     app:srcCompat="@drawable/blank"
-                                    tools:ignore="SpeakableTextPresentCheck" />
+                                    tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
                             </RelativeLayout>
                         </ScrollView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -302,7 +303,8 @@
                             android:textAllCaps="false"
                             android:textColor="@color/white"
                             android:textSize="30sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="TextContrastCheck" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/startBtn"

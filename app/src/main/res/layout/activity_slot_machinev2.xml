@@ -108,7 +108,8 @@
                             android:layout_weight="1"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@drawable/kid1" />
+                            app:srcCompat="@drawable/kid1"
+                            android:contentDescription="@string/profile_picture"/>
 
                         <TextView
                             android:id="@+id/textView6"

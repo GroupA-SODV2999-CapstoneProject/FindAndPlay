@@ -86,4 +86,5 @@
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
     <string name="cloudBackDesc">Clouded backgorund</string>
+    <string name="profile_picture">Profile Picture</string>
 </resources>
