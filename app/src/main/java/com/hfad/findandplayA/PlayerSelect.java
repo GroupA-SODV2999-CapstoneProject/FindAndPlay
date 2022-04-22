@@ -1,118 +1,132 @@
 package com.hfad.findandplayA;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
+import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
-public class PlayerSelect extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import androidx.appcompat.app.AppCompatActivity;
 
-    private Button cameraBtn, constructivePlayBtn; //TODO remove this button code once data is implemented
-    private Spinner spinner;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.Objects;
+
+
+public class PlayerSelect extends AppCompatActivity {
+
+    private final String TAG = "PlayerSelect";
+    // childGroups
+    private final ArrayList<String> allChildGroups = new ArrayList<>();
+    // children
+    private final ArrayList<String> allChildren = new ArrayList<>();
     LinearLayout playerButtonLayout;
     ScrollView playerButtonScrollView;
+    Context context;
+    private Spinner spinner;
+    private String selectedGroup;
 
-    private static final String[] tempGroups = {"Group 1", "Group 2", "Group 3", "Group 4"}; // TODO remove and replace this temp array with actual group data from FireBase
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_select);
+        context = this;
+        Button selectBtn = findViewById(R.id.groupSelectBtn);
 
-        spinner = (Spinner)findViewById(R.id.groupSelectSpinner); // Dropdown menu for groups
+        spinner = (Spinner) findViewById(R.id.groupSelectSpinner); // Dropdown menu for groups
+
         playerButtonLayout = findViewById(R.id.playerButtonLinearLayoutID); // Linear Layout where buttons will be added
         playerButtonScrollView = findViewById(R.id.playerButtonScrollViewLayout); // ScrollView Layout where buttons will be added
-        constructivePlayBtn = (Button) findViewById(R.id.constructivePlayRulesBtn);
+        Button constructivePlayBtn = (Button) findViewById(R.id.constructivePlayRulesBtn);
 
-        // TODO activate the below code once testing buttons are removed and proper items are added to the drop down
-//        playerButtonScrollView.setVisibility(View.GONE); // Hides the player button scrollview
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Groups")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            allChildGroups.add(document.getId());
+                        }
+                        // setting childGroups to the dropdown
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_dropdown_item, allChildGroups);
+                        adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item)); // Setting dropdown
+                        spinner.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(context, "Something went wrong. Try again.", Toast.LENGTH_SHORT).show();
+                        finish();
+                        Log.w("TAG", "Error getting documents.", task.getException());
+                    }
+                });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(PlayerSelect.this, android.R.layout.simple_spinner_item,tempGroups); // TODO change this from tempGroups to actual groups from FireBase
-
-        adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item)); // Setting dropdown
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
-        constructivePlayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO finish intent to constructive play rules activity
+        constructivePlayBtn.setOnClickListener(view -> {
+            // TODO finish intent to constructive play rules activity
 //                Intent constructivePlayIntent = new Intent(PlayerSelect.this, .class);
 //                startActivity(constructivePlayIntent);
-            }
         });
 
-
-        cameraBtn = (Button) findViewById(R.id.playerOneBtn); //TODO remove this button code once data is implemented
-        cameraBtn.setOnClickListener(new View.OnClickListener() { //TODO remove this button code once data is implemented
-            @Override
-            public void onClick(View view) {
-                openCamera();
-            }
+        selectBtn.setOnClickListener(v -> {
+            selectedGroup = spinner.getSelectedItem().toString();
+            createPlayerButtons(selectedGroup);
         });
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int pos, long id){
+    // Will create and add buttons for each child present in a selected group
+    protected void createPlayerButtons(String selectedGroup) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Groups")
+                .document(selectedGroup)
+                .collection("Children")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        playerButtonLayout.removeAllViews();
+                        Log.d(TAG, "Query successful: " + selectedGroup);
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            allChildren.add(document.getId());
+                        }
+                        for (int i = 0; i < allChildren.size(); i++) {
 
-        String selection = spinner.getSelectedItem().toString(); // Getting the selected group
+                            String childName = allChildren.get(i);
 
-        // TODO add the rest of the code to get children from selected group and
+                            final Button playerButton = new Button(context);
 
-        playerButtonScrollView.setVisibility(View.VISIBLE); // Shows the player button scrollview
-        createPlayerButtons(selection);
-    }
+                            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                            buttonParams.setMargins(100, 0, 100, 10);
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        // TODO set what happens if nothing is selected from the dropdown
-    }
+                            playerButton.setText(childName);
+                            playerButton.setLayoutParams(buttonParams);
+                            playerButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.darkGreen))); // Sets the button to red
+                            playerButton.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.white)));
 
-    protected void createPlayerButtons(String groupSelection){
-        // TODO Will create and add buttons for each child present in a selected group
+                            GradientDrawable roundCorners = new GradientDrawable(); // Rounds the corners of the button to keep style with the other app buttons
+                            roundCorners.setCornerRadius(50);
+                            playerButton.setBackground(roundCorners);
 
-        for (int i=1;i<=10;i++){ // TODO need to change to iterate collection of children from FireBase
-
-            final Button playerButton = new Button(this);
-
-            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(390,50);
-            buttonParams.setMargins(10,2,2,10);
-
-            playerButton.setId(i); // TODO Need to change when have access to children data
-            playerButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.playerBtnRed))); // Sets the button to red
-            playerButton.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.white)));
-
-            GradientDrawable roundCorners = new GradientDrawable(); // Rounds the corners of the button to keep style with the other app buttons
-            roundCorners.setCornerRadius(50);
-            playerButton.setBackground(roundCorners);
-
-            playerButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    // TODO add any other data that needs to be passed to the camera activity if any at all
-                    openCamera();
-                }
-            });
-            playerButtonLayout.addView(playerButton); //Creates the new button within the above params
-        }
-    }
-
-    protected void playerComplete(){
-        // TODO Will change player button color if player has completed all of the required tasks
+                            //set button onClick to open the camera intent
+                            playerButton.setOnClickListener(view -> openCamera());
+                            playerButtonLayout.addView(playerButton); //Creates the new button within the above params
+                        }
+                    } else {
+                        Toast.makeText(context, "Something went wrong. Try again.", Toast.LENGTH_SHORT).show();
+                        Log.w(TAG, "Error getting documents.", task.getException());
+                    }
+                });
     }
 
     //Function to open the camera activity
-    public void openCamera(){
+    public void openCamera() {
         Intent startGameIntent = new Intent(PlayerSelect.this, CameraFunctionality.class);
         startActivity(startGameIntent);
     }

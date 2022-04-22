@@ -7,10 +7,12 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,37 +24,38 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.hfad.findandplayA.viewmodels.Game;
+import com.hfad.findandplayA.viewmodels.PlayItem;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.BiConsumer;
 
 public class CameraFunctionality extends Activity {
 
-    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView, itemFiveImageView;
-    private Button clearImageBtn, openCameraButton;
+    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView;
+    private Button clearImageBtn;
     Uri pictureUri; // picture
     private static final int requestCode = 100;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_camera_page);
 
-        openCameraButton = findViewById(R.id.btn_Camera);
+        Button openCameraButton = findViewById(R.id.btn_Camera);
         clearImageBtn = findViewById(R.id.clearImageBtn);
         pictureImageView = findViewById(R.id.cameraImageView);
         itemOneImageView = findViewById(R.id.itemOneIV);
         itemTwoImageView = findViewById(R.id.itemTwoIV);
         itemThreeImageView = findViewById(R.id.itemThreeIV);
         itemFourImageView = findViewById(R.id.itemFourIV);
-        itemFiveImageView = findViewById(R.id.itemFiveIV);
 
 
-        clearImageBtn.setVisibility(View.GONE); // hides the clear image button
-        openCameraButton.setVisibility(View.GONE); // hides the camera button
-
-
-        setItemImageBorder(); // calls function to set item image border colors
         setItemImages(); // calls function to set item image, images
 
         // onClick for the camera button
@@ -65,72 +68,7 @@ public class CameraFunctionality extends Activity {
         });
 
         // onClick for the clear image button
-        clearImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearImage();
-            }
-        });
-
-        // onClick for the first items image view will change border to purple, shows the camera button and needs to pass item data
-        itemOneImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemOneImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the second items image view will change border to purple, shows the camera button and needs to pass item data
-        itemTwoImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemTwoImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the third items image view will change border to purple, shows the camera button and needs to pass item data
-        itemThreeImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemThreeImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the fourth items image view will change border to purple, shows the camera button and needs to pass item data
-        itemFourImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemFourImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the fifth items image view will change border to purple, shows the camera button and needs to pass item data
-        itemFiveImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemFiveImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
+        clearImageBtn.setOnClickListener(view -> clearImage());
     }
 
     // function will check to see if permissions have been granted, if so the camera will open if not permissions will be requested
@@ -188,7 +126,7 @@ public class CameraFunctionality extends Activity {
         Uri uri;
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String pictureName = String.valueOf(format.format(date));
+        String pictureName = format.format(date);
         ContentResolver resolver = getContentResolver();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -204,43 +142,51 @@ public class CameraFunctionality extends Activity {
         return finalPictureUri;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setItemImages(){
+        final int[] counter = {0};
+        String url;
+        for(PlayItem ignored : Game.inGameItems) {
+            BiConsumer<Bitmap, Integer> then = (bitmap, integer) -> {
+                switch(counter[0]) {
+                    case 0:
+                        itemOneImageView.setImageBitmap(bitmap);
+                        break;
+                    case 1:
+                        itemTwoImageView.setImageBitmap(bitmap);
+                        break;
+                    case 2:
+                        itemThreeImageView.setImageBitmap(bitmap);
+                        break;
+                    case 3:
+                        itemFourImageView.setImageBitmap(bitmap);
+                        break;
+                }
+            };
 
-        //TODO implement code to set the three item imageview images
+            url = Game.inGameItems.get(counter[0]).getIcon();
+            // load image from cache or url into view
+            Picasso.get().load(url).into(new Target() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    then.accept(bitmap, counter[0]);
+                    counter[0]++;
+                }
 
-    }
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                    then.accept(null, counter[0]);
+                }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    public void setItemImageBorder(){
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                }
+        });
 
-        //TODO set the color of the items image border using the images tag red=0 and green=1 check to see if that image was actually taken?
-
-        // Checks first items tag to see if it's border should be reg or green and sets that color
-        if (itemOneImageView.getTag()=="1"){
-            itemOneImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
         }
-        else
-        {
-            itemOneImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
-
-        // Checks second items tag to see if it's border should be reg or green and sets that color
-        if (itemTwoImageView.getTag()=="1"){
-            itemTwoImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
-        }
-        else
-        {
-            itemTwoImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
-
-        // Checks third items tag to see if it's border should be reg or green and sets that color
-        if (itemThreeImageView.getTag()=="1"){
-            itemThreeImageView.setBackground(getDrawable(R.drawable.green_camera_item_border));
-        }
-        else
-        {
-            itemThreeImageView.setBackground(getDrawable(R.drawable.red_camera_item_border));
-        }
+        // url = "https://picsum.photos/300/300?random=2&_=" + java.util.UUID.randomUUID().toString();
 
     }
 

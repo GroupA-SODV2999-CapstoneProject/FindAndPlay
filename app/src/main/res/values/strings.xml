@@ -28,7 +28,7 @@
 
     <!-- PlayerSelect -->
     <string name="player_color_change_text">The button for each child will change from <font color='#FFFF4444'>RED </font>to <font color='#337A42'>GREEN </font>once all required pictures have been taken.</string>
-
+    <string name="spinner_prompt">Select a Group</string>
 
     <string name="profile_settings">Profile Settings</string>
     <string name="admin_settings">Admin Settings</string>
@@ -47,6 +47,22 @@
     <string name="slotDescrip">Slot Machine</string>
     <string name="cat3Descr">Category 3 Item</string>
 
+    <!-- USerInfo -->
+    <string name="name2">Name</string>
+    <string name="nickname">Nickname</string>
+    <string name="age">Age</string>
+    <string name="group">Group</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_nickname">Your Nickname</string>
+    <string name="your_age">Your Age</string>
+    <string name="your_group">Your Group</string>
+    <string name="create_account">Create Account</string>
+    <string name="update_user_data">Update User</string>
+    <string name="selectGrouptitle">Select A Group</string>
+    <string name="constrPlayTitle">Constructive Play Rules</string>
+    <string name="selectchildTitle">Select A Child</string>
+    <string name="selectBtn">Select</string>
+
     <string name="choose">Choose</string>
     <string name="upload">Upload</string>
     <string name="helpview1">test1</string>
@@ -60,4 +76,14 @@
     <string name="rulesBtn">RULES</string>
     <string name="createGroupBtn">Create Group</string>
     <string name="PlayBtn">Play!</string>
+    <string name="sign_inLink">sign in</string>
+    <string name="sign_upLbl">sign up</string>
+    <string name="sudent_admin">sudent/admin</string>
+    <string name="password">password</string>
+    <string name="email">Email</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="approve">Approve</string>
+    <string name="decline">Decline</string>
+    <string name="cloudBackDesc">Clouded backgorund</string>
 </resources>

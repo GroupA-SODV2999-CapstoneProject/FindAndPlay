@@ -13,36 +13,58 @@
         android:id="@+id/groupSelectTitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
-        android:text="Select A Group"
+        android:text="@string/selectGrouptitle"
         android:textColor="#413636"
-        android:textSize="70sp"
-        android:textStyle="bold" />
+        android:textSize="40sp"
+        android:textStyle="bold"
+        tools:ignore="TextContrastCheck" />
 
-    <Spinner
-        android:id="@+id/groupSelectSpinner"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginLeft="75dp"
-        android:layout_marginRight="75dp"
-        android:layout_marginBottom="20dp"
-        android:textAlignment="center" />
+        android:layout_height="100dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/groupSelectSpinner"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:layout_weight="2"
+            android:backgroundTint="@color/darkGreen"
+            android:clickable="false"
+            android:prompt="@string/spinner_prompt"
+            android:textAlignment="center"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Button
+            android:id="@+id/groupSelectBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_weight="1"
+            android:text="@string/selectBtn"
+            android:backgroundTint="@color/darkGreen"
+            app:cornerRadius="50dp"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/constructivePlayRulesBtn"
-        android:layout_width="500dp"
+        android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/darkGreen"
-        android:text="Constructive Play Rules"
-        android:textSize="30sp"
-        app:cornerRadius="50dp" />
+        android:text="@string/constrPlayTitle"
+        app:cornerRadius="50dp"
+        tools:ignore="TextContrastCheck" />
 
     <ScrollView
         android:id="@+id/playerButtonScrollViewLayout"
@@ -59,69 +81,16 @@
                 android:id="@+id/playerSelectTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20sp"
+                android:layout_marginTop="10sp"
                 android:layout_marginBottom="20sp"
                 android:gravity="center_horizontal"
-                android:text="Select A Child"
+                android:text="@string/selectchildTitle"
                 android:textColor="#413636"
-                android:textSize="70sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/colorDescriptionTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="60sp"
-                android:layout_marginRight="60sp"
-                android:layout_marginBottom="20sp"
-                android:gravity="center_horizontal"
-                android:text="@string/player_color_change_text"
-                android:textColor="#413636"
-                android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textSize="40sp"
+                android:textStyle="bold"
+                tools:ignore="TextContrastCheck" />
 
 
-            <Button
-                android:id="@+id/playerOneBtn"
-                android:layout_width="800dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/playerBtnRed"
-                android:text="Brian"
-                android:textSize="30sp"
-                app:cornerRadius="50dp" />
-
-            <Button
-                android:id="@+id/playerTwoBtn"
-                android:layout_width="800dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/darkGreen"
-                android:text="Ashlee"
-                android:textSize="30sp"
-                app:cornerRadius="50dp" />
-
-            <Button
-                android:id="@+id/playerThreeBtn"
-                android:layout_width="800dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:backgroundTint="@color/playerBtnRed"
-                android:text="Arron"
-                android:textSize="30sp"
-                app:cornerRadius="50dp" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

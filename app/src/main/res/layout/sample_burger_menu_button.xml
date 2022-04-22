@@ -24,7 +24,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/roundimageview"
-        app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+        app:srcCompat="@android:drawable/ic_menu_sort_by_size"
+        tools:ignore="ImageContrastCheck" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

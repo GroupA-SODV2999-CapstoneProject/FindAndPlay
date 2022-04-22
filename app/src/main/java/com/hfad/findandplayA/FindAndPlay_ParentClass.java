@@ -113,36 +113,6 @@ public class FindAndPlay_ParentClass extends AppCompatActivity {
 
     protected void init_BurgerMenuButton() {
         View BurgerButton = findViewById(R.id.openBurgerMenuButton);
-        BurgerButton.setOnClickListener(View -> {
-            UpdateView(HamburgerMenu.class);
-        });
+        BurgerButton.setOnClickListener(View -> UpdateView(HamburgerMenu.class));
     }
-
-    //Pre-Made Navigation
-    //Basic Accounts
-    /*
-    private void UpdateView_ToHomeNonAdmin() {
-        this.UpdateView(HomeNonAdmin.class);
-    }
-    private void UpdateView_ToProfilePage() {
-        this.UpdateView(ProfilePage.class);
-    }
-    private void UpdateView_ToSlotMachine() {
-        this.UpdateView(SlotMachine.class);
-    }
-    private void UpdateView_ToCameraScreen() {
-        this.UpdateView(CameraScreen.class);
-    }
-
-    //Admin Navigation
-    private void UpdateView_ToHomeAdmin() {
-        this.UpdateView(HomeAdmin.class);
-    }
-    private void UpdateView_ToAdminUserCreator() {
-        this.UpdateView(AdminUserCreator.class);
-    }
-    private void UpdateView_ToAdminGroups() {
-        this.UpdateView(AdminGroups.class);
-    }
-    */
 }
