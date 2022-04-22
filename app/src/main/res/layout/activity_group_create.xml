@@ -4,18 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF8300">
-<!--    tools:context=".GroupCreation"-->
+    android:background="@drawable/treesbackground">
+    <!--    tools:context=".GroupCreation"-->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="38dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
-        android:text="Group Name:"
+        android:gravity="center_horizontal"
+        android:text="Create Group"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#413636"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,39 +29,50 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:hint="Group Name"
+        android:gravity="center_horizontal"
+        android:hint="Enter Group Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
+        android:textColor="#413636"
+        android:textColorHint="#413636"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/btnAddPlayer"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/darkGreen"
         android:text="Add Player"
         app:backgroundTint="#DF362D"
+        app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtGroupName" />
 
     <Button
         android:id="@+id/btnCreateGroup"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/darkGreen"
         android:text="Create Group"
-        app:backgroundTint="#DF362D"
+        app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddPlayer"
+        app:layout_constraintVertical_bias="0.699" />
 </androidx.constraintlayout.widget.ConstraintLayout>

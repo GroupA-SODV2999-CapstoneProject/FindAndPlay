@@ -9,20 +9,20 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="155dp"
-        android:layout_height="97dp"
+        android:layout_width="229dp"
+        android:layout_height="128dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/txt_Title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.021"
+        app:layout_constraintHorizontal_bias="0.028"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.27">
 
         <Button
             android:id="@+id/btn_Back"
-            android:layout_width="match_parent"
-            android:layout_height="66dp"
+            android:layout_width="220dp"
+            android:layout_height="100dp"
             android:layout_marginTop="24dp"
             android:backgroundTint="#4CAF50"
             android:fontFamily="sans-serif-black"
@@ -38,26 +38,28 @@
         android:id="@+id/txt_Title"
         android:layout_width="363dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="140dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/change_profile_change"
         android:textColor="#2C4D67"
         android:textColorHint="#FFFFFF"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
     <TableLayout
-        android:layout_width="535dp"
-        android:layout_height="340dp"
+        android:layout_width="446dp"
+        android:layout_height="511dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Title"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <TableRow
             android:layout_width="match_parent"
@@ -83,16 +85,6 @@
                 app:circularflow_radiusInDP="70dp"
                 app:srcCompat="@drawable/dino"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
-
-            <ImageButton
-                android:id="@+id/img_Six"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
-                android:layout_margin="5dp"
-                android:contentDescription="@string/pic_6"
-                app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/apple"
-                tools:ignore="SpeakableTextPresentCheck" />
 
         </TableRow>
 
@@ -121,6 +113,23 @@
                 app:srcCompat="@drawable/ghost"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/img_Six"
+                android:layout_width="155dp"
+                android:layout_height="155dp"
+                android:layout_margin="5dp"
+                android:contentDescription="@string/pic_6"
+                app:circularflow_radiusInDP="70dp"
+                app:srcCompat="@drawable/apple"
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <ImageButton
                 android:id="@+id/img_Three"
                 android:layout_width="155dp"
@@ -130,7 +139,6 @@
                 app:circularflow_radiusInDP="70dp"
                 app:srcCompat="@drawable/toast"
                 tools:ignore="SpeakableTextPresentCheck" />
-
         </TableRow>
 
     </TableLayout>
