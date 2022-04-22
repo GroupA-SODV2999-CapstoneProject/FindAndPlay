@@ -217,11 +217,10 @@ public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClick
     }
 
     private void loadImgData() {
-        ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
-        ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
+        ImageView btn1 = (ImageView) findViewById(R.id.imageButton2);
+        ImageView btn2 = (ImageView) findViewById(R.id.imageButton);
         ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
         ImageView btn4 = (ImageView) findViewById(R.id.imageButton6);
-
 
         Bitmap[] imgData = _imgData;
         ImageView[] btns = {btn1, btn2, btn3, btn4};
