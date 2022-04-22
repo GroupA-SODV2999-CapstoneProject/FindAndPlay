@@ -41,6 +41,7 @@ public class CameraFunctionality extends Activity {
     private static final int requestCode = 100;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
