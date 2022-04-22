@@ -52,7 +52,7 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_weight="2"
-            app:srcCompat="@drawable/kid1" />
+            android:background="@drawable/kid1" />
     </LinearLayout>
 
     <Button
@@ -77,7 +77,6 @@
         android:layout_width="227dp"
         android:layout_height="67dp"
         android:layout_marginTop="8dp"
-        android:text="Player Name"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +88,6 @@
         android:id="@+id/score"
         android:layout_width="143dp"
         android:layout_height="65dp"
-        android:text="Score:"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

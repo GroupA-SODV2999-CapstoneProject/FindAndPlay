@@ -103,13 +103,13 @@
 
                         <ImageView
                             android:id="@+id/profileOpen"
-                            android:layout_width="wrap_content"
-                            android:layout_height="160dp"
+                            android:layout_width="93dp"
+                            android:layout_height="214dp"
                             android:layout_weight="1"
+                            android:background="@drawable/kid1"
                             android:clickable="true"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:srcCompat="@drawable/kid1"
                             tools:ignore="SpeakableTextPresentCheck" />
 
                         <TextView
