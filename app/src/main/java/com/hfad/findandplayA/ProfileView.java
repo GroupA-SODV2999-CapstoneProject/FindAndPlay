@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class ProfileView extends AppCompatActivity {
 
     private Button back_btn;
@@ -50,6 +52,7 @@ public class ProfileView extends AppCompatActivity {
     }
 
     public void logoutBtn(View view) {
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(ProfileView.this, AuthLoginActivity.class);
         startActivity(intent);
     }
