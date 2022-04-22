@@ -30,6 +30,9 @@
             android:name=".ProfileView"
             android:exported="false" />
         <activity
+            android:name=".ProfilePics"
+            android:exported="false" />
+        <activity
             android:name=".AuthRegisterActivity"
             android:exported="false" />
         <activity

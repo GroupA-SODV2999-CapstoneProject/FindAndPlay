@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tabletback3"
-    tools:context=".MainActivity">
+    tools:context=".ProfilePics">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -38,13 +38,14 @@
         android:id="@+id/txt_Title"
         android:layout_width="363dp"
         android:layout_height="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/change_profile_change"
         android:textColor="#2C4D67"
         android:textColorHint="#FFFFFF"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
@@ -66,32 +67,32 @@
 
             <ImageButton
                 android:id="@+id/img_Four"
-                android:layout_width="155dp"
-                android:layout_height="151dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_4"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/frog"
+                app:srcCompat="@drawable/kid1"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/img_Five"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_5"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/dino"
+                app:srcCompat="@drawable/kid2"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
             <ImageButton
                 android:id="@+id/img_Six"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_6"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/apple"
+                app:srcCompat="@drawable/kid3"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </TableRow>
@@ -103,32 +104,32 @@
 
             <ImageButton
                 android:id="@+id/img_One"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_1"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/kirby"
+                app:srcCompat="@drawable/kid4"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/img_Two"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_2"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/ghost"
+                app:srcCompat="@drawable/kid5"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/img_Three"
-                android:layout_width="155dp"
-                android:layout_height="155dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_3"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/toast"
+                app:srcCompat="@drawable/kid6"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </TableRow>
