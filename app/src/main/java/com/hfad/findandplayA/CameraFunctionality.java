@@ -72,54 +72,6 @@ public class CameraFunctionality extends Activity {
                 clearImage();
             }
         });
-
-        // onClick for the first items image view will change border to purple, shows the camera button and needs to pass item data
-        itemOneImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemOneImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the second items image view will change border to purple, shows the camera button and needs to pass item data
-        itemTwoImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemTwoImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the third items image view will change border to purple, shows the camera button and needs to pass item data
-        itemThreeImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemThreeImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
-
-        // onClick for the fourth items image view will change border to purple, shows the camera button and needs to pass item data
-        itemFourImageView.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("UseCompatLoadingForDrawables")
-            @Override
-            public void onClick(View view) {
-                itemFourImageView.setBackground(getDrawable(R.drawable.purple_camera_item_border));
-                openCameraButton.setVisibility(View.VISIBLE);
-
-                // TODO add code to pass item data?
-            }
-        });
     }
 
     // function will check to see if permissions have been granted, if so the camera will open if not permissions will be requested

@@ -135,7 +135,7 @@
         app:layout_constraintVertical_bias="0.144" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextPersonName"
         android:layout_width="250dp"
         android:layout_height="45dp"
         android:autofillHints=""
