@@ -6,11 +6,13 @@ import android.content.res.ColorStateList;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -61,6 +63,8 @@ public class PlayerSelect extends AppCompatActivity {
                         adapter.setDropDownViewResource((android.R.layout.simple_spinner_dropdown_item)); // Setting dropdown
                         spinner.setAdapter(adapter);
                     } else {
+                        Toast.makeText(context, "Something went wrong. Try again.", Toast.LENGTH_SHORT).show();
+                        finish();
                         Log.w("TAG", "Error getting documents.", task.getException());
                     }
                 });
@@ -86,6 +90,7 @@ public class PlayerSelect extends AppCompatActivity {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        playerButtonLayout.removeAllViews();
                         Log.d(TAG, "Query successful: " + selectedGroup);
                         for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
                             Log.d(TAG, document.getId() + " => " + document.getData());
@@ -97,10 +102,11 @@ public class PlayerSelect extends AppCompatActivity {
 
                             final Button playerButton = new Button(context);
 
-                            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(390, 50);
-                            buttonParams.setMargins(10, 2, 10, 2);
+                            LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                            buttonParams.setMargins(100, 0, 100, 10);
 
                             playerButton.setText(childName);
+                            playerButton.setLayoutParams(buttonParams);
                             playerButton.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(R.color.darkGreen))); // Sets the button to red
                             playerButton.setTextColor(ColorStateList.valueOf(getResources().getColor(R.color.white)));
 
@@ -113,6 +119,7 @@ public class PlayerSelect extends AppCompatActivity {
                             playerButtonLayout.addView(playerButton); //Creates the new button within the above params
                         }
                     } else {
+                        Toast.makeText(context, "Something went wrong. Try again.", Toast.LENGTH_SHORT).show();
                         Log.w(TAG, "Error getting documents.", task.getException());
                     }
                 });
