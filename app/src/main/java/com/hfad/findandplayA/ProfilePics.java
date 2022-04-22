@@ -22,42 +22,42 @@ public class ProfilePics extends AppCompatActivity {
         set_Profile_One.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Kirby", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Avatar 3", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });
         set_Profile_Two.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set Ghost", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set Avatar 4", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });
         set_Profile_Three.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Bread", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Avatar 6", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });
         set_Profile_Four.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set Froggy", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set Avatar 1", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });
         set_Profile_Five.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Dino", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Avatar 2", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });
         set_Profile_Six.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Apple", Toast.LENGTH_SHORT);
+                Toast setProfilePic = Toast.makeText(getApplicationContext(), "Profile picture set to Avatar 5", Toast.LENGTH_SHORT);
                 setProfilePic.show();
             }
         });

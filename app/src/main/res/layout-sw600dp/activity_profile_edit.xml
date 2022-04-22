@@ -12,16 +12,14 @@
         android:layout_height="143dp"
         android:layout_marginEnd="544dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="578dp"
+            android:layout_width="200dp"
             android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
@@ -38,46 +36,55 @@
         android:id="@+id/linearLayout2"
         android:layout_width="800dp"
         android:layout_height="557dp"
+        android:layout_marginTop="352dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <ImageView
             android:id="@+id/profile_pic"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:background="#FFC022"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            android:layout_width="403dp"
+            android:layout_height="347dp"
+            android:clickable="false"
+            android:longClickable="false"
+            android:onClick="changeProfile"
+            app:srcCompat="@drawable/kid1"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Score:"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="298dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/edit_name"
-            android:layout_width="151dp"
-            android:layout_height="48dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name"
-            android:textColor="#FDF1F1"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Score:"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edit_name"
+                android:layout_width="151dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                android:textColor="#FDF1F1"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="517dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="-100dp"
+        android:id="@+id/linearLayout6"
+        android:layout_width="783dp"
+        android:layout_height="128dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

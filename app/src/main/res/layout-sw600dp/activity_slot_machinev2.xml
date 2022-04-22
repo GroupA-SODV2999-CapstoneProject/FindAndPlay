@@ -60,8 +60,8 @@
 
                     <LinearLayout
                         android:id="@+id/llayout_col0"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="914dp"
+                        android:layout_height="255dp"
                         android:layout_marginBottom="100dp"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -76,6 +76,24 @@
                             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
                         <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="66dp"
+                            android:layout_weight="1"
+                            android:gravity="center" />
+
+                        <ImageView
+                            android:id="@+id/profileOpen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="160dp"
+                            android:layout_weight="1"
+                            android:clickable="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:srcCompat="@drawable/kid1"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
+                        <TextView
+                            android:id="@+id/textView7"
                             android:layout_width="0dp"
                             android:layout_height="66dp"
                             android:layout_weight="1"
