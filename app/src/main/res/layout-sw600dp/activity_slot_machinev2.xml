@@ -219,13 +219,13 @@
                     <LinearLayout
                         android:id="@+id/llayout_col3"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="300dp"
                         android:layout_below="@+id/llayout_col4"
                         android:layout_marginStart="200dp"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="20dp"
                         android:layout_marginEnd="200dp"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/spinBtn"
@@ -245,6 +245,26 @@
                             android:textSize="30sp"
                             android:textStyle="bold"
                             tools:ignore="TextContrastCheck" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnRules"
+                            android:layout_width="400dp"
+                            android:layout_height="100dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/button_green"
+                            android:fontFamily="@font/rubik"
+                            android:gravity="center"
+                            android:letterSpacing="0.05"
+                            android:shadowColor="#256130"
+                            android:shadowDx="0"
+                            android:shadowDy="3"
+                            android:shadowRadius="5"
+                            android:text="@string/rulesBtn"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/startBtn"
