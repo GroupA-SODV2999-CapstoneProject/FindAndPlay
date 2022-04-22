@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -35,10 +38,11 @@ import java.util.function.BiConsumer;
 
 public class CameraFunctionality extends Activity {
 
-    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView;
-    private Button clearImageBtn;
+    private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView, selectedImageView;
+    private Button openCameraButton;
     Uri pictureUri; // picture
     private static final int requestCode = 100;
+    private String playerName = "";
 
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -46,14 +50,19 @@ public class CameraFunctionality extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_camera_page);
-
-        Button openCameraButton = findViewById(R.id.btn_Camera);
-        clearImageBtn = findViewById(R.id.clearImageBtn);
+        playerName = getIntent().getStringExtra("NAME_KEY");
+        if(playerName.isEmpty()) {
+            Log.d("CameraFunctionality", "Error: No playerName in intent extra.");
+            Toast.makeText(this, "Unexpected Error. Try again.", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+        openCameraButton = findViewById(R.id.btn_Camera);
+        Button clearBtn = findViewById(R.id.clearBtn);
         pictureImageView = findViewById(R.id.cameraImageView);
-        itemOneImageView = findViewById(R.id.itemOneIV);
-        itemTwoImageView = findViewById(R.id.itemTwoIV);
-        itemThreeImageView = findViewById(R.id.itemThreeIV);
-        itemFourImageView = findViewById(R.id.itemFourIV);
+        itemOneImageView = findViewById(R.id.itemOne);
+        itemTwoImageView = findViewById(R.id.itemTwo);
+        itemThreeImageView = findViewById(R.id.itemThree);
+        itemFourImageView = findViewById(R.id.itemFour);
 
 
         setItemImages(); // calls function to set item image, images
@@ -68,7 +77,64 @@ public class CameraFunctionality extends Activity {
         });
 
         // onClick for the clear image button
-        clearImageBtn.setOnClickListener(view -> clearImage());
+        clearBtn.setOnClickListener(view -> clearFound());
+        itemOneImageView.setOnClickListener(this::markSelected);
+        itemTwoImageView.setOnClickListener(this::markSelected);
+        itemThreeImageView.setOnClickListener(this::markSelected);
+        itemFourImageView.setOnClickListener(this::markSelected);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private void markSelected(View v) {
+        ImageView imageView = (ImageView) v;
+        if(imageView == selectedImageView) {
+            selectedImageView.setForeground(null);
+            selectedImageView = null;
+        }
+        else {
+            if(selectedImageView != null) {
+                selectedImageView.setForeground(null);
+            }
+            selectedImageView = (ImageView) v;
+            selectedImageView.setForeground(getResources().getDrawable(R.drawable.sm_category_overlay));
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void foundItem() {
+        if(selectedImageView == null) {
+            Toast.makeText(this, "Please select an item first", Toast.LENGTH_LONG).show();
+            return;
+        }
+        boolean[] playerFound = PlayerSelect.itemsFound.get(playerName);
+        assert playerFound != null;
+        int id = selectedImageView.getId();
+
+        if (id == R.id.itemOne) {
+            playerFound[0] = true;
+            itemOneImageView.setEnabled(false);
+            itemOneImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+        } else if (id == R.id.itemTwo) {
+            playerFound[1] = true;
+            itemTwoImageView.setEnabled(false);
+            itemTwoImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+        } else if (id == R.id.itemThree) {
+            playerFound[2] = true;
+            itemThreeImageView.setEnabled(false);
+            itemThreeImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+        } else if (id == R.id.itemFour) {
+            playerFound[3] = true;
+            itemFourImageView.setEnabled(false);
+            itemFourImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+        }
+
+        if(playerFound[0] && playerFound[1] &&  playerFound[2] && playerFound[3]) {
+            openCameraButton.setEnabled(false);
+        }
+        PlayerSelect.itemsFound.put(playerName, playerFound);
+
     }
 
     // function will check to see if permissions have been granted, if so the camera will open if not permissions will be requested
@@ -109,14 +175,44 @@ public class CameraFunctionality extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         pictureImageView.setImageURI(pictureUri);
-        clearImageBtn.setVisibility(View.VISIBLE);
         Toast.makeText(this, "Picture Saved to Pictures/Find and Play Pictures", Toast.LENGTH_LONG).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm");
+        builder.setMessage("Is this the correct item?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            public void onClick(DialogInterface dialog, int id) {
+                foundItem();
+            }
+        });
+        builder.setNegativeButton("No", (dialog, id) -> pictureImageView.setImageDrawable(null));
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
-    public void clearImage() { // Function to clear image and hide the clear image button
-
-        pictureImageView.setImageDrawable(null);
-        clearImageBtn.setVisibility(View.GONE);
+    public void clearFound() { // Function to clear image and hide the clear image button
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure you want to clear all finds?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            public void onClick(DialogInterface dialog, int id) {
+                boolean[] noneFound = new boolean[] {false, false, false, false};
+                PlayerSelect.itemsFound.put(playerName, noneFound);
+                itemOneImageView.setBackgroundResource(R.drawable.green_camera_item_border);
+                itemTwoImageView.setBackgroundResource(R.drawable.green_camera_item_border);
+                itemThreeImageView.setBackgroundResource(R.drawable.green_camera_item_border);
+                itemFourImageView.setBackgroundResource(R.drawable.green_camera_item_border);
+                itemOneImageView.setEnabled(true);
+                itemTwoImageView.setEnabled(true);
+                itemThreeImageView.setEnabled(true);
+                itemFourImageView.setEnabled(true);
+                openCameraButton.setEnabled(true);
+            }
+        });
+        builder.setNegativeButton("No", (dialog, id) -> dialog.dismiss());
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
 
@@ -146,20 +242,38 @@ public class CameraFunctionality extends Activity {
     public void setItemImages(){
         final int[] counter = {0};
         String url;
+        boolean[] found = PlayerSelect.itemsFound.get(playerName);
+        assert found != null;
         for(PlayItem ignored : Game.inGameItems) {
             BiConsumer<Bitmap, Integer> then = (bitmap, integer) -> {
                 switch(counter[0]) {
                     case 0:
                         itemOneImageView.setImageBitmap(bitmap);
+                        if(found[0]) {
+                            itemOneImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+                            itemOneImageView.setEnabled(false);
+                    }
                         break;
                     case 1:
                         itemTwoImageView.setImageBitmap(bitmap);
+                        if(found[1]) {
+                            itemTwoImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+                            itemTwoImageView.setEnabled(false);
+                        }
                         break;
                     case 2:
                         itemThreeImageView.setImageBitmap(bitmap);
+                        if(found[2]) {
+                            itemThreeImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+                            itemThreeImageView.setEnabled(false);
+                        }
                         break;
                     case 3:
                         itemFourImageView.setImageBitmap(bitmap);
+                        if(found[3]) {
+                            itemFourImageView.setBackgroundResource(R.drawable.red_camera_item_border);
+                            itemFourImageView.setEnabled(false);
+                        }
                         break;
                 }
             };

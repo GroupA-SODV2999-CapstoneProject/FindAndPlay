@@ -8,12 +8,12 @@
     android:scaleType="centerCrop">
 
     <ImageView
-        android:id="@+id/itemOneIV"
+        android:id="@+id/itemOne"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/green_camera_item_border"
         android:clickable="true"
@@ -21,18 +21,18 @@
         android:focusable="true"
         android:tag="0"
         app:layout_constraintBottom_toTopOf="@+id/cameraImageView"
-        app:layout_constraintEnd_toStartOf="@+id/itemTwoIV"
+        app:layout_constraintEnd_toStartOf="@+id/itemTwo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/itemTwoIV"
+        android:id="@+id/itemTwo"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/green_camera_item_border"
         android:clickable="true"
@@ -40,18 +40,18 @@
         android:focusable="true"
         android:tag="0"
         app:layout_constraintBottom_toTopOf="@+id/cameraImageView"
-        app:layout_constraintEnd_toStartOf="@+id/itemThreeIV"
-        app:layout_constraintStart_toEndOf="@+id/itemOneIV"
+        app:layout_constraintEnd_toStartOf="@+id/itemThree"
+        app:layout_constraintStart_toEndOf="@+id/itemOne"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/itemThreeIV"
+        android:id="@+id/itemThree"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="11dp"
+        android:layout_marginEnd="2dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/green_camera_item_border"
         android:clickable="true"
@@ -59,18 +59,18 @@
         android:focusable="true"
         android:tag="0"
         app:layout_constraintBottom_toTopOf="@+id/cameraImageView"
-        app:layout_constraintEnd_toStartOf="@+id/itemFourIV"
-        app:layout_constraintStart_toEndOf="@+id/itemTwoIV"
+        app:layout_constraintEnd_toStartOf="@+id/itemFour"
+        app:layout_constraintStart_toEndOf="@+id/itemTwo"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
     <ImageView
-        android:id="@+id/itemFourIV"
+        android:id="@+id/itemFour"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="2dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/green_camera_item_border"
         android:clickable="true"
@@ -79,7 +79,7 @@
         android:tag="0"
         app:layout_constraintBottom_toTopOf="@+id/cameraImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/itemThreeIV"
+        app:layout_constraintStart_toEndOf="@+id/itemThree"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/blank" />
 
@@ -111,7 +111,7 @@
         tools:ignore="TextContrastCheck" />
 
     <Button
-        android:id="@+id/clearImageBtn"
+        android:id="@+id/clearBtn"
         android:layout_width="78dp"
         android:layout_height="76dp"
         android:layout_marginTop="60dp"

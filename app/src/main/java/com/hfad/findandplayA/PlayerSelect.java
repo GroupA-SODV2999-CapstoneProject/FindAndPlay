@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 
@@ -35,6 +37,7 @@ public class PlayerSelect extends AppCompatActivity {
     Context context;
     private Spinner spinner;
     private String selectedGroup;
+    public static Map<String, boolean[]> itemsFound = new HashMap<>();
 
 
     @Override
@@ -70,9 +73,8 @@ public class PlayerSelect extends AppCompatActivity {
                 });
 
         constructivePlayBtn.setOnClickListener(view -> {
-            // TODO finish intent to constructive play rules activity
-//                Intent constructivePlayIntent = new Intent(PlayerSelect.this, .class);
-//                startActivity(constructivePlayIntent);
+                Intent constructivePlayIntent = new Intent(PlayerSelect.this, ImaginativePlayActivity.class);
+                startActivity(constructivePlayIntent);
         });
 
         selectBtn.setOnClickListener(v -> {
@@ -97,9 +99,9 @@ public class PlayerSelect extends AppCompatActivity {
                             allChildren.add(document.getId());
                         }
                         for (int i = 0; i < allChildren.size(); i++) {
-
+                            boolean[] notFound = new boolean[]{false, false, false, false};
                             String childName = allChildren.get(i);
-
+                            itemsFound.put(childName,notFound);
                             final Button playerButton = new Button(context);
 
                             LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -115,7 +117,7 @@ public class PlayerSelect extends AppCompatActivity {
                             playerButton.setBackground(roundCorners);
 
                             //set button onClick to open the camera intent
-                            playerButton.setOnClickListener(view -> openCamera());
+                            playerButton.setOnClickListener(view -> openCamera(childName));
                             playerButtonLayout.addView(playerButton); //Creates the new button within the above params
                         }
                     } else {
@@ -126,8 +128,9 @@ public class PlayerSelect extends AppCompatActivity {
     }
 
     //Function to open the camera activity
-    public void openCamera() {
+    public void openCamera(String childName) {
         Intent startGameIntent = new Intent(PlayerSelect.this, CameraFunctionality.class);
+        startGameIntent.putExtra("NAME_KEY", childName);
         startActivity(startGameIntent);
     }
 }
