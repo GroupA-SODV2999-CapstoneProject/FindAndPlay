@@ -1,13 +1,13 @@
 package com.hfad.findandplayA;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileView extends AppCompatActivity {
 
@@ -19,6 +19,7 @@ public class ProfileView extends AppCompatActivity {
         setContentView(R.layout.activity_profile_view);
         back_btn = findViewById(R.id.back_btn);
         profile_pic = findViewById(R.id.profile_pic);
+        back_btn.setOnClickListener(v -> finish());
         profilePic();
     }
 
