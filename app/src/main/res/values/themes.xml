@@ -14,4 +14,12 @@
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@drawable/background_photo</item>
     </style>
+    <style name="Theme.FindAndPlay.HelpMenu">
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:background">#00000000</item>
+    </style>
+    <style name="Theme.FindAndPlay.HelpMenu.Tab">
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>

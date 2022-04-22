@@ -35,6 +35,17 @@
     <string name="slot_machine">Slot Machine</string>
     <string name="camera_text">Camera</string>
     <string name="main_background_content">Main Background</string>
+    <string name="ImaginativePlayTextContents"> Now to ask you some questions about what you collected!\n\nWhere did you find it? How did it get there?\n\nCan you think of any way to use these?\n\nWhat is your favorite game? Could you use these items in it?\n</string>
+    <string name="return_to_main_menu">Return To\nMain Menu</string>
+    <string name="hamburger_menu_return_button_text">Return</string>
+    <string name="Burger_Menu_Help_button_Text">Help</string>
+    <string name="burgerMenuDescr">Additional popup menu items.</string>
+    <string name="audioBtnDescrip">Audio ON/OFF</string>
+    <string name="cat1Descrip">Category 1 Item</string>
+    <string name="cat2Descrip">Category 2 Item</string>
+    <string name="cat4Descr">Category 4 Item</string>
+    <string name="slotDescrip">Slot Machine</string>
+    <string name="cat3Descr">Category 3 Item</string>
 
     <!-- USerInfo -->
     <string name="name">Name</string>
@@ -52,4 +63,15 @@
     <string name="selectchildTitle">Select A Child</string>
     <string name="selectBtn">Select</string>
 
+    <string name="choose">Choose</string>
+    <string name="upload">Upload</string>
+    <string name="helpview1">test1</string>
+    <string name="helpview0">test0</string>
+    <string name="helpview2">test2</string>
+    <string name="end">End</string>
+    <string name="refreshBtn">Refresh</string>
+    <string name="congratsTxt">Congratulations</string>
+    <string name="picOfWeekTxt">Picture of The Week</string>
+    <string name="generalPicWeekDescr">This week\'s picture of the week</string>
+    <string name="rulesBtn">RULES</string>
 </resources>

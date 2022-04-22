@@ -1,29 +1,12 @@
-//TODO Summary (Marked on relevant lines in code)
-// * ****** UI AND SLOT MACHINE ANIMATION ******
-// * Animation is either for all categories to spin or only a selected category as noted in spin
-// * I added a "Start" button to the layout (it will stay deactivated/hidden until the slot machine has spun at least once), it will need to be placed/sized appropriately in UI
-// * After the animation is done and there are images associated with Items in Firestore, I'll need to add assigning the results of a spin (inGameItems) to the UI
-// *
-// * ****** CHILD GROUP / MEMBER ******
-// * Needs to assign the final inGameItems to each child in the current game (Not sure if that will be in different class or this one, feel free to move it wherever)
-// *
-// * ****** NAVIGATION ******
-// * Once the "Start" (id = startBtn) is clicked we'll need to navigate to whatever activity is next (in-game) or we have to change the UI of this activity to hide options to spin the slot machine.
-// *
-// * ****** ADMIN APPROVAL FOR RESPINNING ******
-// * We're going to need admin approval for approving photos of items in game, however we implement that needs to be used to approve spinning the slot machine again (I was imagining a math question in a Dialog prompt)
-// * If this is implemented in a different class the method used will need to return a boolean and replace any adminPermission() refs in this class
-// *
-// * ****** MISC ******
-// * After animation is finished I'll need to add item highlighting and selection functionality for spinning again (it's just set to spin again on category 1 for testing)
-
-
 package com.hfad.findandplayA;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Build;
@@ -57,13 +40,14 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     private static final String TAG = "Slot_Activity";
     private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
-    private final Bitmap[] _imgData = new Bitmap[3];
+    private final Bitmap[] _imgData = new Bitmap[4];
     private Button spinBtn;
     private Button startBtn;
     private Game game;
     private boolean spinned = false;
     private boolean audioOn = true;
     private int selectedCatIndex = -1;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -97,6 +81,22 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
                     ? android.R.drawable.ic_lock_silent_mode_off
                     : android.R.drawable.ic_lock_silent_mode);
         });
+
+
+        Button rulesBtn = findViewById(R.id.btnRules);
+
+        rulesBtn.setOnClickListener(view -> showDialog());
+    }
+
+    private void showDialog() {
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.rules);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+
+        ImageView btnclose = dialog.findViewById(R.id.btnClose);
+        btnclose.setOnClickListener(view -> dialog.dismiss());
+        dialog.show();
+
     }
 
 
@@ -175,7 +175,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
                 if (currentItem.equals(question.answer)) {
                     game.spinOne(selectedCatIndex + 1);
                     loadImgData();
-                    //TODO REMOVE *****DEBUGGER******
                     for (PlayItem item : Game.inGameItems) {
                         Log.d("SelectedForGame", item.getItemName());
                     }
@@ -192,7 +191,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             game.spinAll();
             loadImgData();
             spinned = true;
-            //TODO REMOVE *****DEBUGGER******
             for (PlayItem item : Game.inGameItems) {
                 Log.d("SelectedForGame", item.getItemName());
             }
@@ -204,9 +202,11 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         ImageView btn1 = (ImageView) findViewById(R.id.imageButton);
         ImageView btn2 = (ImageView) findViewById(R.id.imageButton2);
         ImageView btn3 = (ImageView) findViewById(R.id.imageButton3);
+        ImageView btn4 = (ImageView) findViewById(R.id.imageButton6);
+
 
         Bitmap[] imgData = _imgData;
-        ImageView[] btns = {btn1, btn2, btn3};
+        ImageView[] btns = {btn1, btn2, btn3, btn4};
         final int[] completed = {0};
         final BiConsumer<Bitmap, Integer> listener = (data, index) ->
         {
@@ -215,7 +215,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             completed[0]++;
 
             // check if all images bitmap data loaded from cache or remotely
-            if (completed[0] >= 3) { // increase count when you add more category buttons
+            if (completed[0] >= 4) { // increase count when you add more category buttons
                 boolean hasMissing = Arrays.asList(imgData).contains(null);
 
                 if (-1 != selectedCatIndex)
@@ -242,8 +242,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     }
 
     public void startGame(View view) {
-        //TODO Add Navigation to the next in-game activity (or change UI so we don't spin anymore)?
-
         Intent startGameIntent = new Intent(SlotMachine.this, PlayerSelect.class);
         startActivity(startGameIntent);
     }
@@ -272,6 +270,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     protected void loadImageWithAnimation(ImageView ref, Bitmap[] imgData, final int index) {
         int resId = getResources().getIdentifier("animate__sv" + (index + 1), "id", this.getPackageName());
         ScrollView animSv = (ScrollView) findViewById(resId);
@@ -289,10 +288,11 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         animSv.setHorizontalScrollBarEnabled(false);
 
         Handler tapHandler = new Handler();
-        Runnable tapRunner = () -> {
-            if (!loadedCatBtns.get(index)) // img not loaded
+        @SuppressLint("UseCompatLoadingForDrawables") Runnable tapRunner = () -> {
+            if (loadedCatBtns.get(index) == null) { // img not loaded
+                Log.e(TAG, "Error: image not loaded");
                 return;
-
+            }
             selectedCatIndex = selectedCatIndex == index ? -1 : index;
 
             for (int i = 0; i < imgData.length; i++) {
