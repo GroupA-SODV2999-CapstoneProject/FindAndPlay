@@ -7,16 +7,16 @@ import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.hfad.findandplayA.viewmodels.Game;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,9 +25,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.hfad.findandplayA.viewmodels.Game;
+import com.hfad.findandplayA.viewmodels.PlayItem;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.function.BiConsumer;
 
 public class CameraFunctionality extends Activity {
 
@@ -51,8 +55,8 @@ public class CameraFunctionality extends Activity {
         itemFourImageView = findViewById(R.id.itemFourIV);
 
 
-        clearImageBtn.setVisibility(View.GONE); // hides the clear image button
-        openCameraButton.setVisibility(View.GONE); // hides the camera button
+//        clearImageBtn.setVisibility(View.GONE); // hides the clear image button
+//        openCameraButton.setVisibility(View.GONE); // hides the camera button
 
         setItemImages(); // calls function to set item image, images
 
@@ -145,9 +149,54 @@ public class CameraFunctionality extends Activity {
         return finalPictureUri;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void setItemImages(){
+        final int[] counter = {0};
+        String url = "";
+        for(PlayItem item : Game.inGameItems) {
+            BiConsumer<Bitmap, Integer> then = new BiConsumer<Bitmap, Integer>() {
+                @Override
+                public void accept(Bitmap bitmap, Integer integer) {
+                    switch(counter[0]) {
+                        case 0:
+                            itemOneImageView.setImageBitmap(bitmap);
+                            break;
+                        case 1:
+                            itemTwoImageView.setImageBitmap(bitmap);
+                            break;
+                        case 2:
+                            itemThreeImageView.setImageBitmap(bitmap);
+                            break;
+                        case 3:
+                            itemFourImageView.setImageBitmap(bitmap);
+                            break;
+                    }
+                }
+            };
 
-        //TODO implement code to set the three item imageview images
+            url = Game.inGameItems.get(counter[0]).getIcon();
+            // load image from cache or url into view
+            Picasso.get().load(url).into(new Target() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    then.accept(bitmap, counter[0]);
+                    counter[0]++;
+                }
+
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                    then.accept(null, counter[0]);
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                }
+        });
+
+        }
+        // url = "https://picsum.photos/300/300?random=2&_=" + java.util.UUID.randomUUID().toString();
 
     }
 

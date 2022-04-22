@@ -248,8 +248,6 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
     protected void loadCategoryItem(int index, BiConsumer<Bitmap, Integer> then) {
         String url = Game.inGameItems.get(index).getIcon();
-        // url = "https://picsum.photos/300/300?random=2&_=" + java.util.UUID.randomUUID().toString();
-
         // load image from cache or url into view
         Picasso.get().load(url).into(new Target() {
             @RequiresApi(api = Build.VERSION_CODES.N)
