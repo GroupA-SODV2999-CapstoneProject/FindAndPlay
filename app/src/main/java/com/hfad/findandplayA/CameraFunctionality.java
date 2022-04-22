@@ -132,9 +132,10 @@ public class CameraFunctionality extends Activity {
 
         if(playerFound[0] && playerFound[1] &&  playerFound[2] && playerFound[3]) {
             openCameraButton.setEnabled(false);
+            Intent picturesCompleteIntent = new Intent(CameraFunctionality.this, PlayerSelect.class);
+            startActivity(picturesCompleteIntent);
         }
         PlayerSelect.itemsFound.put(playerName, playerFound);
-
     }
 
     // function will check to see if permissions have been granted, if so the camera will open if not permissions will be requested
