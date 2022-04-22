@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.function.BiConsumer;
 
-public class SlotMachine extends AppCompatActivity implements View.OnClickListener {
+public class SlotMachine extends FindAndPlay_ParentClass implements View.OnClickListener {
 
     private static final String TAG = "Slot_Activity";
     private final HashMap<Integer, Boolean> loadedCatBtns = new HashMap<>();
@@ -96,6 +96,8 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
         rulesBtn = findViewById(R.id.btnRules);
 
         rulesBtn.setOnClickListener(view -> showDialog());
+
+        init_BurgerMenuButton();
     }
 
     private void showDialog() {

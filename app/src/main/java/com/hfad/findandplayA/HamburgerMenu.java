@@ -20,6 +20,7 @@ public class HamburgerMenu extends FindAndPlay_ParentClass {
         init_slotsButton();
         init_adminButton();
         init_returnButton();
+        init_helpButton();
     }
 
     public void init_cameraButton() {
@@ -51,7 +52,7 @@ public class HamburgerMenu extends FindAndPlay_ParentClass {
         Button admin_button = findViewById(R.id.adminButton);
         admin_button.setOnClickListener(view -> {
             //Call the nav class
-            //????
+            //I'm not sure where they meant for this one to go.
         });
     }
     public void init_returnButton() {
@@ -67,7 +68,7 @@ public class HamburgerMenu extends FindAndPlay_ParentClass {
         Button help_button = findViewById(R.id.helpButton);
         help_button.setOnClickListener(view -> {
             //Make the call here to the help activity
-
+            UpdateView(HelpMenu.class);
         });
     }
 }
