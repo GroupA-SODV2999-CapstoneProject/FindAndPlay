@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tabletback3"
-    tools:context=".MainActivity">
+    tools:context=".ProfilePics">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -28,7 +28,7 @@
             android:fontFamily="sans-serif-black"
             android:text="@string/back"
             android:textColorLink="#FF1000"
-            android:textSize="16sp"
+            android:textSize="34sp"
             app:cornerRadius="80dp"
             tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
@@ -36,23 +36,23 @@
 
     <TextView
         android:id="@+id/txt_Title"
-        android:layout_width="363dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="140dp"
+        android:layout_width="429dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="180dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/change_profile_change"
+        android:text="Change Profile"
         android:textColor="#2C4D67"
         android:textColorHint="#FFFFFF"
-        android:textSize="34sp"
+        android:textSize="60sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
     <TableLayout
-        android:layout_width="446dp"
-        android:layout_height="511dp"
+        android:layout_width="780dp"
+        android:layout_height="551dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +60,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Title"
         app:layout_constraintVertical_bias="0.0">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" />
 
         <TableRow
             android:layout_width="match_parent"
@@ -73,7 +78,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_4"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/frog"
+                app:srcCompat="@drawable/kid1"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -83,7 +88,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_5"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/dino"
+                app:srcCompat="@drawable/kid2"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
         </TableRow>
@@ -100,7 +105,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_1"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/kirby"
+                app:srcCompat="@drawable/kid3"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -110,7 +115,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_2"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/ghost"
+                app:srcCompat="@drawable/kid4"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </TableRow>
@@ -127,7 +132,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_6"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/apple"
+                app:srcCompat="@drawable/kid5"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -137,7 +142,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_3"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/toast"
+                app:srcCompat="@drawable/kid6"
                 tools:ignore="SpeakableTextPresentCheck" />
         </TableRow>
 

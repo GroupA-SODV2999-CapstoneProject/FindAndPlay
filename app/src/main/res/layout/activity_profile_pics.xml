@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/tabletback3"
-    tools:context=".MainActivity">
+    tools:context=".ProfilePics">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -73,7 +73,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_4"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/frog"
+                app:srcCompat="@drawable/kid1"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -83,7 +83,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_5"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/dino"
+                app:srcCompat="@drawable/kid2"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
         </TableRow>
@@ -100,7 +100,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_1"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/kirby"
+                app:srcCompat="@drawable/kid3"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -110,7 +110,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_2"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/ghost"
+                app:srcCompat="@drawable/kid4"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </TableRow>
@@ -127,7 +127,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_6"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/apple"
+                app:srcCompat="@drawable/kid5"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
@@ -137,7 +137,7 @@
                 android:layout_margin="5dp"
                 android:contentDescription="@string/pic_3"
                 app:circularflow_radiusInDP="70dp"
-                app:srcCompat="@drawable/toast"
+                app:srcCompat="@drawable/kid6"
                 tools:ignore="SpeakableTextPresentCheck" />
         </TableRow>
 

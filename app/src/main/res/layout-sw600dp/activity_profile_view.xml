@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_photo">
+    android:background="@drawable/background_photo"
+    android:onClick="openEditProfile">
 
     <LinearLayout
         android:id="@+id/linearLayout4"
-        android:layout_width="179dp"
-        android:layout_height="95dp"
+        android:layout_width="224dp"
+        android:layout_height="127dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -18,19 +19,20 @@
 
         <Button
             android:id="@+id/back_btn"
-            android:layout_width="133dp"
-            android:layout_height="70dp"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:backgroundTint="#4CAF50"
             android:text="Back"
+            android:textSize="34sp"
             app:cornerRadius="50dp" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout5"
-        android:layout_width="297dp"
-        android:layout_height="200dp"
+        android:layout_width="401dp"
+        android:layout_height="317dp"
         android:layout_marginTop="128dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,60 +42,60 @@
 
         <ImageView
             android:id="@+id/edit_btn"
-            android:layout_width="56dp"
-            android:layout_height="35dp"
+            android:layout_width="58dp"
+            android:layout_height="53dp"
+            android:onClick="openEditProfile"
             app:srcCompat="@drawable/ic_baseline_edit_24" />
 
         <ImageView
             android:id="@+id/profile_pic"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
             android:layout_weight="2"
-            android:background="#FFC022"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
+            app:srcCompat="@drawable/kid1" />
     </LinearLayout>
 
     <Button
         android:id="@+id/save_btn"
-        android:layout_width="173dp"
-        android:layout_height="70dp"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="168dp"
         android:backgroundTint="#4CAF50"
+        android:onClick="logoutBtn"
         android:text="Logout"
+        android:textSize="34sp"
+        android:textStyle="bold"
         app:cornerRadius="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_name"
-        app:layout_constraintVertical_bias="0.146" />
+        app:layout_constraintTop_toBottomOf="@+id/score"
+        app:layout_constraintVertical_bias="0.065" />
 
     <TextView
         android:id="@+id/player_name"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="227dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="8dp"
         android:text="Player Name"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_width="143dp"
+        android:layout_height="65dp"
         android:text="Score:"
-        android:textSize="24sp"
+        android:textSize="34sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/save_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.287"
+        app:layout_constraintHorizontal_bias="0.303"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/player_name"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/player_name" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

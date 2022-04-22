@@ -47,7 +47,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
     private boolean spinned = false;
     private boolean audioOn = true;
     private int selectedCatIndex = -1;
-
+    private ImageView profileOpen;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -69,6 +69,7 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
 
         spinBtn = (Button) findViewById(R.id.spinBtn);
         startBtn = (Button) findViewById(R.id.startBtn);
+        profileOpen =  findViewById(R.id.profileOpen);
         startBtn.setEnabled(false);
         startBtn.setVisibility(View.GONE);
         spinBtn.setOnClickListener(this);
@@ -80,6 +81,14 @@ public class SlotMachine extends AppCompatActivity implements View.OnClickListen
             audioBtn.setImageResource(audioOn
                     ? android.R.drawable.ic_lock_silent_mode_off
                     : android.R.drawable.ic_lock_silent_mode);
+        });
+
+        profileOpen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SlotMachine.this, ProfileView.class);
+                startActivity(intent);
+            }
         });
 
 

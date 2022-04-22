@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
             intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
             MainActivity.this.startActivity(intent);
             finish(); // this is somehow needed to prevent backbtn showing the hello-world string
-        } else if ( true ) { // temporarily redirect to slot machine, until we have proper navigation added
-            Intent intent = new Intent(MainActivity.this, SlotMachine.class);
+        } else if ( true ) { // intent to load the LandingPage
+            Intent intent = new Intent(MainActivity.this, LandingPage.class);
             intent.setFlags(intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
             MainActivity.this.startActivity(intent);
             finish();
