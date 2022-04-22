@@ -36,7 +36,7 @@ import java.util.function.BiConsumer;
 public class CameraFunctionality extends Activity {
 
     private ImageView pictureImageView, itemOneImageView, itemTwoImageView, itemThreeImageView, itemFourImageView;
-    private Button clearImageBtn, openCameraButton;
+    private Button clearImageBtn;
     Uri pictureUri; // picture
     private static final int requestCode = 100;
 
@@ -47,7 +47,7 @@ public class CameraFunctionality extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth_camera_page);
 
-        openCameraButton = findViewById(R.id.btn_Camera);
+        Button openCameraButton = findViewById(R.id.btn_Camera);
         clearImageBtn = findViewById(R.id.clearImageBtn);
         pictureImageView = findViewById(R.id.cameraImageView);
         itemOneImageView = findViewById(R.id.itemOneIV);
@@ -55,9 +55,6 @@ public class CameraFunctionality extends Activity {
         itemThreeImageView = findViewById(R.id.itemThreeIV);
         itemFourImageView = findViewById(R.id.itemFourIV);
 
-
-//        clearImageBtn.setVisibility(View.GONE); // hides the clear image button
-//        openCameraButton.setVisibility(View.GONE); // hides the camera button
 
         setItemImages(); // calls function to set item image, images
 
@@ -71,12 +68,7 @@ public class CameraFunctionality extends Activity {
         });
 
         // onClick for the clear image button
-        clearImageBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                clearImage();
-            }
-        });
+        clearImageBtn.setOnClickListener(view -> clearImage());
     }
 
     // function will check to see if permissions have been granted, if so the camera will open if not permissions will be requested
@@ -134,7 +126,7 @@ public class CameraFunctionality extends Activity {
         Uri uri;
         Date date = new Date();
         @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String pictureName = String.valueOf(format.format(date));
+        String pictureName = format.format(date);
         ContentResolver resolver = getContentResolver();
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -153,25 +145,22 @@ public class CameraFunctionality extends Activity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void setItemImages(){
         final int[] counter = {0};
-        String url = "";
-        for(PlayItem item : Game.inGameItems) {
-            BiConsumer<Bitmap, Integer> then = new BiConsumer<Bitmap, Integer>() {
-                @Override
-                public void accept(Bitmap bitmap, Integer integer) {
-                    switch(counter[0]) {
-                        case 0:
-                            itemOneImageView.setImageBitmap(bitmap);
-                            break;
-                        case 1:
-                            itemTwoImageView.setImageBitmap(bitmap);
-                            break;
-                        case 2:
-                            itemThreeImageView.setImageBitmap(bitmap);
-                            break;
-                        case 3:
-                            itemFourImageView.setImageBitmap(bitmap);
-                            break;
-                    }
+        String url;
+        for(PlayItem ignored : Game.inGameItems) {
+            BiConsumer<Bitmap, Integer> then = (bitmap, integer) -> {
+                switch(counter[0]) {
+                    case 0:
+                        itemOneImageView.setImageBitmap(bitmap);
+                        break;
+                    case 1:
+                        itemTwoImageView.setImageBitmap(bitmap);
+                        break;
+                    case 2:
+                        itemThreeImageView.setImageBitmap(bitmap);
+                        break;
+                    case 3:
+                        itemFourImageView.setImageBitmap(bitmap);
+                        break;
                 }
             };
 
