@@ -53,7 +53,10 @@
             android:exported="false" />
         <activity
             android:name=".PostPicture"
-            android:exported="true" />
+            android:exported="false" />
+        <activity
+            android:name=".GetPictureOfTheWeek"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
