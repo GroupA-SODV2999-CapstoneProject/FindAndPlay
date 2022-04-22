@@ -265,18 +265,6 @@
                     </LinearLayout>
                 </RelativeLayout>
             </ScrollView>
-
-            <Button
-                android:id="@+id/btnRules"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/rulesBtn"
-                app:layout_constraintTop_toTopOf="parent" />
-
         </RelativeLayout>
     </LinearLayout>
 
