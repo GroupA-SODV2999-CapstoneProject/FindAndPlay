@@ -47,5 +47,9 @@
     <string name="your_group">Your Group</string>
     <string name="create_account">Create Account</string>
     <string name="update_user_data">Update User</string>
+    <string name="selectGrouptitle">Select A Group</string>
+    <string name="constrPlayTitle">Constructive Play Rules</string>
+    <string name="selectchildTitle">Select A Child</string>
+    <string name="selectBtn">Select</string>
 
 </resources>
