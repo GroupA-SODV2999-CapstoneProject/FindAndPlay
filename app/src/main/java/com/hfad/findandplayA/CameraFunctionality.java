@@ -172,23 +172,27 @@ public class CameraFunctionality extends Activity {
     }
 
     // function will add the picture taken to the imageview, show the clear image button and print a message indicating it was saved to the device
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         pictureImageView.setImageURI(pictureUri);
         Toast.makeText(this, "Picture Saved to Pictures/Find and Play Pictures", Toast.LENGTH_LONG).show();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm");
-        builder.setMessage("Is this the correct item?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
-            public void onClick(DialogInterface dialog, int id) {
-                foundItem();
-            }
-        });
-        builder.setNegativeButton("No", (dialog, id) -> pictureImageView.setImageDrawable(null));
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        foundItem(); //Delete this line if reimplementing below commented out Dialog
+
+        //Admin Dialog box approval for photo (removed as per client request)
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setTitle("Confirm");
+//        builder.setMessage("Is this the correct item?");
+//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//            @RequiresApi(api = Build.VERSION_CODES.M)
+//            public void onClick(DialogInterface dialog, int id) {
+//                foundItem();
+//            }
+//        });
+//        builder.setNegativeButton("No", (dialog, id) -> pictureImageView.setImageDrawable(null));
+//        AlertDialog dialog = builder.create();
+//        dialog.show();
     }
 
     public void clearFound() { // Function to clear image and hide the clear image button
@@ -239,8 +243,7 @@ public class CameraFunctionality extends Activity {
         return finalPictureUri;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void setItemImages(){
+        public void setItemImages(){
         final int[] counter = {0};
         String url;
         boolean[] found = PlayerSelect.itemsFound.get(playerName);

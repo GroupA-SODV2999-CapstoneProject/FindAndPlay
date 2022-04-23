@@ -5,15 +5,12 @@ import java.util.ArrayList;
 public class MathProblem {
 
     private final ArrayList<Question> questionList = new ArrayList<Question>() {{
-                    add(new Question("3 + (3 * 3) / 3 = ", "6"));
-                    add(new Question("(5 + 28) / 5 - 2 = ", "4.6"));
-                    add(new Question("9 * 11 + 10 = ", "109"));
-                    add(new Question("2\u00B2 + 3\u00B2 = ", "13"));
-                    add(new Question("3\u00B2 + 3\u00B2 = ", "18"));
-                    add(new Question("4\u00B2 + 3\u00B2 = ", "25"));
-                    add(new Question("5\u00B2 + 5\u00B2 = ", "50"));
-                    add(new Question("5\u00B3 = ", "125"));
-                    add(new Question("2\u00B3 = ", "8"));
+                    add(new Question("3 + 3 = ", "6"));
+                    add(new Question("5 + 28 = ", "33"));
+                    add(new Question("9 * 10 = ", "90"));
+                    add(new Question("2\u00B2 = ", "4"));
+                    add(new Question("3\u00B2", "9"));
+                    add(new Question("5\u00B2 = ", "25"));
     }};
 
     public Question getMathProblem() {

@@ -4,7 +4,6 @@ package com.hfad.findandplayA;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -15,7 +14,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Groups {
@@ -111,7 +109,7 @@ public class Groups {
          ;
      return false;
      }
-     public static void AddGroup(String GroupName){
+     public static void AddChild(String GroupName){
          FirebaseFirestore db = FirebaseFirestore.getInstance();
          db.collection("groups").add(GroupName);
      }
